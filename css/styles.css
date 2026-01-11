@@ -3768,6 +3768,61 @@ textarea.form-control-lg {
   color: var(--bs-navbar-brand-hover-color);
 }
 
+.timeline {
+  position: relative;
+  border-left: 2px solid #e2e8f0;
+  margin-left: 20px;
+  padding-left: 0;
+}
+
+.timeline-item {
+  position: relative;
+  display: block;
+  padding: 15px 15px 15px 35px;
+
+  margin-bottom: 20px;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #6c757d;
+  overflow: visible;
+}
+
+/* Cái chấm tròn */
+.timeline-marker {
+  position: absolute;
+  left: -11px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #cbd5e1;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.timeline-item.active .timeline-content-mini h5 {
+  color: #F27226 !important;
+}
+
+.timeline-item.active .timeline-content-mini small {
+  color: #000 !important;
+}
+
+.timeline-item.active .timeline-marker {
+  background: linear-gradient(45deg, #F27226 0%, #f09819 100%);
+  border-color: white;
+  box-shadow: 0 0 0 4px rgba(242, 114, 38, 0.2);
+  transform: scale(1.2);
+}
+
+.timeline-item:hover .timeline-marker {
+  border-color: #F27226;
+}
+
 .navbar-nav {
   --bs-nav-link-padding-x: 0;
   --bs-nav-link-padding-y: 0.5rem;
@@ -11566,6 +11621,15 @@ html {
   transform: translateY(-3px);
   box-shadow: 0 8px 15px rgba(242, 114, 38, 0.3);
   opacity: 0.9;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #F27226 0%, #f09819 100%) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(242, 114, 38, 0.3);
+  transition: all 0.3s ease;
 }
 
 .bg-gradient-primary-to-secondary {
