@@ -11663,16 +11663,19 @@ html {
   width: 75vw;
   border-radius: 5vw;
   margin-top: 5vw;
-  max-height: 40rem;
-  max-width: 40rem;
+  max-height: 25rem;
+  max-width: 25rem;
 }
 .profile .profile-img {
-  height: 80vw;
-  max-height: 45rem;
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
   position: absolute;
-  bottom: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  border-radius: 5rem;
 }
 .profile .dots-1 {
   position: absolute;
@@ -11690,7 +11693,7 @@ html {
   top: 6.05vw;
 }
 .profile .dots-2 svg {
-  fill: #1e30f3;
+  fill: url(#gradientCam) !important;
 }
 .profile .dots-3 {
   position: absolute;
@@ -11708,7 +11711,7 @@ html {
   bottom: 4vw;
 }
 .profile .dots-4 svg {
-  fill: #1e30f3;
+  fill: url(#gradientCam) !important;
 }
 
 @media (min-width: 576px) {
