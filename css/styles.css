@@ -89,7 +89,7 @@ body {
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
+  background-color: rgb(234, 232, 232);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -3770,7 +3770,7 @@ textarea.form-control-lg {
 
 .timeline {
   position: relative;
-  border-left: 2px solid #e2e8f0;
+  border-left: 2px solid #f89b37;
   margin-left: 20px;
   padding-left: 0;
 }
@@ -3779,7 +3779,6 @@ textarea.form-control-lg {
   position: relative;
   display: block;
   padding: 15px 15px 15px 35px;
-
   margin-bottom: 20px;
   background: transparent !important;
   border: none !important;
@@ -3799,7 +3798,7 @@ textarea.form-control-lg {
   height: 20px;
   border-radius: 50%;
   background: white;
-  border: 3px solid #cbd5e1;
+  border: 3px solid #aebac8;
   transition: all 0.3s ease;
   z-index: 1;
 }
@@ -8286,7 +8285,7 @@ textarea.form-control-lg {
 
 .text-muted {
   --bs-text-opacity: 1;
-  color: #6c757d !important;
+  color: black !important;
 }
 
 .text-black-50 {
