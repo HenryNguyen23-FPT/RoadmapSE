@@ -116,7 +116,7 @@
                         <div class="card shadow border-0 sticky-top" style="top: 100px; min-height: 300px;">
                             <div class="card-body p-5">
                                 <div class="tab-content" id="v-pills-tabContent">
-                
+                        
                                     <div class="tab-pane fade show active" id="content-jpd" role="tabpanel">
                                         <div class="d-flex align-items-center mb-3">
                                             <span class="badge bg-gradient-primary-to-secondary me-3 p-2">JPD113</span>
@@ -124,51 +124,202 @@
                                         </div>
                                         <p class="lead text-muted">Học bảng chữ cái Hiragana, Katakana và các mẫu câu cơ bản.</p>
                                         <hr>
+                        
+                                        <div class="mb-3">
+                                            <button class="btn btn-outline-orange w-100 d-flex justify-content-between align-items-center" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#menu-jpd" aria-expanded="false">
+                                                <span><i class="bi bi-collection-play me-2"></i>Chọn nội dung học</span>
+                                                <i class="bi bi-chevron-down"></i>
+                                            </button>
+                                        
+                                            <div class="collapse mt-2" id="menu-jpd">
+                                                <div class="card card-body bg-light border-0">
+                                                    <div class="d-grid gap-2">
+                                        
+                                                        <button class="btn btn-sub-lesson bg-white text-start btn-view-lesson" data-content-id="jpd-grammar">
+                                                            <i class="bi bi-book me-2"></i>Ngữ pháp (Bunpou)
+                                                        </button>
+                                        
+                                                        <button class="btn btn-sub-lesson bg-white text-start btn-view-lesson" data-content-id="jpd-vocab">
+                                                            <i class="bi bi-translate me-2"></i>Từ vựng (Kotoba)
+                                                        </button>
+                                        
+                                                        <button class="btn btn-sub-lesson bg-white text-start btn-view-lesson" data-content-id="jpd-kaiwa">
+                                                            <i class="bi bi-chat-dots me-2"></i>Hội thoại (Kaiwa)
+                                                        </button>
+                                        
+                                                        <button class="btn btn-sub-lesson bg-white text-start btn-view-lesson" data-content-id="jpd-kanji">
+                                                            <i class="bi bi-pencil-square me-2"></i>Hán tự (Kanji)
+                                                        </button>
+                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
                                         <div class="alert alert-warning border-0 bg-warning bg-opacity-10">
                                             <strong><i class="bi bi-lightbulb-fill me-2"></i>Ghi chú:</strong>
-                                            <p class="mb-0 small">Môn này cần chăm chỉ luyện đọc,viết,học bảng chữ cái hàng ngày.</p>
+                                            <p class="mb-0 small">Môn này cần chăm chỉ luyện đọc, viết, học bảng chữ cái hàng ngày.</p>
                                         </div>
                                     </div>
-                
+                        
                                     <div class="tab-pane fade" id="content-mas" role="tabpanel">
                                         <div class="d-flex align-items-center mb-3">
                                             <span class="badge bg-gradient-primary-to-secondary me-3 p-2">MAS291</span>
                                             <h2 class="fw-bolder mb-0 text-primary">Xác suất và Thống kê</h2>
                                         </div>
-                                        <p class="lead text-muted">Cách thiết lập, thu thập, phân tích dữ liệu và ứng dụng trong khoa
-                                            học dữ liệu.</p>
+                                        <p class="lead text-muted">Cách thiết lập, thu thập, phân tích dữ liệu và ứng dụng trong khoa học dữ
+                                            liệu.</p>
+                        
+                                        <div class="mb-3">
+                                            <button class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center"
+                                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-mas" aria-expanded="false">
+                                                <span><i class="bi bi-calculator me-2"></i>Tài liệu môn học</span>
+                                                <i class="bi bi-chevron-down"></i>
+                                            </button>
+                                            <div class="collapse mt-2" id="menu-mas">
+                                                <div class="card card-body bg-light border-0">
+                                                    <div class="d-grid gap-2">
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-grammar">
+                                                            <i class="bi bi-book me-2 text-info"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-vocab">
+                                                            <i class="bi bi-translate me-2 text-warning"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-kaiwa">
+                                                            <i class="bi bi-chat-dots me-2 text-success"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-kanji">
+                                                            <i class="bi bi-pencil-square me-2 text-danger"></i>Content
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                
+                        
                                     <div class="tab-pane fade" id="content-dbi" role="tabpanel">
                                         <div class="d-flex align-items-center mb-3">
                                             <span class="badge bg-gradient-primary-to-secondary me-3 p-2">DBI202</span>
                                             <h2 class="fw-bolder mb-0 text-primary">Hệ quản trị CSDL</h2>
                                         </div>
                                         <p class="lead text-muted">Thiết kế ERD, truy vấn SQL Server, chuẩn hóa dữ liệu.</p>
+                        
+                                        <div class="mb-3">
+                                            <button class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center"
+                                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-dbi" aria-expanded="false">
+                                                <span><i class="bi bi-database me-2"></i>Thực hành SQL</span>
+                                                <i class="bi bi-chevron-down"></i>
+                                            </button>
+                                            <div class="collapse mt-2" id="menu-dbi">
+                                                <div class="card card-body bg-light border-0">
+                                                    <div class="d-grid gap-2">
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-grammar">
+                                                            <i class="bi bi-book me-2 text-info"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-vocab">
+                                                            <i class="bi bi-translate me-2 text-warning"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-kaiwa">
+                                                            <i class="bi bi-chat-dots me-2 text-success"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-kanji">
+                                                            <i class="bi bi-pencil-square me-2 text-danger"></i>Content
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
                                         <hr>
                                         <div class="alert alert-info border-0 bg-info bg-opacity-10">
                                             <strong><i class="bi bi-code-slash me-2"></i>Quan trọng:</strong>
                                             <p class="mb-0 small">Cần nắm vững các câu lệnh JOIN và thiết kế Database chuẩn.</p>
                                         </div>
                                     </div>
-                
+                        
                                     <div class="tab-pane fade" id="content-lab" role="tabpanel">
                                         <div class="d-flex align-items-center mb-3">
                                             <span class="badge bg-gradient-primary-to-secondary me-3 p-2">LAB211</span>
                                             <h2 class="fw-bolder mb-0 text-primary">Java nâng cao</h2>
                                         </div>
                                         <p class="lead text-muted">Thực hành làm các bài tập quản lý sinh viên, thư viện bằng Java.</p>
+                        
+                                        <div class="mb-3">
+                                            <button class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center"
+                                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-lab" aria-expanded="false">
+                                                <span><i class="bi bi-folder2-open me-2"></i>Bài tập thực hành</span>
+                                                <i class="bi bi-chevron-down"></i>
+                                            </button>
+                                            <div class="collapse mt-2" id="menu-lab">
+                                                <div class="card card-body bg-light border-0">
+                                                    <div class="d-grid gap-2">
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-grammar">
+                                                            <i class="bi bi-book me-2 text-info"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-vocab">
+                                                            <i class="bi bi-translate me-2 text-warning"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-kaiwa">
+                                                            <i class="bi bi-chat-dots me-2 text-success"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-kanji">
+                                                            <i class="bi bi-pencil-square me-2 text-danger"></i>Content
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                
+                        
                                     <div class="tab-pane fade" id="content-swe" role="tabpanel">
                                         <div class="d-flex align-items-center mb-3">
                                             <span class="badge bg-gradient-primary-to-secondary me-3 p-2">SWE201c</span>
-                                            <h2 class="fw-bolder mb-0 text-primary">Nhập môn Kỹ thuật phần mềm</h2>
+                                            <h2 class="fw-bolder mb-0 text-primary">Nhập môn Kỹ thuật PM</h2>
                                         </div>
-                                        <p class="lead text-muted">Quy trình phát triển phần mềm, thu thập yêu cầu khách hàng
-                                            (Requirements), áp dụng các phương pháp (Methodologies) như Agile/Scrum.</p>
+                                        <p class="lead text-muted">Quy trình phát triển phần mềm, thu thập yêu cầu khách hàng.</p>
+                        
+                                        <div class="mb-3">
+                                            <button class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center"
+                                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-swe" aria-expanded="false">
+                                                <span><i class="bi bi-kanban me-2"></i>Tài liệu ôn tập</span>
+                                                <i class="bi bi-chevron-down"></i>
+                                            </button>
+                                            <div class="collapse mt-2" id="menu-swe">
+                                                <div class="card card-body bg-light border-0">
+                                                    <div class="d-grid gap-2">
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-grammar">
+                                                            <i class="bi bi-book me-2 text-info"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-vocab">
+                                                            <i class="bi bi-translate me-2 text-warning"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-kaiwa">
+                                                            <i class="bi bi-chat-dots me-2 text-success"></i>Content
+                                                        </button>
+                                                        
+                                                        <button class="btn btn-white border shadow-sm text-start btn-view-lesson" data-content-id="jpd-kanji">
+                                                            <i class="bi bi-pencil-square me-2 text-danger"></i>Content
+                                                        </button>
+                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                        </div>
                                     </div>
-                
                                 </div>
                             </div>
                         </div>
@@ -186,9 +337,28 @@
                 </div>
             </div>
         </footer>
+        
+        <!--Khung canvas cho các môn học-->
+        <div class="offcanvas offcanvas-end shadow" tabindex="-1" id="dynamicOffcanvas" style="width: 50%;">
+            <div class="offcanvas-header bg-primary text-white">
+                <h4 class="offcanvas-title">
+                    <i class="bi bi-book me-2"></i><span id="dynamicTitle">Tiêu đề</span>
+                </h4>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body bg-light" id="dynamicBody">
+                <div class="text-center text-muted mt-5">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p>Đang tải dữ liệu...</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
+        
     </body>
 </html>

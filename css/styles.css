@@ -66,6 +66,8 @@
   --bs-link-hover-color: #1826c2;
   --bs-code-color: #e21e80;
   --bs-highlight-bg: #fff3cd;
+  --fpt-orange: #f36f21;
+  --fpt-orange-hover: #d95b12;
 }
 
 *,
@@ -3820,6 +3822,36 @@ textarea.form-control-lg {
 
 .timeline-item:hover .timeline-marker {
   border-color: #F27226;
+}
+
+.btn-outline-orange {
+  color: var(--fpt-orange);
+  border-color: var(--fpt-orange);
+}
+
+.btn-outline-orange:hover,
+.btn-outline-orange:active,
+.btn-outline-orange[aria-expanded="true"] {
+  color: #fff;
+  background-color: var(--fpt-orange);
+  border-color: var(--fpt-orange);
+}
+
+.btn-sub-lesson {
+  border: 1px solid #e9ecef;
+  color: #495057;
+  transition: all 0.2s;
+}
+
+.btn-sub-lesson:hover {
+  border-color: var(--fpt-orange);
+  color: var(--fpt-orange) !important;
+  background-color: #fff5f0;
+  transform: translateX(5px);
+}
+
+.btn-sub-lesson:hover i {
+        color: var(--fpt-orange) !important;   
 }
 
 .navbar-nav {
