@@ -29,12 +29,115 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// Hàm load dữ liệu từ JSON
+async function loadSubjectsFromJSON() {
+    try {
+        const response = await fetch('data.json');
+        const data = await response.json();
+        
+        const menuContainer = document.getElementById('v-pills-tab');
+        const contentContainer = document.getElementById('v-pills-tabContent');
+        const downloadBtn = document.getElementById('btn-download-dynamic');
+
+        // Xóa loading spinner
+        menuContainer.innerHTML = '';
+        contentContainer.innerHTML = '';
+
+        data.forEach((subject, index) => {
+            const isActive = index === 0 ? 'active' : '';
+            
+            // Tạo thẻ a cho menu
+            const menuItem = document.createElement('a');
+            menuItem.className = `timeline-item list-group-item-action ${isActive}`;
+            menuItem.id = `tab-${subject.id}`;
+            menuItem.setAttribute('data-bs-toggle', 'pill');
+            menuItem.setAttribute('data-bs-target', `#content-${subject.id}`);
+            menuItem.setAttribute('role', 'tab');
+            menuItem.setAttribute('type', 'button');
+            // Sự kiện khi click vào menu thì đổi link download
+            menuItem.onclick = function() { 
+                downloadBtn.href = subject.file; 
+            };
+            
+            menuItem.innerHTML = `
+                <div class="timeline-marker"></div>
+                <div class="timeline-content-mini">
+                    <h5 class="fw-bolder mb-0">${subject.code}</h5>
+                    <small class="text-muted">${subject.name}</small>
+                </div>
+            `;
+            menuContainer.appendChild(menuItem);
+
+
+            const isShowActive = index === 0 ? 'show active' : '';
+
+            // Xử lý danh sách nút con (Sub-lessons)
+            let subButtonsHTML = '';
+            if (subject.subLessons && subject.subLessons.length > 0) {
+                subject.subLessons.forEach(sub => {
+                    subButtonsHTML += `
+                        <button class="btn btn-sub-lesson bg-white text-start btn-view-lesson" 
+                                data-content-id="${subject.id}-${sub.type}">
+                            <i class="bi ${sub.icon} me-2"></i>${sub.name}
+                        </button>
+                    `;
+                });
+            }
+
+            const contentItem = `
+                <div class="tab-pane fade ${isShowActive}" id="content-${subject.id}" role="tabpanel">
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-gradient-primary-to-secondary me-3 p-2">${subject.code}</span>
+                        <h2 class="fw-bolder mb-0 text-primary">${subject.name}</h2>
+                    </div>
+                    <p class="lead text-muted">${subject.desc}</p>
+                    <hr>
+                    
+                    <div class="mb-3">
+                        <button class="btn btn-outline-orange w-100 d-flex justify-content-between align-items-center" 
+                                type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#menu-${subject.id}" aria-expanded="false">
+                            <span><i class="bi bi-collection-play me-2"></i>Chọn nội dung học</span>
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                        
+                        <div class="collapse mt-2" id="menu-${subject.id}">
+                            <div class="card card-body bg-light border-0">
+                                <div class="d-grid gap-2">
+                                    ${subButtonsHTML}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-${subject.noteColor} border-0 bg-${subject.noteColor} bg-opacity-10">
+                        <strong><i class="bi ${subject.noteIcon} me-2"></i>Ghi chú:</strong>
+                        <p class="mb-0 small">${subject.note}</p>
+                    </div>
+                </div>
+            `;
+            contentContainer.innerHTML += contentItem;
+        });
+
+        // Set link download mặc định cho môn đầu tiên
+        if(data.length > 0) {
+            downloadBtn.href = data[0].file;
+        }
+
+    } catch (error) {
+        console.error('Lỗi tải data:', error);
+        document.getElementById('v-pills-tab').innerHTML = '<p class="text-danger">Lỗi tải dữ liệu. Hãy chạy bằng Live Server.</p>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadSubjectsFromJSON);
+
 
 
 const lessonData = {
     // --- PHẦN 1: NGỮ PHÁP (JPD113) ---
     'jpd-grammar': {
-        title: 'Ngữ pháp cơ bản (Bài 1-2)',
+        title: 'Ngữ pháp cơ bản',
         content: `
             <div class="alert alert-primary mb-3"><i class="bi bi-info-circle me-2"></i>Các mẫu câu khẳng định, phủ định và nghi vấn cơ bản.</div>
             
@@ -137,7 +240,14 @@ const lessonData = {
         `
     }
     
-    // Bạn có thể thêm các môn khác (SQL, Java) tiếp theo ở dưới đây...
+    //thêm các môn khác
+
+    //MAS
+    //DBI
+    //LAB
+    //SWEc
+
+
 };
 
 // 2. LOGIC XỬ LÝ SỰ KIỆN
@@ -171,3 +281,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
