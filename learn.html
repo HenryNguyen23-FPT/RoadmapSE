@@ -90,21 +90,22 @@
         </div>
     </footer>
 
-    <div class="offcanvas offcanvas-end shadow" tabindex="-1" id="dynamicOffcanvas" style="width: 50%;">
-        <div class="offcanvas-header bg-primary text-white">
-            <h4 class="offcanvas-title">
-                <i class="bi bi-book me-2"></i><span id="dynamicTitle">Tiêu đề</span>
-            </h4>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body bg-light" id="dynamicBody">
-            <div class="text-center text-muted mt-5">
-                <div class="spinner-border text-primary" role="status"></div>
-                <p>Đang tải dữ liệu...</p>
+<div class="offcanvas offcanvas-end shadow" tabindex="-1" id="lessonOffcanvas">
+    <div class="offcanvas-header bg-primary text-white">
+        <h4 class="offcanvas-title d-flex align-items-center">
+            <i class="bi bi-book-half me-2"></i>
+            <span id="offcanvasTitle"></span>
+        </h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body bg-light" id="offcanvasContent">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden"></span>
             </div>
         </div>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>

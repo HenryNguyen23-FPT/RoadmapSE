@@ -3854,6 +3854,25 @@ textarea.form-control-lg {
         color: var(--fpt-orange) !important;   
 }
 
+#lessonOffcanvas {
+  width: 50%;
+}
+
+@media (max-width: 768px) {
+  #lessonOffcanvas {
+    width: 100%;
+  }
+}
+
+#lessonOffcanvas .offcanvas-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+#lessonOffcanvas .offcanvas-body::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
 .navbar-nav {
   --bs-nav-link-padding-x: 0;
   --bs-nav-link-padding-y: 0.5rem;

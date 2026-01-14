@@ -9,10 +9,30 @@
     "noteColor": "warning",
     "noteIcon": "bi-lightbulb-fill",
     "subLessons": [
-      { "name": "Ngữ pháp (Bunpou)", "icon": "bi-book", "type": "grammar" },
-      { "name": "Từ vựng (Kotoba)", "icon": "bi-translate", "type": "vocab" },
-      { "name": "Hội thoại (Kaiwa)", "icon": "bi-chat-dots", "type": "kaiwa" },
-      { "name": "Hán tự (Kanji)", "icon": "bi-pencil-square", "type": "kanji" }
+      { 
+        "name": "Ngữ pháp (Bunpou)", 
+        "icon": "bi-book", 
+        "type": "grammar",
+        "content": "<h4>Ngữ pháp bài 1</h4><p>Cấu trúc: <b>A wa B desu</b> (A là B).</p><div class='alert alert-info'>Ví dụ: Watashi wa Gakusei desu (Tôi là sinh viên).</div>"
+      },
+      { 
+        "name": "Từ vựng (Kotoba)", 
+        "icon": "bi-translate", 
+        "type": "vocab",
+        "content": "<h4>Từ vựng cơ bản</h4><ul><li>Watashi: Tôi</li><li>Gakusei: Sinh viên</li><li>Sensei: Giáo viên</li></ul>"
+      },
+      { 
+        "name": "Hội thoại (Kaiwa)", 
+        "icon": "bi-chat-dots", 
+        "type": "kaiwa",
+        "content": "<h4>Hội thoại làm quen</h4><p><b>A:</b> Hajimemashite (Rất vui được gặp bạn).<br><b>B:</b> Yoroshiku onegaishimasu (Mong được giúp đỡ).</p>"
+      },
+      { 
+        "name": "Hán tự (Kanji)", 
+        "icon": "bi-pencil-square", 
+        "type": "kanji",
+        "content": "<h4>Hán tự nhập môn</h4><p>Nhất (一), Nhị (二), Tam (三), Nhân (人).</p>"
+      }
     ]
   },
   {
@@ -25,8 +45,24 @@
     "noteColor": "info",
     "noteIcon": "bi-info-circle-fill",
     "subLessons": [
-      { "name": "Chương 1: Xác suất", "icon": "bi-pie-chart", "type": "chap1" },
-      { "name": "Chương 2: Biến ngẫu nhiên", "icon": "bi-graph-up", "type": "chap2" }
+      { 
+        "name": "Xác suất", 
+        "icon": "bi-pie-chart", 
+        "type": "chap1",
+        "content": "<h4>Chương 1: Xác suất cơ bản</h4><p>Định nghĩa không gian mẫu, biến cố.</p><p>Công thức Bayes và xác suất có điều kiện.</p>"
+      },
+      { 
+        "name": "Thống kê", 
+        "icon": "bi-graph-up", 
+        "type": "chap2",
+        "content": "<h4>Chương 2: Thống kê mô tả</h4><p>Các đại lượng đặc trưng: Mean, Median, Mode, Variance, Standard Deviation.</p>"
+      },
+      { 
+        "name": "Công thức", 
+        "icon": "bi-calculator", 
+        "type": "chap3",
+        "content": "<h4>Tổng hợp công thức</h4><img src='https://via.placeholder.com/400x200?text=Formula+Sheet' class='img-fluid mb-3'><p>Cần nhớ công thức tính Phân phối chuẩn (Normal Distribution).</p>"
+      }
     ]
   },
   {
@@ -39,8 +75,18 @@
     "noteColor": "primary",
     "noteIcon": "bi-code-slash",
     "subLessons": [
-      { "name": "Thiết kế ERD", "icon": "bi-diagram-3", "type": "erd" },
-      { "name": "SQL Query", "icon": "bi-terminal", "type": "query" }
+      { 
+        "name": "Thiết kế ERD", 
+        "icon": "bi-diagram-3", 
+        "type": "erd",
+        "content": "<h4>Entity Relationship Diagram</h4><p>Hướng dẫn vẽ thực thể và quan hệ (1-1, 1-n, n-n).</p><p>Công cụ sử dụng: Draw.io hoặc SQL Server Management Studio.</p>"
+      },
+      { 
+        "name": "SQL Query", 
+        "icon": "bi-terminal", 
+        "type": "query",
+        "content": "<h4>Các câu lệnh truy vấn</h4><pre class='bg-dark text-white p-3 rounded'>SELECT * \nFROM Students \nWHERE Major = 'SE';</pre><p>Ôn tập kỹ về INNER JOIN và LEFT JOIN.</p>"
+      }
     ]
   },
   {
@@ -53,8 +99,24 @@
     "noteColor": "danger",
     "noteIcon": "bi-exclamation-triangle-fill",
     "subLessons": [
-      { "name": "Bài tập Quản lý", "icon": "bi-folder", "type": "management" },
-      { "name": "Java Collections", "icon": "bi-collection", "type": "collection" }
+      { 
+        "name": "Bài 1: Quản lý sinh viên", 
+        "icon": "bi-folder", 
+        "type": "management",
+        "content": "<h4>Yêu cầu bài toán</h4><p>Viết chương trình quản lý sinh viên gồm các chức năng: Add, Update, Delete, Search.</p><p>Sử dụng ArrayList để lưu trữ.</p>"
+      },
+      { 
+        "name": "Bài 2: Quản lý thư viện", 
+        "icon": "bi-folder", 
+        "type": "management",
+        "content": "<h4>Yêu cầu bài toán</h4><p>Quản lý sách và người mượn. Yêu cầu validate dữ liệu đầu vào chặt chẽ.</p>"
+      },
+      { 
+        "name": "Java Collections", 
+        "icon": "bi-collection", 
+        "type": "collection",
+        "content": "<h4>Lý thuyết Collection</h4><p>Phân biệt sự khác nhau giữa ArrayList và LinkedList, HashMap và HashSet.</p>"
+      }
     ]
   },
   {
@@ -67,8 +129,18 @@
     "noteColor": "success",
     "noteIcon": "bi-check-circle-fill",
     "subLessons": [
-      { "name": "SDLC Models", "icon": "bi-recycle", "type": "sdlc" },
-      { "name": "Requirement Engineering", "icon": "bi-list-check", "type": "req" }
+      { 
+        "name": "SDLC Models", 
+        "icon": "bi-recycle", 
+        "type": "sdlc",
+        "content": "<h4>Các mô hình phát triển phần mềm</h4><ul><li>Waterfall (Thác nước)</li><li>Agile/Scrum (Linh hoạt)</li><li>V-Model</li></ul>"
+      },
+      { 
+        "name": "Requirement Engineering", 
+        "icon": "bi-list-check", 
+        "type": "req",
+        "content": "<h4>Kỹ nghệ yêu cầu</h4><p>Phân biệt Functional Requirements (Chức năng) và Non-functional Requirements (Phi chức năng).</p>"
+      }
     ]
   }
 ]
