@@ -114,7 +114,7 @@ async function loadSubjectsFromJSON() {
                         </div>
                     </div>
 
-                    <div class="alert alert-${subject.noteColor} border-0 bg-${subject.noteColor} bg-opacity-10">
+                    <div class="alert alert-${subject.noteColor} border-start bg-${subject.noteColor} bg-opacity-10">
                         <strong><i class="bi ${subject.noteIcon} me-2"></i>Ghi chú:</strong>
                         <p class="mb-0 small">${subject.note}</p>
                     </div>

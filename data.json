@@ -6,8 +6,8 @@
     "desc": "Học bảng chữ cái Hiragana, Katakana và các mẫu câu cơ bản.",
     "file": "./document/JPD113_Materials.zip",
     "note": "Môn này cần chăm chỉ luyện đọc, viết, học bảng chữ cái hàng ngày.",
-    "noteColor": "warning",
-    "noteIcon": "bi-lightbulb-fill",
+    "noteColor": "info",
+    "noteIcon": "bi-info-circle-fill",
     "subLessons": [
       { 
         "name": "Ngữ pháp (Bunpou)", 
@@ -72,8 +72,8 @@
     "desc": "Thiết kế ERD, truy vấn SQL Server, chuẩn hóa dữ liệu.",
     "file": "./document/DBI202_Materials.zip",
     "note": "Cần nắm vững các câu lệnh JOIN và thiết kế Database chuẩn.",
-    "noteColor": "primary",
-    "noteIcon": "bi-code-slash",
+    "noteColor": "info",
+    "noteIcon": "bi-info-circle-fill",
     "subLessons": [
       { 
         "name": "Thiết kế ERD", 
@@ -96,8 +96,8 @@
     "desc": "Thực hành làm các bài tập quản lý sinh viên, thư viện... bằng Java.",
     "file": "./document/LAB211_Materials.zip",
     "note": "Code phải tuân thủ Coding Convention và Clean Code.",
-    "noteColor": "danger",
-    "noteIcon": "bi-exclamation-triangle-fill",
+    "noteColor": "info",
+    "noteIcon": "bi-info-circle-fill",
     "subLessons": [
       { 
         "name": "Bài 1: Quản lý sinh viên", 
@@ -126,8 +126,8 @@
     "desc": "Quy trình phát triển phần mềm, thu thập yêu cầu khách hàng.",
     "file": "./document/SWE201c_Materials.zip",
     "note": "Môn này lý thuyết nhiều, cần đọc kỹ giáo trình.",
-    "noteColor": "success",
-    "noteIcon": "bi-check-circle-fill",
+    "noteColor": "info",
+    "noteIcon": "bi-info-circle-fill",
     "subLessons": [
       { 
         "name": "SDLC Models", 

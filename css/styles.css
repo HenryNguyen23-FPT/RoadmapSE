@@ -923,6 +923,115 @@ textarea.form-control {
   color: var(--bs-navbar-brand-hover-color);
 }
 
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  transform: translateY(-3px);
+}
+
+.brand-logo-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F27226 0%, #f09819 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(242, 114, 38, 0.4);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.navbar-brand:hover .brand-logo-circle {
+  box-shadow: 0 6px 25px rgba(242, 114, 38, 0.6);
+  transform: scale(1.05);
+}
+
+.brand-logo-circle .logo-text {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.brand-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1;
+}
+
+/* Title chính */
+.brand-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2d3748;
+  letter-spacing: -0.5px;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand:hover .brand-title {
+  color: #F27226;
+}
+
+.brand-subtitle {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .brand-logo-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .brand-logo-circle .logo-text {
+    font-size: 1.3rem;
+  }
+
+  .brand-title {
+    font-size: 1.3rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand {
+    gap: 10px;
+  }
+
+  .brand-logo-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .brand-logo-circle .logo-text {
+    font-size: 1.1rem;
+  }
+
+  .brand-title {
+    font-size: 1.1rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.7rem;
+  }
+}
+
 .timeline {
   position: relative;
   border-left: 2px solid #f89b37;
@@ -1241,6 +1350,12 @@ textarea.form-control {
   border-radius: var(--bs-alert-border-radius);
 }
 
+.alert {
+  border-left: 8px solid !important;
+  background-opacity: 0.2 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
 @keyframes progress-bar-stripes {
   0% {
     background-position-x: 1rem;
@@ -1425,6 +1540,67 @@ textarea.form-control {
   background-clip: padding-box;
   outline: 0;
   transition: transform 0.3s ease-in-out;
+}
+
+.offcanvas-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.offcanvas-backdrop.fade {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.offcanvas-backdrop.show {
+  opacity: 1;
+}
+
+#lessonOffcanvas {
+  z-index: 1045 !important;
+}
+
+.bg-headcanvas {
+  background: linear-gradient(135deg, #F27226 0%, #f09819 100%) !important;
+  border-bottom: 3px solid #d95b12;
+  box-shadow: 0 2px 10px rgba(242, 114, 38, 0.3);
+}
+
+#lessonOffcanvas .offcanvas-title {
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#lessonOffcanvas .btn-close-white {
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+#lessonOffcanvas .btn-close-white:hover {
+  opacity: 0.8;
+  transform: scale(1.15) rotate(90deg);
+}
+
+#lessonOffcanvas .offcanvas-body {
+  padding: 1.5rem;
+}
+
+#lessonOffcanvas.shadow {
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Spinner styling */
+#lessonOffcanvas .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3em;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1731,7 +1907,8 @@ textarea.form-control {
 /* rtl:end:remove */
 .text-primary {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+  color: black !important;
+  font-weight: bolder;
 }
 
 .text-danger {
@@ -1751,7 +1928,12 @@ textarea.form-control {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+  background: linear-gradient(45deg, #F27226 0%, #f09819 100%) !important;
+}
+
+.bg-headcanvas {
+  --bs-bg-opacity: 1;
+  background: var(--fpt-orange) !important;
 }
 
 .bg-light {
@@ -1775,6 +1957,8 @@ textarea.form-control {
 .rounded-4 {
   border-radius: var(--bs-border-radius-xl) !important;
 }
+
+
 
 @media (min-width: 576px) {
   .d-sm-flex {
@@ -1864,6 +2048,11 @@ html {
   transition: all 0.3s ease;
 }
 
+.btn-close{
+  opacity: 2 !important;
+  font-weight: bold;
+}
+
 .bg-gradient-primary-to-secondary {
   background: #2563eb;
   background: linear-gradient(135deg, #2563eb 0%, #10b981 100%) !important;
@@ -1900,8 +2089,8 @@ html {
 }
 
 .profile .profile-img {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 120%;
+  max-height: 120%;
   width: auto;
   height: auto;
   position: absolute;
@@ -1909,17 +2098,6 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 5rem;
-}
-
-.profile .dots-1 {
-  position: absolute;
-  width: 3vw;
-  right: 1.5vw;
-  top: 4vw;
-}
-
-.profile .dots-1 svg {
-  fill: #fff;
 }
 
 .profile .dots-2 {
@@ -1931,17 +2109,6 @@ html {
 
 .profile .dots-2 svg {
   fill: url(#gradientCam) !important;
-}
-
-.profile .dots-3 {
-  position: absolute;
-  width: 3vw;
-  left: 1.5vw;
-  bottom: 6.05vw;
-}
-
-.profile .dots-3 svg {
-  fill: #fff;
 }
 
 .profile .dots-4 {
@@ -1965,19 +2132,9 @@ html {
     height: 65vw;
   }
 
-  .profile .dots-1 {
-    width: 3vw;
-    right: 1.5vw;
-  }
-
   .profile .dots-2 {
     width: 3vw;
     right: -4vw;
-  }
-
-  .profile .dots-3 {
-    width: 3vw;
-    left: 1.5vw;
   }
 
   .profile .dots-4 {
@@ -1996,19 +2153,9 @@ html {
     height: 55vw;
   }
 
-  .profile .dots-1 {
-    width: 3vw;
-    right: 1.5vw;
-  }
-
   .profile .dots-2 {
     width: 3vw;
     right: -4vw;
-  }
-
-  .profile .dots-3 {
-    width: 3vw;
-    left: 1.5vw;
   }
 
   .profile .dots-4 {
@@ -2027,19 +2174,9 @@ html {
     height: 45vw;
   }
 
-  .profile .dots-1 {
-    width: 1.5vw;
-    right: 0.75vw;
-  }
-
   .profile .dots-2 {
     width: 1.5vw;
     right: -2vw;
-  }
-
-  .profile .dots-3 {
-    width: 1.5vw;
-    left: 0.75vw;
   }
 
   .profile .dots-4 {
@@ -2058,19 +2195,9 @@ html {
     height: 40vw;
   }
 
-  .profile .dots-1 {
-    width: 1.5vw;
-    right: 0.75vw;
-  }
-
   .profile .dots-2 {
     width: 1.5vw;
     right: -2vw;
-  }
-
-  .profile .dots-3 {
-    width: 1.5vw;
-    left: 0.75vw;
   }
 
   .profile .dots-4 {
