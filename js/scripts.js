@@ -160,5 +160,96 @@ document.addEventListener('click', function(e) {
     }
 });
 
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
 
 
+async function loadChallengesFromJSON() {
+    const tabContainer = document.getElementById('challenge-tab');
+    const contentContainer = document.getElementById('challenge-tabContent');
+
+    if (!tabContainer || !contentContainer) return;
+
+    try {
+        const response = await fetch('challenge-data.json');
+        const data = await response.json();
+
+        tabContainer.innerHTML = `
+            <div class="timeline-container">
+                <div class="timeline-wrapper">
+                    <div class="timeline-line"></div>
+                    <div id="nodes-render-area" class="d-flex w-100 justify-content-between"></div>
+                </div>
+            </div>
+        `;
+
+        const nodesArea = document.getElementById('nodes-render-area');
+        contentContainer.innerHTML = '';
+
+        data.forEach((item, index) => {
+            const isActive = index === 0 ? 'active' : '';
+            const isShowActive = index === 0 ? 'show active' : '';
+
+            const nodeItem = document.createElement('div');
+            nodeItem.className = `timeline-node ${isActive}`;
+
+            nodeItem.onclick = function() {
+                document.querySelectorAll('.timeline-node').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('show', 'active'));
+                this.classList.add('active');
+                document.getElementById(`content-${item.id}`).classList.add('show', 'active');
+            };
+
+            // --- CẬP NHẬT Ở ĐÂY ---
+            // Code sẽ lấy link từ 'item.image'. 
+            // Nếu chưa có trong JSON thì dùng tạm ảnh xám (để không bị lỗi hình).
+            const imgUrl = item.image || 'https://placehold.co/600x400?text=No+Image';
+
+            nodeItem.innerHTML = `
+                <div class="node-card-wrapper">
+                    <div class="card" style="width: 12rem;"> 
+                        <img src="${imgUrl}" class="card-img-top" alt="${item.name}">
+                        
+                        <div class="card-body p-2 text-center">
+                            <h6 class="card-title mb-1 text-primary">${item.code}</h6>
+                            <p class="card-text text-muted mb-2 text-truncate" style="font-size: 0.8rem;">
+                                ${item.name}
+                            </p>
+                            <a href="#" class="btn btn-primary btn-sm w-100 rounded-pill">Quiz</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="node-circle"></div>
+            `;
+            nodesArea.appendChild(nodeItem);
+
+            const contentItem = `
+                <div class="tab-pane fade ${isShowActive}" id="content-${item.id}">
+                    <div class="card shadow border-0 rounded-4 mt-5">
+                        <div class="card-body p-5">
+                            <span class="badge bg-primary bg-gradient-primary-to-secondary mb-3 px-3 py-2 rounded-pill">
+                                ${item.code}
+                            </span>
+                            <h2 class="fw-bolder mb-3">${item.name}</h2>
+                            <p class="lead text-muted mb-4">${item.desc}</p>
+                            <hr>
+                            <p>${item.mindmap}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            contentContainer.innerHTML += contentItem;
+        });
+
+    } catch (error) {
+        console.error('Lỗi tải data:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadChallengesFromJSON);

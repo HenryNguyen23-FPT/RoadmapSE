@@ -1,0 +1,43 @@
+[
+    {
+        "id": "subj1",
+        "code": "JPD113",
+        "name": "Tiếng Nhật sơ cấp",
+        "desc": "Ôn tập lại",
+        "status": "active",
+        "image": ""
+    },
+    {
+        "id": "subj2",
+        "code": "MAS291",
+        "name": "Xác suất Thống kê",
+        "desc": "Ôn tập lại",
+        "mindmap": "",
+        "status": "locked",
+        "image": ""
+    },
+    {
+        "id": "subj3",
+        "code": "DBI202",
+        "name": "Hệ quản trị CSDL",
+        "desc": "Ôn tập lại",
+        "status": "locked",
+        "image": ""
+    },
+    {
+        "id": "subj4",
+        "code": "LAB211",
+        "name": "Java nâng cao",
+        "desc": "Ôn tập lại",
+        "status": "locked",
+        "image": ""
+    },
+    {
+        "id": "subj5",
+        "code": "SWE201c",
+        "name": "Kỹ thuật phần mềm",
+        "desc": "Ôn tập lại",
+        "status": "locked",
+        "image": ""
+    }
+]

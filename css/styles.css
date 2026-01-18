@@ -660,14 +660,6 @@ textarea {
   height: auto;
 }
 
-/* rtl:raw:
-[type="tel"],
-[type="url"],
-[type="email"],
-[type="number"] {
-  direction: ltr;
-}
-*/
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
@@ -1114,6 +1106,35 @@ textarea.form-control {
   --bs-btn-border-radius: 0.5rem;
 }
 
+.btn-home-effect {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.btn-home-effect:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(242, 114, 38, 0.5);
+  filter: brightness(1.1);
+}
+
+.btn-home-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: all 0.6s;
+  z-index: -1;
+}
+
+.btn-home-effect:hover::before {
+  left: 100%;
+}
+
 .fade {
   transition: opacity 0.15s linear;
 }
@@ -1364,7 +1385,7 @@ textarea.form-control {
     font-size: 0.7rem;
   }
 }
-
+ /*---timeline dọc---*/
 .timeline {
   position: relative;
   border-left: 2px solid #f89b37;
@@ -1419,6 +1440,159 @@ textarea.form-control {
   border-color: #F27226;
 }
 
+/* --- timeline ngang --- */
+
+:root {
+  --timeline-gap: 100px;
+}
+
+.timeline-container {
+  padding-top: 350px;
+  padding-bottom: 350px;
+  position: relative;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.timeline-container::-webkit-scrollbar {
+  display: none;
+}
+
+.timeline-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  min-width: 1200px;
+  padding: 0 80px;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #e9ecef;
+  z-index: 0;
+  transform: translateY(-50%);
+}
+
+.timeline-node {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.node-circle {
+  width: 24px;
+  height: 24px;
+  background-color: #adb5bd;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 3px #dee2e6;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.node-card-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.node-card-wrapper::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: var(--timeline-gap);
+  background-color: #dee2e6;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.timeline-node:nth-child(odd) .node-card-wrapper {
+  bottom: var(--timeline-gap);
+}
+
+.timeline-node:nth-child(odd) .node-card-wrapper::after {
+  top: 100%;
+}
+
+.timeline-node:nth-child(even) .node-card-wrapper {
+  top: var(--timeline-gap);
+}
+
+.timeline-node:nth-child(even) .node-card-wrapper::after {
+  bottom: 100%;
+}
+
+.node-card-wrapper .card {
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  background: white;
+}
+
+
+
+.node-card-wrapper .card-img-top {
+  height: 80px;
+  object-fit: cover;
+}
+
+.node-card-wrapper .card-body {
+  padding: 10px !important;
+}
+
+.node-card-wrapper .card-title {
+  font-size: 0.9rem;
+  margin-bottom: 2px !important;
+}
+
+.node-card-wrapper .card-text {
+  font-size: 0.7rem;
+  margin-bottom: 8px !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.node-card-wrapper .btn {
+  padding: 2px 10px;
+  font-size: 0.7rem;
+  height: auto;
+}
+
+
+.timeline-node.active .node-circle {
+  background-color: #F27226;
+  box-shadow: 0 0 0 5px rgba(242, 114, 38, 0.3);
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.timeline-node.active .node-card-wrapper .card {
+  border-color: #F27226;
+  box-shadow: 0 0 20px rgba(242, 114, 38, 0.2);
+}
+
+.timeline-node.active .node-card-wrapper::after {
+  background-color: #F27226;
+}
 .btn-outline-orange {
   color: var(--fpt-orange);
   border-color: var(--fpt-orange);
