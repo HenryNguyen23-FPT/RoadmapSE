@@ -253,3 +253,95 @@ async function loadChallengesFromJSON() {
 }
 
 document.addEventListener('DOMContentLoaded', loadChallengesFromJSON);
+document.getElementById("contactForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const form = this;
+
+    // 1. Regex Patterns
+    const patterns = {
+        name: /^[\p{L}\s]{3,50}$/u,
+        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        phone: /^\d{10,15}$/,
+        // allow multiline message
+        message: /^[\s\S]{10,500}$/
+    };
+
+    // 2. Inputs
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    const messageInput = document.getElementById("message");
+    const submitBtn = form.querySelector("button[type='submit']");
+
+    // 3. Validation
+    nameInput.setCustomValidity(
+        patterns.name.test(nameInput.value.trim())
+            ? ""
+            : "Name must be 3–50 letters"
+    );
+
+    emailInput.setCustomValidity(
+        patterns.email.test(emailInput.value.trim())
+            ? ""
+            : "Invalid email address"
+    );
+
+    if (phoneInput.value.trim()) {
+        phoneInput.setCustomValidity(
+            patterns.phone.test(phoneInput.value.trim())
+                ? ""
+                : "Phone must be 10–15 digits"
+        );
+    } else {
+        phoneInput.setCustomValidity("");
+    }
+
+    messageInput.setCustomValidity(
+        patterns.message.test(messageInput.value.trim())
+            ? ""
+            : "Message must be 10–500 characters"
+    );
+
+    // 4. Bootstrap validation
+    if (!form.checkValidity()) {
+        e.stopPropagation();
+        form.classList.add("was-validated");
+        return;
+    }
+
+    // 5. Prepare data
+    const data = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        message: messageInput.value.trim()
+    };
+
+    try {
+        submitBtn.disabled = true;
+
+        const res = await fetch("http://localhost:3000/feedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        if (!res.ok) throw new Error("Server error");
+
+        const result = await res.json();
+
+        if (result.success) {
+            document.getElementById("submitSuccessMessage").classList.remove("d-none");
+            document.getElementById("submitErrorMessage").classList.add("d-none");
+            form.reset();
+            form.classList.remove("was-validated");
+        } else {
+            throw new Error("Save failed");
+        }
+
+    } catch (err) {
+        document.getElementById("submitErrorMessage").classList.remove("d-none");
+    } finally {
+        submitBtn.disabled = false;
+    }
+});
