@@ -617,6 +617,198 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+
+  .circle-1,
+  .circle-2,
+  .square-2,
+  .triangle-2,
+  .frog-3 {
+    display: none;
+  }
+
+  .floating-shape {
+    opacity: 0.1;
+  }
+
+  header .col-xxl-5,
+  header .col-xxl-7 {
+    text-align: center !important;
+  }
+
+  header .fs-3 {
+    font-size: 1.2rem !important;
+  }
+
+  header .fs-2 {
+    font-size: 1.5rem !important;
+  }
+
+  header .badge {
+    font-size: 0.8rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+
+  header .btn-home-effect {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .stats-fixed .col-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 1rem;
+  }
+
+  .stats-number {
+    font-size: 1.8rem !important;
+  }
+
+  .features-fixed .col-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+  }
+
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+
+  .team-row-fixed .col {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 1.5rem;
+  }
+
+  .team-avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+
+  .mission-box {
+    padding: 1.5rem;
+  }
+
+  .intro-head {
+    font-size: 1.3rem;
+  }
+
+  .intro {
+    font-size: 0.95rem;
+  }
+
+  .section-badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+  }
+
+  .social-link {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 576px) {
+
+  header .fs-3 {
+    font-size: 1rem !important;
+  }
+
+  header .fs-2 {
+    font-size: 1.3rem !important;
+  }
+
+  header .badge {
+    font-size: 0.7rem !important;
+    padding: 0.4rem 0.8rem !important;
+  }
+
+  header .btn-home-effect {
+    padding: 0.6rem 1.2rem !important;
+    font-size: 0.85rem !important;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  header .d-grid {
+    gap: 1rem !important;
+  }
+
+  .profile {
+    height: 250px !important;
+    width: 250px !important;
+    margin: 2rem auto !important;
+  }
+
+  .stats-fixed .col-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .stats-box {
+    padding: 1rem;
+  }
+
+  .stats-number {
+    font-size: 1.5rem !important;
+  }
+
+  .features-fixed .col-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .team-row-fixed .col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .team-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  .mission-box {
+    padding: 1rem;
+  }
+
+  .intro-head {
+    font-size: 1.1rem;
+  }
+
+  .intro {
+    font-size: 0.9rem;
+  }
+
+  .display-4 {
+    font-size: 1.8rem !important;
+  }
+
+  section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .gap-4 {
+    gap: 1rem !important;
+  }
+}
+
 *,
 *::before,
 *::after {
