@@ -17,8 +17,8 @@ app.post("/feedback", (req, res) => {
     let existing = [];
     
     // Check if the database file (JSON) already exists
-    if (fs.existsSync("feedback.json")) {
-        const raw = fs.readFileSync("feedback.json", "utf8"); // Read file content as string
+    if (fs.existsSync("data/feedback.json")) {
+        const raw = fs.readFileSync("data/feedback.json", "utf8"); // Read file content as string
         if (raw) existing = JSON.parse(raw); // Convert string back to JS array if not empty
     }
 
@@ -29,7 +29,7 @@ app.post("/feedback", (req, res) => {
     });
 
     // Write the updated array back to the file with 2-space indentation for readability
-    fs.writeFileSync("feedback.json", JSON.stringify(existing, null, 2));
+    fs.writeFileSync("data/feedback.json", JSON.stringify(existing, null, 2));
 
     // Send a success response back to the client
     res.json({ success: true });

@@ -35,22 +35,17 @@ let subjectsData = [];
 // Hàm load dữ liệu từ JSON
 async function loadSubjectsFromJSON() {
     try {
-        const response = await fetch('data.json');
+        const response = await fetch('data/data.json');
         const data = await response.json();
         subjectsData = data;
-        
         const menuContainer = document.getElementById('v-pills-tab');
         const contentContainer = document.getElementById('v-pills-tabContent');
         const downloadBtn = document.getElementById('btn-download-dynamic');
-
-        // Xóa loading spinner
         menuContainer.innerHTML = '';
         contentContainer.innerHTML = '';
 
         data.forEach((subject, index) => {
             const isActive = index === 0 ? 'active' : '';
-            
-            // Tạo thẻ a cho menu
             const menuItem = document.createElement('a');
             menuItem.className = `timeline-item list-group-item-action ${isActive}`;
             menuItem.id = `tab-${subject.id}`;
@@ -58,7 +53,7 @@ async function loadSubjectsFromJSON() {
             menuItem.setAttribute('data-bs-target', `#content-${subject.id}`);
             menuItem.setAttribute('role', 'tab');
             menuItem.setAttribute('type', 'button');
-            // Sự kiện khi click vào menu thì đổi link download
+
             menuItem.onclick = function() { 
                 downloadBtn.href = subject.file; 
             };
@@ -75,7 +70,6 @@ async function loadSubjectsFromJSON() {
 
             const isShowActive = index === 0 ? 'show active' : '';
 
-            // Xử lý danh sách nút con (Sub-lessons)
             let subButtonsHTML = '';
             if (subject.subLessons && subject.subLessons.length > 0) {
                 subject.subLessons.forEach(sub => {
@@ -147,11 +141,8 @@ document.addEventListener('click', function(e) {
             const lesson = subject.subLessons.find(l => l.type === lessonType);
             
             if (lesson) {
-                // Cập nhật offcanvas
                 document.getElementById('offcanvasTitle').textContent = lesson.name;
                 document.getElementById('offcanvasContent').innerHTML = lesson.content;
-                
-                // Hiển thị offcanvas
                 const offcanvasElement = document.getElementById('lessonOffcanvas');
                 const offcanvas = new bootstrap.Offcanvas(offcanvasElement);
                 offcanvas.show();
@@ -177,7 +168,7 @@ async function loadChallengesFromJSON() {
     if (!tabContainer || !contentContainer) return;
 
     try {
-        const response = await fetch('challenge-data.json');
+        const response = await fetch('data/challenge-data.json');
         const data = await response.json();
 
         tabContainer.innerHTML = `
@@ -206,9 +197,6 @@ async function loadChallengesFromJSON() {
                 document.getElementById(`content-${item.id}`).classList.add('show', 'active');
             };
 
-            // --- CẬP NHẬT Ở ĐÂY ---
-            // Code sẽ lấy link từ 'item.image'. 
-            // Nếu chưa có trong JSON thì dùng tạm ảnh xám (để không bị lỗi hình).
             const imgUrl = item.image || 'https://placehold.co/600x400?text=No+Image';
 
             nodeItem.innerHTML = `
@@ -256,24 +244,19 @@ document.addEventListener('DOMContentLoaded', loadChallengesFromJSON);
 document.getElementById("contactForm").addEventListener("submit", async function (e) {
     e.preventDefault();
     const form = this;
-
-    // 1. Regex Patterns
     const patterns = {
         name: /^[\p{L}\s]{3,50}$/u,
         email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         phone: /^\d{10,15}$/,
-        // allow multiline message
         message: /^[\s\S]{10,500}$/
     };
 
-    // 2. Inputs
     const nameInput = document.getElementById("name");
     const emailInput = document.getElementById("email");
     const phoneInput = document.getElementById("phone");
     const messageInput = document.getElementById("message");
     const submitBtn = form.querySelector("button[type='submit']");
 
-    // 3. Validation
     nameInput.setCustomValidity(
         patterns.name.test(nameInput.value.trim())
             ? ""
@@ -302,14 +285,12 @@ document.getElementById("contactForm").addEventListener("submit", async function
             : "Message must be 10–500 characters"
     );
 
-    // 4. Bootstrap validation
     if (!form.checkValidity()) {
         e.stopPropagation();
         form.classList.add("was-validated");
         return;
     }
 
-    // 5. Prepare data
     const data = {
         name: nameInput.value.trim(),
         email: emailInput.value.trim(),

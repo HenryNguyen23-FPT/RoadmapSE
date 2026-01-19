@@ -4,20 +4,27 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>RoadMap-FPTU</title>
-    <!-- Favicon-->
+    <meta name="description" content="FPTU Study Checklist - Track your learning progress" />
+    <meta name="author" content="CocChamChi" />
+    <title>Checklist - RoadMap FPTU</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Custom Google font-->
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
-    <!-- Bootstrap icons-->
+
+    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
     <link href="css/styles.css" rel="stylesheet" />
 </head>
 
@@ -27,45 +34,46 @@
         <div class="floating-shape circle-shape circle-1"></div>
         <div class="floating-shape circle-shape circle-2"></div>
         <div class="floating-shape circle-shape circle-3"></div>
-    
+
         <!-- Triangles -->
         <div class="floating-shape triangle-shape triangle-1"></div>
         <div class="floating-shape triangle-shape triangle-2"></div>
-    
+
         <!-- Squares -->
         <div class="floating-shape square-shape square-1"></div>
         <div class="floating-shape square-shape square-2"></div>
-    
+
         <!-- Floating Frogs -->
         <div class="floating-shape frog-float frog-1">🐸</div>
         <div class="floating-shape frog-float frog-2">🐸</div>
         <div class="floating-shape frog-float frog-3">🐸</div>
-    
+
         <!-- Floating Books -->
         <div class="floating-shape book-float book-1">📚</div>
         <div class="floating-shape book-float book-2">📖</div>
     </div>
-    <main class="flex-shrink-0">
+   
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light py-3">
             <div class="container px-5">
-            <a class="navbar-brand" href="index.html">
-                <div class="brand-logo-circle">
-                    <span class="logo-text">🐸</span>
-                </div>
-                <div class="brand-text-container">
-                    <h1 class="brand-title">Cóc Chăm Chỉ</h1>
-                    <p class="brand-subtitle">Being a Hard Working Frog</p>
-                </div>
-            </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <a class="navbar-brand" href="index.html">
+                    <div class="brand-logo-circle">
+                        <span class="logo-text">🐸</span>
+                    </div>
+                    <div class="brand-text-container">
+                        <h1 class="brand-title">Cóc Chăm Chỉ</h1>
+                        <p class="brand-subtitle">Being a Hard Working Frog</p>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder gap-4">
                         <li class="nav-item"><a class="nav-link nav-link-btn" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link nav-link-btn" href="learn.html">Học tập</a></li>
+                        <li class="nav-item"><a class="nav-link nav-link-btn" href="learn.html">Learning</a></li>
                         <li class="nav-item"><a class="nav-link nav-link-btn" href="challenge.html">Challenge</a></li>
                         <li class="nav-item"><a class="nav-link nav-link-btn" href="checklist.html">Check list</a></li>
                         <li class="nav-item"><a class="nav-link nav-link-btn" href="contact.html">Contact</a></li>
@@ -73,21 +81,137 @@
                 </div>
             </div>
         </nav>
-    </main>
-        <!-- Footer-->
-        <footer class="py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto">
-                        <div class="small m-0">Copyright &copy; CocChamChi</div>
+    
+        <main class="flex-shrink-0">
+        <div class="container px-4 py-5">
+            <div class="text-center mb-4">
+                <h1 class="display-5 fw-bolder mb-2">
+                    <span class="text-gradient2 d-inline">Study Checklist</span>
+                </h1>
+                <p class="lead text-muted">Track your learning progress 🎯</p>
+            </div>
+    
+            <div id="statsContainer" class="row g-3 mb-4"></div>
+    
+            <div class="row">
+                <div class="col-12">
+                    <div class="position-relative mb-4">
+                        <input type="text" id="searchInput" class="form-control search-input"
+                            placeholder="🔍 Search tasks by title or notes." />
+                    </div>
+    
+                    <div id="tasksList"></div>
+    
+                    <div id="emptyState" class="empty-state d-none">
+                        <i class="bi bi-inbox"></i>
+                        <h5>No tasks found</h5>
+                        <p class="text-muted">Add a new task to get started!</p>
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
-</html>
+        </div>
+    </main>
     
+    <button id="floatingAddBtn" class="floating-btn" data-bs-toggle="modal" data-bs-target="#taskModal">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+    
+    <div class="modal fade" id="taskModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">
+                        <i class="bi bi-plus-circle me-2"></i>Add New Task
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="taskForm">
+                        <input type="hidden" id="taskId">
+    
+                        <div class="mb-3">
+                            <label for="taskTitle" class="form-label">
+                                Title <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" id="taskTitle" class="form-control" placeholder="Enter task title..."
+                                required />
+                        </div>
+    
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="taskSubject" class="form-label">Subject</label>
+                                <select id="taskSubject" class="form-select">
+                                    <option value="JPD113">JPD113 - Tiếng Nhật</option>
+                                    <option value="MAS291">MAS291 - Xác suất</option>
+                                    <option value="DBI202">DBI202 - Database</option>
+                                    <option value="LAB211">LAB211 - Java</option>
+                                    <option value="SWE201C">SWE201c - Kỹ thuật PM</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="taskType" class="form-label">Type</label>
+                                <select id="taskType" class="form-select">
+                                    <option value="reading">📖 Reading</option>
+                                    <option value="coding">💻 Coding</option>
+                                    <option value="practice">✏️ Practice</option>
+                                    <option value="assignment">📝 Assignment</option>
+                                    <option value="exam">🎯 Exam Prep</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="taskPriority" class="form-label">Priority</label>
+                                <select id="taskPriority" class="form-select">
+                                    <option value="normal">📌 Normal</option>
+                                    <option value="important">⭐ Important</option>
+                                    <option value="urgent">🔥 Urgent</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="taskDueDate" class="form-label">
+                                    Due Date <span class="text-danger">*</span>
+                                </label>
+                                <input type="date" id="taskDueDate" class="form-control" required />
+                            </div>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="taskNotes" class="form-label">Notes (Optional)</label>
+                            <textarea id="taskNotes" class="form-control" rows="3"
+                                placeholder="Add any additional notes or details..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-lg me-1"></i>Cancel
+                    </button>
+                    <button type="button" id="saveTaskBtn" class="btn btn-orange">
+                        <i class="bi bi-check-lg me-1"></i>Save Task
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="py-4 mt-auto">
+        <div class="container px-5">
+            <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                <div class="col-auto">
+                    <div class="small m-0">Copyright &copy; CocChamChi</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/scripts.js"></script>
+    <script src="js/checklist.js"></script>
+</body>
+
+</html>
