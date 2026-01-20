@@ -491,3 +491,15 @@ document.getElementById("contactForm").addEventListener("submit", async function
         submitBtn.disabled = false;
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const currentPath = window.location.pathname; 
+    
+    const navLinks = document.querySelectorAll('.nav-link-btn');
+    
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath || (currentPath === '/' && link.getAttribute('href') === '/index')) {
+            link.classList.add('active-page');
+        }
+    });
+});

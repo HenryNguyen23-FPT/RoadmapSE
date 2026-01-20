@@ -6,6 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 // --- CẤU HÌNH KẾT NỐI AIVEN ---
 const dbConfig = {
     host: process.env.DB_HOST,     
@@ -178,6 +179,7 @@ app.get('/api/quiz/:category', async (req, res) => {
         res.status(500).send('Lỗi kết nối Aiven');
     }
 });
+
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server chạy tại http://localhost:${PORT}`));
