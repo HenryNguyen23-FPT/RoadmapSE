@@ -2,42 +2,46 @@
     {
         "id": "subj1",
         "code": "JPD113",
+        "category": "JPD", 
         "name": "Tiếng Nhật sơ cấp",
-        "desc": "Ôn tập lại",
+        "desc": "Ôn tập bảng chữ cái và ngữ pháp cơ bản.",
         "status": "active",
-        "image": ""
+        "image": "assets/jpd113.jpg"
     },
     {
         "id": "subj2",
         "code": "MAS291",
+        "category": "MAS",
         "name": "Xác suất Thống kê",
-        "desc": "Ôn tập lại",
-        "mindmap": "",
+        "desc": "Các công thức xác suất và kiểm định giả thuyết.",
         "status": "locked",
-        "image": ""
+        "image": "assets/mas291.jpg"
     },
     {
         "id": "subj3",
         "code": "DBI202",
+        "category": "DBI",
         "name": "Hệ quản trị CSDL",
-        "desc": "Ôn tập lại",
+        "desc": "Truy vấn SQL và thiết kế Database.",
         "status": "locked",
-        "image": ""
+        "image": "assets/dbi202.jpg"
     },
     {
         "id": "subj4",
         "code": "LAB211",
+        "category": "LAB",
         "name": "Java nâng cao",
-        "desc": "Ôn tập lại",
+        "desc": "Lập trình hướng đối tượng.",
         "status": "locked",
-        "image": ""
+        "image": "assets/lab211.jpg"
     },
     {
         "id": "subj5",
         "code": "SWE202c",
+        "category": "SWEc",
         "name": "Nhập môn KTPM",
-        "desc": "Ôn tập lại",
+        "desc": "Quy trình phần mềm và mô hình.",
         "status": "locked",
-        "image": ""
+        "image": "assets/swe202c.jpg"
     }
 ]

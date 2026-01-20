@@ -1132,7 +1132,7 @@ img {
     }
 
     .node-card-wrapper .card {
-        width: 11rem !important;
+        width: 12rem !important;
     }
 }
 
@@ -1152,7 +1152,7 @@ img {
     }
 
     .node-card-wrapper .card {
-        width: 10rem !important;
+        width: 11.5rem !important;
     }
 
     .node-card-wrapper .card-img-top {
@@ -1186,7 +1186,7 @@ img {
     }
 
     .node-card-wrapper .card {
-        width: 9rem !important;
+        width: 10.5rem !important;
     }
 
     .node-card-wrapper .card-img-top {
@@ -1213,8 +1213,8 @@ img {
 
 @media (max-width: 575px) {
     .timeline-container {
-        padding-top: 280px;
-        padding-bottom: 280px;
+        padding-top: 320px;
+        padding-bottom: 320px;
     }
 
     :root {
@@ -1227,7 +1227,7 @@ img {
     }
 
     .node-card-wrapper .card {
-        width: 8rem !important;
+        width: 10rem !important;
     }
 
     .node-card-wrapper .card-img-top {
@@ -1259,7 +1259,7 @@ img {
 
 @media (max-width: 375px) {
     .node-card-wrapper .card {
-        width: 7rem !important;
+        width: 9rem !important;
     }
 }
 
@@ -1615,8 +1615,6 @@ img {
 /* ==========================================
    23. IPAD PRO RESPONSIVE (1024px - 1366px)
    ========================================== */
-
-/* iPad Pro 11" & 12.9" Portrait */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
 
     /* Navbar */
@@ -1642,7 +1640,6 @@ img {
         font-size: 0.7rem;
     }
 
-    /* Header buttons - index.html */
     header .btn-home-effect {
         padding: 0.8rem 1.6rem !important;
         font-size: 0.95rem !important;
