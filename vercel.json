@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "builds": [
+    { "src": "js/server.js", "use": "@vercel/node" },
+    { "src": "*.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/js/server.js" },
+    { "src": "/init-db", "dest": "/js/server.js" }
+  ]
+}
