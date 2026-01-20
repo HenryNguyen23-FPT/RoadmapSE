@@ -121,8 +121,8 @@
   },
   {
     "id": "swe",
-    "code": "SWE201c",
-    "name": "Nhập môn Kỹ thuật PM",
+    "code": "SWE202c",
+    "name": "Nhập môn KTPM",
     "desc": "Quy trình phát triển phần mềm, thu thập yêu cầu khách hàng.",
     "file": "./document/SWE201c_Materials.zip",
     "note": "Môn này lý thuyết nhiều, cần đọc kỹ giáo trình.",

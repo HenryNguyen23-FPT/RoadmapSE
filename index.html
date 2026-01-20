@@ -16,6 +16,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/responsive.css" rel="stylesheet" />
     </head>
     <body class="d-flex flex-column h-100">
         <div class="floating-shapes">
@@ -32,10 +33,10 @@
             <div class="floating-shape square-shape square-1"></div>
             <div class="floating-shape square-shape square-2"></div>
         
-            <!-- Floating Frogs -->
-            <div class="floating-shape frog-float frog-1">🐸</div>
-            <div class="floating-shape frog-float frog-2">🐸</div>
-            <div class="floating-shape frog-float frog-3">🐸</div>
+            <!-- Floating animals -->
+            <div class="floating-shape ani-float ani-1">🦫</div>
+            <div class="floating-shape ani-float ani-2">🦫</div>
+            <div class="floating-shape ani-float ani-3">🦫</div>
         
             <!-- Floating Books -->
             <div class="floating-shape book-float book-1">📚</div>
@@ -47,11 +48,12 @@
             <div class="container px-5">
             <a class="navbar-brand" href="index.html">
                 <div class="brand-logo-circle">
-                <span class="logo-text">🐸</span>
+                <img src="./assets/Logo (2).png" alt="" width="75" height="75" class="d-inline-block align-text-top">
                 </div>
                 <div class="brand-text-container">
-                <h1 class="brand-title">Cóc Chăm Chỉ</h1>
-                <p class="brand-subtitle">Being a Hard Working Frog</p>
+                <h1 class="brand-title">Cạp Mọt Sách</h1>
+                <hr>
+                <p class="brand-subtitle">Being a Hard Working Capypara</p>
                 </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -80,7 +82,7 @@
                                 <div class="fs-3 fw-light text-muted fw-bolder" style="">Hành trình học tập ở trường FPTU</div>
                                 <h1 class="fs-2 fw-bolder mb-5"><span class="text-gradient d-inline">Nâng cao kiến thức mỗi ngày</span></h1>
                                 <div class="d-grid gap-5 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                                    <a class="btn btn-primary btn-lg px-4 py-4 fs-6 fw-bolder btn-home-effect" href="learn.html">Học tập</a>
+                                    <a class="btn btn-primary btn-lg px-4 py-4 fs-6 fw-bolder btn-home-effect" href="learn.html">Learning</a>
                                     <a class="btn btn-primary btn-lg px-4 py-4 fs-6 fw-bolder btn-home-effect" href="challenge.html">Challenge</a>
                                     <a class="btn btn-primary btn-lg px-4 py-4 fs-6 fw-bolder btn-home-effect" href="checklist.html">Check list</a>
                                 </div>
@@ -90,7 +92,7 @@
                             <!-- Header profile picture-->
                             <div class="d-flex justify-content-end mt-5 mt-xxl-0">
                                 <div class="profile bg-gradient-primary-to-secondary">
-                                    <img class="profile-img" src="./assets/avt.png" alt="lazy" />
+                                    <img class="profile-img" src="./assets/profilecapy.png" alt="lazy"/>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +110,7 @@
                     <div class="text-center mb-5">
                         <span class="section-badge">Về Chúng Tôi</span>
                         <h2 class="display-4 fw-bolder mb-3">
-                            <span class="text-gradient-orange">Cóc Chăm Chỉ</span>
+                            <span class="text-gradient-orange">Cạp Mọt Sách</span>
                         </h2>
                         <p class="fw-bolder lead text-muted mb-0" style="max-width: 700px; margin: 0 auto;">
                             Đây là dự án của nhóm mình - nơi sinh viên FPTU cùng chia sẻ và học hỏi
@@ -126,7 +128,7 @@
                                             Website được tạo ra với mục đích hỗ trợ sinh viên FPTU trong quá trình học tập.
                                             Tại đây bạn có thể tìm thấy tài liệu học tập, roadmap các môn học,
                                             bài tập thực hành và công cụ quản lý tiến độ học tập cá nhân.
-                                            Hãy cùng nhau trở thành những chú cóc chăm chỉ! 🐸📚
+                                            Hãy cùng nhau trở thành những chú cóc chăm chỉ! 📝📖
                                         </p>
                                     </div>
                                 </div>
@@ -166,7 +168,7 @@
                     <div class="row g-4 mb-5 features-fixed">
                         <div class="col-3">
                             <div class="feature-card">
-                                <div class="feature-icon">📚</div>
+                                <div class="feature-icon">📓</div>
                                 <h4 class="fw-bold text-center mb-3">Tài Liệu Học Tập</h4>
                                 <p class="text-muted text-center mb-0">
                                     Tổng hợp slide bài giảng, tài liệu tham khảo chất lượng cho từng môn học theo từng kỳ
@@ -175,7 +177,7 @@
                         </div>
                         <div class="col-3">
                             <div class="feature-card">
-                                <div class="feature-icon">🎮</div>
+                                <div class="feature-icon">🔥</div>
                                 <h4 class="fw-bold text-center mb-3">Quiz & Challenge</h4>
                                 <p class="text-muted text-center mb-0">
                                     Ôn tập kiến thức thông qua các bài quiz và mindmap
@@ -184,7 +186,7 @@
                         </div>
                         <div class="col-3">
                             <div class="feature-card">
-                                <div class="feature-icon">✅</div>
+                                <div class="feature-icon">☑️</div>
                                 <h4 class="fw-bold text-center mb-3">Checklist</h4>
                                 <p class="text-muted text-center mb-0">
                                     Quản lý tiến độ học tập, theo dõi deadline và hoàn thành mục tiêu cá nhân
@@ -193,7 +195,7 @@
                         </div>
                         <div class="col-3">
                             <div class="feature-card">
-                                <div class="feature-icon">💬</div>
+                                <div class="feature-icon">📮</div>
                                 <h4 class="fw-bold text-center mb-3">Liên hệ giải đáp</h4>
                                 <p class="text-muted text-center mb-0">
                                     Giải đáp các thắc mắc về học tập....
@@ -214,7 +216,7 @@
                                 <div class="team-avatar">
                                     <span>🐸</span>
                                 </div>
-                                <h5 class="fw-bold mb-1">Member 1</h5>
+                                <h5 class="fw-bold mb-1">Nhật Đăng</h5>
                                 <p class="small text-muted">Developer</p>
                             </div>
                         </div>
@@ -223,7 +225,7 @@
                                 <div class="team-avatar">
                                     <span>🐸</span>
                                 </div>
-                                <h5 class="fw-bold mb-1">Member 2</h5>
+                                <h5 class="fw-bold mb-1">Đức Trí</h5>
                                 <p class="small text-muted">Designer</p>
                             </div>
                         </div>
@@ -232,7 +234,7 @@
                                 <div class="team-avatar">
                                     <span>🐸</span>
                                 </div>
-                                <h5 class="fw-bold mb-1">Member 3</h5>
+                                <h5 class="fw-bold mb-1">Trần Trung</h5>
                                 <p class="small text-muted">Content</p>
                             </div>
                         </div>
@@ -241,7 +243,7 @@
                                 <div class="team-avatar">
                                     <span>🐸</span>
                                 </div>
-                                <h5 class="fw-bold mb-1">Member 4</h5>
+                                <h5 class="fw-bold mb-1">Hải Đăng</h5>
                                 <p class="small text-muted">Slide</p>
                             </div>
                         </div>
@@ -250,7 +252,7 @@
                                 <div class="team-avatar">
                                     <span>🐸</span>
                                 </div>
-                                <h5 class="fw-bold mb-1">Member 5</h5>
+                                <h5 class="fw-bold mb-1">Trọng Nhân</h5>
                                 <p class="small text-muted">Slide</p>
                             </div>
                         </div>
@@ -266,7 +268,7 @@
                             <a href="https://m.me/61586790029686" class="social-link text-gradient">
                                 <i class="bi bi-messenger"></i>
                             </a>
-                            <a href="#!" class="social-link text-gradient">
+                            <a href="mailto:your-email@gmail.com" class="social-link text-gradient">
                                 <i class="bi bi-google"></i>
                             </a>
                         </div>
@@ -278,7 +280,7 @@
         <footer class="py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0">Copyright &copy; CocChamChi</div></div>
+                    <div class="col-auto"><div class="small m-0">Copyright &copy; CapMotSach</div></div>
                 </div>
             </div>
         </footer>
