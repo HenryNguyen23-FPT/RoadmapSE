@@ -412,7 +412,7 @@ document.getElementById("contactForm").addEventListener("submit", async function
     const patterns = {
         name: /^[\p{L}\s]{3,50}$/u,
         email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        phone: /^\d{10,15}$/,
+        phone:/^(0|\+84)(32|33|34|35|36|37|38|39|86|96|97|98|70|76|77|78|79|89|90|93|81|82|83|84|85|88|91|94|56|58|59)\d{7}$/,
         message: /^[\s\S]{10,500}$/
     };
 
@@ -438,7 +438,7 @@ document.getElementById("contactForm").addEventListener("submit", async function
         phoneInput.setCustomValidity(
             patterns.phone.test(phoneInput.value.trim())
                 ? ""
-                : "Phone must be 10–15 digits"
+                : "Phone must be belong to Vietnam mobile numbers()"
         );
     } else {
         phoneInput.setCustomValidity("");
