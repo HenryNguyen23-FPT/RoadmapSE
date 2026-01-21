@@ -38,6 +38,20 @@ app.get('/init-db', async (req, res) => {
             )
         `);
 
+        await connection.query('DROP TABLE IF EXISTS Questions');
+
+        await connection.query(`
+            CREATE TABLE Contacts (
+                id INT IDENTITY(1,1) PRIMARY KEY,
+                first_name VARCHAR(50) NOT NULL,
+                last_name VARCHAR(50) NOT NULL,
+                email_address VARCHAR(100) NOT NULL,
+                phone_number VARCHAR(20),
+                message TEXT,
+                created_at DATETIME DEFAULT GETDATE()
+            );
+        `);
+
       
         const sqlInsert = `
             INSERT INTO Questions (category, question_text, option_a, option_b, option_c, option_d, correct_answer, explanation) 
@@ -178,8 +192,25 @@ app.get('/api/quiz/:category', async (req, res) => {
         console.error(err);
         res.status(500).send('Lỗi kết nối Aiven');
     }
-});
+});   
 
+
+// --- API lƯU FEEDBACK ---
+app.post('/feedback', async (req, res) => {
+    try {
+        const { name, email, phone, message} = req.body;
+    
+        const sql = "INSERT INTO Feedback (name, email, phone, message) VALUES (?, ?, ?, ?)";
+    
+        await pool.query(sql, [name, email, phone, message]);
+
+        console.log("Đã nhận feeedback từ:", name);
+        res.json({ success: true, message: "Cảm ơn bạn đã phản hồi!"})
+    } catch (error) {
+        console.error("Lỗi lưu feedback:", error);
+        res.status(500).json({ success: false, message: "Lỗi lưu phản hồi."})
+    }
+});
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server chạy tại http://localhost:${PORT}`));
