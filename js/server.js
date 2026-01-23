@@ -23,7 +23,7 @@ app.get('/init-db', async (req, res) => {
         const connection = await pool.getConnection();
         
         await connection.query('DROP TABLE IF EXISTS Questions');
-
+        await connection.query('DROP TABLE IF EXISTS Feedback');
         await connection.query(`
             CREATE TABLE Questions (
                 id INT PRIMARY KEY AUTO_INCREMENT,
@@ -38,20 +38,16 @@ app.get('/init-db', async (req, res) => {
             )
         `);
 
-        await connection.query('DROP TABLE IF EXISTS Questions');
-
         await connection.query(`
-            CREATE TABLE Contacts (
-                id INT IDENTITY(1,1) PRIMARY KEY,
-                first_name VARCHAR(50) NOT NULL,
-                last_name VARCHAR(50) NOT NULL,
-                email_address VARCHAR(100) NOT NULL,
-                phone_number VARCHAR(20),
+            CREATE TABLE Feedback (
+                id INT PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(100) NOT NULL,
+                email VARCHAR(100),
+                phone VARCHAR(20),
                 message TEXT,
-                created_at DATETIME DEFAULT GETDATE()
-            );
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
         `);
-
       
         const sqlInsert = `
             INSERT INTO Questions (category, question_text, option_a, option_b, option_c, option_d, correct_answer, explanation) 
@@ -172,7 +168,7 @@ app.get('/init-db', async (req, res) => {
         await connection.query(sqlInsert, [values]);
 
         connection.release();
-        res.send(`<h1 style="color:green">✅ Đã nạp thành công 100 CÂU HỎI lên Aiven!</h1>`);
+        res.send(`<h1 style="color:green">✅ Đã nạp thành công lên Aiven!</h1>`);
     } catch (err) {
         console.error(err);
         res.status(500).send(`<h1 style="color:red">❌ Lỗi: ${err.message}</h1>`);
