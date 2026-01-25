@@ -3,35 +3,43 @@
     "id": "jpd",
     "code": "JPD113",
     "name": "Tiếng Nhật sơ cấp",
-    "desc": "Học bảng chữ cái Hiragana, Katakana và các mẫu câu cơ bản.",
-    "file": "./document/JPD113_Materials.zip",
-    "note": "Môn này cần chăm chỉ luyện đọc, viết, học bảng chữ cái hàng ngày.",
+    "desc": "Học bảng chữ cái và các mẫu câu cơ bản.",
+    "file": "./document/JPD113_Materials.rar",
+    "note": "Cần chăm chỉ luyện đọc, viết hàng ngày.",
     "noteColor": "info",
     "noteIcon": "bi-info-circle-fill",
     "subLessons": [
-      { 
-        "name": "Ngữ pháp (Bunpou)", 
-        "icon": "bi-book", 
-        "type": "grammar",
-        "content": "<h4>Ngữ pháp bài 1</h4><p>Cấu trúc: <b>A wa B desu</b> (A là B).</p><div class='alert alert-info'>Ví dụ: Watashi wa Gakusei desu (Tôi là sinh viên).</div>"
+      {
+        "name": "Hệ thống chữ viết",
+        "icon": "bi-alphabet-uppercase",
+        "type": "writing-group",
+        "subLessons": [
+          {
+            "name": "Bảng chữ cái & Hán tự",
+            "icon": "bi-pencil-square",
+            "type": "kanji",
+            "content": "<h4>Hán tự nhập môn</h4><p>Nhất (一), Nhị (二), Tam (三), Nhân (人).</p>"
+          }
+        ]
       },
-      { 
-        "name": "Từ vựng (Kotoba)", 
-        "icon": "bi-translate", 
-        "type": "vocab",
-        "content": "<h4>Từ vựng cơ bản</h4><ul><li>Watashi: Tôi</li><li>Gakusei: Sinh viên</li><li>Sensei: Giáo viên</li></ul>"
-      },
-      { 
-        "name": "Hội thoại (Kaiwa)", 
-        "icon": "bi-chat-dots", 
-        "type": "kaiwa",
-        "content": "<h4>Hội thoại làm quen</h4><p><b>A:</b> Hajimemashite (Rất vui được gặp bạn).<br><b>B:</b> Yoroshiku onegaishimasu (Mong được giúp đỡ).</p>"
-      },
-      { 
-        "name": "Hán tự (Kanji)", 
-        "icon": "bi-pencil-square", 
-        "type": "kanji",
-        "content": "<h4>Hán tự nhập môn</h4><p>Nhất (一), Nhị (二), Tam (三), Nhân (人).</p>"
+      {
+        "name": "Kỹ năng ngôn ngữ",
+        "icon": "bi-translate",
+        "type": "skills-group",
+        "subLessons": [
+          {
+            "name": "Ngữ pháp (Bunpou)",
+            "icon": "bi-book",
+            "type": "grammar",
+            "content": "<h4>Ngữ pháp bài 1</h4><p>Cấu trúc: <b>A wa B desu</b>.</p>"
+          },
+          {
+            "name": "Từ vựng & Hội thoại",
+            "icon": "bi-chat-dots",
+            "type": "kaiwa",
+            "content": "<h4>Giao tiếp cơ bản</h4><p>Hajimemashite (Rất vui được gặp bạn).</p>"
+          }
+        ]
       }
     ]
   },
@@ -39,29 +47,43 @@
     "id": "mas",
     "code": "MAS291",
     "name": "Xác suất và Thống kê",
-    "desc": "Cách thiết lập, thu thập, phân tích dữ liệu và ứng dụng trong khoa học dữ liệu.",
-    "file": "./document/MAS291_Materials.zip",
+    "desc": "Phân tích dữ liệu và ứng dụng khoa học dữ liệu.",
+    "file": "./document/MAS291_Materials.rar",
     "note": "Chú ý các công thức tính xác suất và phân phối chuẩn.",
     "noteColor": "info",
     "noteIcon": "bi-info-circle-fill",
     "subLessons": [
-      { 
-        "name": "Xác suất", 
-        "icon": "bi-pie-chart", 
-        "type": "chap1",
-        "content": "<h4>Chương 1: Xác suất cơ bản</h4><p>Định nghĩa không gian mẫu, biến cố.</p><p>Công thức Bayes và xác suất có điều kiện.</p>"
+      {
+        "name": "Lý thuyết Xác suất",
+        "icon": "bi-dice-5",
+        "type": "prob-group",
+        "subLessons": [
+          {
+            "name": "Xác suất cơ bản",
+            "icon": "bi-pie-chart",
+            "type": "chap1",
+            "content": "<h4>Chương 1: Xác suất</h4><p>Công thức Bayes và xác suất có điều kiện.</p>"
+          }
+        ]
       },
-      { 
-        "name": "Thống kê", 
-        "icon": "bi-graph-up", 
-        "type": "chap2",
-        "content": "<h4>Chương 2: Thống kê mô tả</h4><p>Các đại lượng đặc trưng: Mean, Median, Mode, Variance, Standard Deviation.</p>"
-      },
-      { 
-        "name": "Công thức", 
-        "icon": "bi-calculator", 
-        "type": "chap3",
-        "content": "<h4>Tổng hợp công thức</h4><img src='https://via.placeholder.com/400x200?text=Formula+Sheet' class='img-fluid mb-3'><p>Cần nhớ công thức tính Phân phối chuẩn (Normal Distribution).</p>"
+      {
+        "name": "Thống kê & Công thức",
+        "icon": "bi-calculator",
+        "type": "stat-group",
+        "subLessons": [
+          {
+            "name": "Thống kê mô tả",
+            "icon": "bi-graph-up",
+            "type": "chap2",
+            "content": "<h4>Chương 2: Thống kê mô tả</h4><p>Mean, Median, Mode, Variance.</p>"
+          },
+          {
+            "name": "Tra cứu Công thức",
+            "icon": "bi-collection",
+            "type": "chap3",
+            "content": "<h4>Tổng hợp công thức</h4><p>Phân phối chuẩn (Normal Distribution).</p>"
+          }
+        ]
       }
     ]
   },
@@ -70,22 +92,61 @@
     "code": "DBI202",
     "name": "Hệ quản trị CSDL",
     "desc": "Thiết kế ERD, truy vấn SQL Server, chuẩn hóa dữ liệu.",
-    "file": "./document/DBI202_Materials.zip",
+    "file": "./document/DBI202_Materials.rar",
     "note": "Cần nắm vững các câu lệnh JOIN và thiết kế Database chuẩn.",
     "noteColor": "info",
     "noteIcon": "bi-info-circle-fill",
     "subLessons": [
-      { 
-        "name": "Thiết kế ERD", 
-        "icon": "bi-diagram-3", 
-        "type": "erd",
-        "content": "<h4>Entity Relationship Diagram</h4><p>Hướng dẫn vẽ thực thể và quan hệ (1-1, 1-n, n-n).</p><p>Công cụ sử dụng: Draw.io hoặc SQL Server Management Studio.</p>"
+      {
+        "name": "Thiết kế ERD",
+        "icon": "bi-diagram-3",
+        "type": "erd-group",
+        "subLessons": [
+          {
+            "name": "1. Chen's Notation",
+            "icon": "bi-geometry-receptacle",
+            "type": "erdChen",
+            "content": "<div class='mb-4'> <h2 class='fw-bold text-primary'>📐 Chen's Notation Basics</h2> <p class='text-muted'>Tìm hiểu các hình cơ bản trong Chen's notation và ý nghĩa của chúng</p> </div> <div class='content-card'> <h3 class='card-title'> <span>📋</span> Các thành phần cơ bản trong Chen's Notation </h3> <div class='card-content'> <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 24px 0;'> <div style='text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='width: 180px; height: 90px; border: 3px solid #1e40af; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; background: white; border-radius: 4px;'> <strong style='color: #1e40af; font-size: 16px;'>ENTITY</strong> </div> <p style='margin: 0; color: #475569; font-weight: 600;'>Entity (Thực thể)</p> <p style='margin: 8px 0 0 0; color: #64748b; font-size: 14px;'>Đại diện cho bảng trong CSDL<br>(VD: Student, Course)</p> </div> <div style='text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='width: 180px; height: 90px; border: 3px double #1e40af; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; background: white; border-radius: 4px; box-shadow: inset 0 0 0 3px white;'> <strong style='color: #1e40af; font-size: 16px;'>WEAK ENTITY</strong> </div> <p style='margin: 0; color: #475569; font-weight: 600;'>Weak Entity</p> <p style='margin: 8px 0 0 0; color: #64748b; font-size: 14px;'>Thực thể phụ thuộc<br>(Không tồn tại độc lập)</p> </div> <div style='text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='width: 160px; height: 80px; border: 3px solid #059669; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; background: white;'> <strong style='color: #059669; font-size: 14px;'>ATTRIBUTE</strong> </div> <p style='margin: 0; color: #475569; font-weight: 600;'>Attribute (Thuộc tính)</p> <p style='margin: 8px 0 0 0; color: #64748b; font-size: 14px;'>Thuộc tính của Entity<br>(VD: name, age)</p> </div> <div style='text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='width: 160px; height: 80px; border: 3px solid #dc2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; background: white;'> <strong style='color: #dc2626; font-size: 14px; text-decoration: underline;'>KEY ATTRIBUTE</strong> </div> <p style='margin: 0; color: #475569; font-weight: 600;'>Key Attribute</p> <p style='margin: 8px 0 0 0; color: #64748b; font-size: 14px;'>Thuộc tính khóa chính<br>(Gạch chân)</p> </div> <div style='text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='position: relative; width: 160px; height: 80px; margin: 0 auto 16px;'> <div style='position: absolute; width: 100%; height: 100%; border: 3px solid #7c3aed; border-radius: 50%; background: white;'></div> <div style='position: absolute; width: calc(100% - 12px); height: calc(100% - 12px); border: 3px solid #7c3aed; border-radius: 50%; top: 6px; left: 6px; background: white; display: flex; align-items: center; justify-content: center;'> <strong style='color: #7c3aed; font-size: 12px;'>MULTIVALUED<br>ATTRIBUTE</strong> </div> </div> <p style='margin: 0; color: #475569; font-weight: 600;'>Multivalued Attribute</p> <p style='margin: 8px 0 0 0; color: #64748b; font-size: 14px;'>Nhiều giá trị<br>(VD: address)</p> </div> <div style='text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='width: 160px; height: 80px; border: 3px dashed #ea580c; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; background: white;'> <strong style='color: #ea580c; font-size: 12px;'>DERIVED<br>ATTRIBUTE</strong> </div> <p style='margin: 0; color: #475569; font-weight: 600;'>Derived Attribute</p> <p style='margin: 8px 0 0 0; color: #64748b; font-size: 14px;'>Thuộc tính suy ra<br>(VD: age từ birth_date)</p> </div> </div> </div> </div> <div class='info-box'> <strong>💡 Lưu ý quan trọng:</strong><br> Chen's Notation vẽ mô hình khái niệm (Conceptual Model), KHÔNG phải vẽ bảng SQL trực tiếp. Sau khi thiết kế ERD, bạn mới chuyển đổi sang Physical Model để tạo bảng trong SQL Server. </div> <div class='content-card'> <h3 class='card-title'> <span>📊</span> Ví dụ: BảngStudent </h3> <div class='card-content'> <div class='erd-wrapper d-flex justify-content-center align-items-center'> <div class='erd-container'> <div class='entity-box'>Student</div> <div class='attr attr-student-id key-attr'>StudentId</div> <div class='attr attr-first-name'>FirstName</div> <div class='attr attr-last-name'>LastName</div> <div class='attr attr-address'>Address</div> <div class='attr attr-street'>StreetNumber</div> <div class='attr attr-state'>State</div> <div class='attr attr-city'>City</div> <div class='attr attr-hobby multivalued-attr'> <div class='inner-oval'>Hobby</div> </div> <div class='attr attr-age derived-attr'>Age</div> <svg class='lines-svg'> <line x1='100' y1='50' x2='-100' y2='40' /> <line x1='100' y1='50' x2='-100' y2='160' /> <line x1='100' y1='50' x2='100' y2='200' /> <line x1='100' y1='50' x2='100' y2='-100' /> <line x1='100' y1='50' x2='300' y2='40' /> <line x1='100' y1='50' x2='300' y2='160' /> <line x1='100' y1='-100' x2='-50' y2='-200' /> <line x1='100' y1='-100' x2='100' y2='-250' /> <line x1='100' y1='-100' x2='250' y2='-180' /> </svg> </div> </div> <p style='margin-top: 0px; color: #64748b; text-align: center; font-style: italic;'> Lưu ý: AGE là Derived Attribute (nét đứt) vì được tính từ BIRTH_DATE. Trong SQL Server không nên lưu trực tiếp mà dùng Computed Column. </p> </div> </div>"          },
+          {
+            "name": "2. Relationships",
+            "icon": "bi-arrow-left-right",
+            "type": "erdRel",
+            "content": "<div class='section-header'> <h2 class='section-title'>🔗 Vẽ Relationships</h2> <p class='section-description'>Hiểu về các loại quan hệ: 1-1, 1-N, và N-N</p> </div> <div class='content-card'> <h3 class='card-title'> <span>1️⃣</span> Quan hệ 1 - 1 (One-to-One) </h3> <div style='text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='display: flex; align-items: center; justify-content: center; gap: 0; margin: 0 auto 16px; height: 100px;'> <div style='width: 80px; height: 50px; border: 2px solid #000; background: #0087d5; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; z-index: 2;'>Person</div> <div style='position: relative; width: 40px; height: 2px; background: black; display: flex; justify-content: center;'> <span style='position: absolute; top: -20px; font-weight: bold;'>1</span> </div> <div style='width: 60px; height: 60px; border: 2px solid #000; background: #00bc62; transform: rotate(45deg); display: flex; align-items: center; justify-content: center; z-index: 1;'> <span style='transform: rotate(-45deg); font-size: 11px; font-weight: bold; color: black;'>Has</span> </div> <div style='position: relative; width: 40px; height: 2px; background: black; display: flex; justify-content: center;'> <span style='position: absolute; top: -20px; font-weight: bold;'>1</span> </div> <div style='width: 80px; height: 50px; border: 2px solid #000; background: #0087d5; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; z-index: 2;'>Passport</div> </div> <p style='margin: 0; color: #475569; font-weight: 600;'>Quan hệ 1 - 1</p> <p style='margin: 8px 0 0 0; color: #64748b; font-size: 14px;'>Một người sở hữu một hộ chiếu duy nhất.</p> </div> </div> <div class='success-box'> <strong>✅ Triển khai:</strong> Đặt Foreign Key ở bên 'phụ thuộc' hoặc có thể gộp thành một bảng duy nhất. </div> <div class='content-card'> <h3 class='card-title'> <span>🔢</span> Quan hệ 1 - N (One-to-Many) </h3> <div style='text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='display: flex; align-items: center; justify-content: center; gap: 0; margin: 0 auto 16px; height: 100px;'> <div style='width: 80px; height: 50px; border: 2px solid #000; background: #0087d5; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; z-index: 2;'>Dept</div> <div style='position: relative; width: 40px; height: 2px; background: black; display: flex; justify-content: center;'> <span style='position: absolute; top: -20px; font-weight: bold;'>1</span> </div> <div style='width: 60px; height: 60px; border: 2px solid #000; background: #00bc62; transform: rotate(45deg); display: flex; align-items: center; justify-content: center; z-index: 1;'> <span style='transform: rotate(-45deg); font-size: 11px; font-weight: bold; color: black;'>Has</span> </div> <div style='position: relative; width: 40px; height: 2px; background: black; display: flex; justify-content: center;'> <span style='position: absolute; top: -20px; font-weight: bold;'>N</span> </div> <div style='width: 80px; height: 50px; border: 2px solid #000; background: #0087d5; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; z-index: 2;'>Employee</div> </div> <p style='margin: 0; color: #475569; font-weight: 600;'>Quan hệ 1 - N</p> <p style='margin: 8px 0 0 0; color: #64748b; font-size: 14px;'>Một phòng ban có thể có nhiều nhân viên.</p> </div> </div> <div class='success-box'> <strong>✅ Quy ước:</strong> Entity phía <strong>N</strong> sẽ chứa khóa ngoại (Foreign Key). </div> <div class='content-card'> <h3 class='card-title'> <span>♾️</span> Quan hệ N - N (Many-to-Many) </h3> <div style='text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='display: flex; align-items: center; justify-content: center; gap: 0; margin: 0 auto 16px; height: 100px;'> <div style='width: 80px; height: 50px; border: 2px solid #000; background: #0087d5; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; z-index: 2;'>Student</div> <div style='position: relative; width: 40px; height: 2px; background: black; display: flex; justify-content: center;'> <span style='position: absolute; top: -20px; font-weight: bold;'>N</span> </div> <div style='width: 60px; height: 60px; border: 2px solid #000; background: #00bc62; transform: rotate(45deg); display: flex; align-items: center; justify-content: center; z-index: 1;'> <span style='transform: rotate(-45deg); font-size: 11px; font-weight: bold; color: black;'>Enroll</span> </div> <div style='position: relative; width: 40px; height: 2px; background: black; display: flex; justify-content: center;'> <span style='position: absolute; top: -20px; font-weight: bold;'>N</span> </div> <div style='width: 80px; height: 50px; border: 2px solid #000; background: #0087d5; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; z-index: 2;'>Course</div> </div> <p style='margin: 0; color: #475569; font-weight: 600;'>Quan hệ N - N</p> <p style='margin: 8px 0 0 0; color: #64748b; font-size: 14px;'>Nhiều sinh viên đăng ký nhiều khóa học.</p> </div> </div> <div class='warning-box'> <strong>⚠️ Lưu ý:</strong><br> Quan hệ N-N KHÔNG tồn tại trực tiếp trong CSDL quan hệ. Khi triển khai, phải tách thành bảng trung gian:<br> <div style='text-align: center; padding: 0 0 0 10px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0;'> <div style='display: flex; gap: 0; margin: 0 auto 16px;'> <p>Student —— Enrollment —— Course</p> </div> </div> </div>"
+          },
+          {
+            "name": "3. Quy tắc đặt tên",
+            "icon": "bi-pencil-square",
+            "type": "erdNaming",
+            "content": "<div class='section-header'> <h2 class='section-title'>✏️ Quy chuẩn đặt tên (Naming Conventions)</h2> <p class='section-description'>Tổng hợp quy tắc chuẩn hóa đối tượng trong CSDL và lập trình T-SQL</p> </div> <div class='content-card'> <h3 class='card-title'><span>📦</span> Table / Entity (Thực thể)</h3> <div class='card-content'> <p><strong>Quy tắc chính:</strong></p> <ul> <li>Sử dụng <strong>PascalCase</strong> (Viết hoa chữ cái đầu mỗi từ).</li> <li>Dùng <strong>Danh từ, số ít</strong> (VD: Student thay vì Students).</li> <li>Không bắt đầu bằng prefix <code>tbl_</code> hay <code>tb_</code>.</li> <li>Không ký tự đặc biệt, không khoảng trắng, không bắt đầu bằng số.</li> </ul> <div class='success-box'> <strong>✅ Ví dụ:</strong> SaleDepartment, UserAccount, OrderDetail </div> </div> </div> <div class='content-card'> <h3 class='card-title'><span>🏷️</span> Attribute (Cột dữ liệu)</h3> <div class='card-content'> <p><strong>Quy tắc chính:</strong></p> <ul> <li>Khuyến khích <strong>PascalCase</strong>.</li> <li><strong>Ý nghĩa & Kiểu dữ liệu:</strong> Tên cột nên chỉ ra loại dữ liệu (VD: <code>IsAbsent</code> thay vì <code>Absent</code> cho kiểu bit).</li> <li><strong>Độ dài:</strong> Dưới 30 ký tự (Giới hạn tối đa 50).</li> <li>Không dùng tiền tố (prefix) trước tên cột. Hạn chế viết tắt quá nhiều.</li> </ul> <div class='success-box'> <strong>✅ Ví dụ:</strong> FullName, BirthDate, IsActive, CreatedAt </div> </div> </div> <div class='content-card'> <h3 class='card-title'><span>🔑</span> Primary Key & Foreign Key</h3> <div class='card-content'> <p><strong>Quy tắc đặt tên ID:</strong></p> <ul> <li><strong>Primary Key (PK):</strong> Công thức = <code>[TableName] + Id</code>.</li> <li><strong>Foreign Key (FK):</strong> Tên phải <strong>giống hệt</strong> tên Primary Key mà nó tham chiếu tới.</li> </ul> <div class='success-box'> <strong>✅ Ví dụ:</strong> <ul> <li>Bảng <b>Staff</b> có PK là <code>StaffId</code>.</li> <li>Bảng <b>Class</b> tham chiếu đến Staff thì đặt tên cột FK là <code>StaffId</code>.</li> </ul> </div> </div> </div> <div class='content-card'> <h3 class='card-title'><span>🛡️</span> Ràng buộc (Constraints)</h3> <div class='card-content'> <p><strong>Quy tắc đặt tên:</strong> <code>Prefix + TableName + _ + ColumnName</code></p> <div class='row'> <div class='col-md-6'> <ul> <li><code>Pk</code>: Primary Key (VD: <code>PkProduct_Id</code>)</li> <li><code>Fk</code>: Foreign Key (VD: <code>FkOrder_ProductId</code>)</li> </ul> </div> <div class='col-md-6'> <ul> <li><code>Ck</code>: Check Constraint (VD: <code>CkStudent_Age</code>)</li> <li><code>Un</code>: Unique (VD: <code>UnContact_Phone</code>)</li> </ul> </div> </div> </div> </div> <div class='content-card'> <h3 class='card-title'><span>📌</span> Index & View</h3> <div class='card-content'> <ul> <li><strong>Index:</strong> Bắt đầu bằng <code>IX_</code> + Tên bảng + Tên cột (VD: <code>IX_Student_Email</code>).</li> <li><strong>View:</strong> Bắt đầu bằng <code>vw</code>. Tên nên kết hợp các bảng tạo nên view (VD: <code>vwProductCategory</code>).</li> </ul> </div> </div> <div class='content-card'> <h3 class='card-title'><span>⚙️</span> Procedures, Functions & Triggers</h3> <div class='card-content'> <ul> <li><strong>Stored Procedure (sp):</strong> <code>sp + Đối tượng + Hành động</code> (VD: <code>spProductCreate</code>, <code>spProductDelete</code>).</li> <li><strong>Function (fn):</strong> Dùng động từ chỉ chức năng (VD: <code>fnGetTime</code>, <code>fnCalculateTax</code>).</li> <li><strong>Trigger (tr):</strong> Chứa tên bảng và các hành động (VD: <code>trProductInsertUpdate</code>).</li> </ul> </div> </div> <div class='content-card'> <h3 class='card-title'><span>🧪</span> Biến (Variables)</h3> <div class='card-content'> <p><strong>Quy tắc chính:</strong></p> <ul> <li>Bắt đầu bằng ký tự <strong>@</strong>. Tuyệt đối không dùng <strong>@@</strong> (dành cho hệ thống).</li> <li>Sử dụng <strong>camelCase</strong> (chữ cái đầu viết thường: <code>@totalMark</code>).</li> <li>Ký tự đầu tiên sau @ phải là chữ cái (alphabet). Không dùng số hay <code>_</code> ở đầu.</li> <li>Giới hạn 50 ký tự. Không dùng khoảng trắng hoặc ký tự đặc biệt.</li> </ul> <div class='success-box'> <strong>✅ Ví dụ:</strong> @studentName, @workHours, @totalAmount </div> </div> </div> <div class='warning-box'> <strong>⚠️ Nguyên tắc vàng:</strong><br> - Đặt tên mang ý nghĩa đúng với nội dung và tính chất đối tượng.<br> - Giới hạn việc viết tắt và <strong>không bao giờ</strong> viết tắt 2 lần trong cùng một tên.<br> - Đảm bảo tính nhất quán (Consistency) trong toàn bộ hệ thống CSDL. </div>"          },
+          {
+            "name": "4. Kiểu dữ liệu",
+            "icon": "bi-database",
+            "type": "erdData",
+            "content": "<div class='section-header'> <h2 class='section-title'>💾 Kiểu dữ liệu SQL Server</h2> <p class='section-description'>Chọn đúng kiểu dữ liệu cho mỗi Attribute khi triển khai</p> </div> <div class='content-card'> <h3 class='card-title'> <span>📊</span> Kiểu dữ liệu số (Numeric) </h3> <div class='card-content'> <table class='data-table'> <thead> <tr> <th>Kiểu dữ liệu</th> <th>Kích thước</th> <th>Sử dụng khi</th> <th>Ví dụ</th> </tr> </thead> <tbody> <tr> <td><code>INT</code></td> <td>4 bytes</td> <td>ID, số đếm, tuổi</td> <td>StudentId, Age, Quantity</td> </tr> <tr> <td><code>BIGINT</code></td> <td>8 bytes</td> <td>Số rất lớn</td> <td>Population, TransactionId</td> </tr> <tr> <td><code>SMALLINT</code></td> <td>2 bytes</td> <td>Số nhỏ</td> <td>Month, Day</td> </tr> <tr> <td><code>TINYINT</code></td> <td>1 byte</td> <td>Số từ 0-255</td> <td>StatusCode, Priority</td> </tr> <tr> <td><code>DECIMAL(p,s)</code></td> <td>5-17 bytes</td> <td>Tiền, điểm số chính xác</td> <td>Price, Gpa, Salary</td> </tr> <tr> <td><code>FLOAT</code></td> <td>4-8 bytes</td> <td>Số thực không cần chính xác tuyệt đối</td> <td>Latitude, Longitude</td> </tr> </tbody> </table> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>📝</span> Kiểu dữ liệu ký tự (Character) </h3> <div class='card-content'> <table class='data-table'> <thead> <tr> <th>Kiểu dữ liệu</th> <th>Kích thước</th> <th>Unicode</th> </tr> </thead> <tbody> <tr> <td><code>VARCHAR(n)</code></td> <td>n bytes</td> <td>❌ Không</td> </tr> <tr> <td><code>NVARCHAR(n)</code></td> <td>2n bytes</td> <td>✅ Có</td> </tr> <tr> <td><code>CHAR(n)</code></td> <td>n bytes (cố định)</td> <td>❌ Không</td> </tr> <tr> <td><code>NCHAR(n)</code></td> <td>2n bytes (cố định)</td> <td>✅ Có</td> </tr> <tr> <td><code>TEXT</code></td> <td>Tối đa 2GB</td> <td>❌ Không</td> </tr> </tbody> </table> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>📅</span> Kiểu dữ liệu ngày giờ (Date & Time) </h3> <div class='card-content'> <table class='data-table'> <thead> <tr> <th>Kiểu dữ liệu</th> <th>Kích thước</th> <th>Độ chính xác</th> <th>Sử dụng khi</th> </tr> </thead> <tbody> <tr> <td><code>DATE</code></td> <td>3 bytes</td> <td>Ngày</td> <td>BirthDate, EnrollmentDate</td> </tr> <tr> <td><code>TIME</code></td> <td>5 bytes</td> <td>Giờ:Phút:Giây</td> <td>OpeningTime, ShiftStart</td> </tr> <tr> <td><code>DATETIME</code></td> <td>8 bytes</td> <td>3.33ms</td> <td>Ngày giờ chung</td> </tr> </tbody> </table> <div class='info-box' style='margin-top: 16px;'> <strong>💡 Best Practice:</strong><br> Dùng <code>DATETIME2</code> thay vì <code>DATETIME</code> cho dữ liệu mới - chính xác hơn và tiết kiệm dung lượng hơn! </div> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>🔢</span> Kiểu dữ liệu khác </h3> <div class='card-content'> <table class='data-table'> <thead> <tr> <th>Kiểu dữ liệu</th> <th>Kích thước</th> <th>Sử dụng khi</th> <th>Ví dụ</th> </tr> </thead> <tbody> <tr> <td><code>BIT</code></td> <td>1 bit</td> <td>Boolean (0/1, True/False)</td> <td>IsActive, IsDeleted</td> </tr> <tr> <td><code>UNIQUEIDENTIFIER</code></td> <td>16 bytes</td> <td>GUID/UUID</td> <td>UserGuid, SessionId</td> </tr> <tr> <td><code>MONEY</code></td> <td>8 bytes</td> <td>Tiền tệ</td> <td>Price, Salary</td> </tr> <tr> <td><code>XML</code></td> <td>2GB</td> <td>Dữ liệu XML</td> <td>ConfigData</td> </tr> <tr> <td><code>JSON</code></td> <td>-</td> <td>⚠️ Không có, dùng NVARCHAR(MAX)</td> <td>Metadata, Settings</td> </tr> </tbody> </table> </div> </div>"          }
+        ]
       },
-      { 
-        "name": "SQL Query", 
-        "icon": "bi-terminal", 
-        "type": "query",
-        "content": "<h4>Các câu lệnh truy vấn</h4><pre class='bg-dark text-white p-3 rounded'>SELECT * \nFROM Students \nWHERE Major = 'SE';</pre><p>Ôn tập kỹ về INNER JOIN và LEFT JOIN.</p>"
+      {
+        "name": "SQL Query",
+        "icon": "bi-terminal",
+        "type": "sql-group",
+        "subLessons": [
+          {
+            "name": "1. Ngôn ngữ DDL",
+            "icon": "bi-bricks",
+            "type": "sqlDdl",
+            "content": "<div class='section-header'> <h2 class='section-title'>🏗️ DDL - Data Definition Language</h2> <p class='section-description'>Các lệnh SQL dùng để định nghĩa, thay đổi và xóa cấu trúc database</p> </div> <div class='info-box'> <strong>💡 DDL là gì?</strong><br> DDL (Data Definition Language) bao gồm các lệnh SQL được sử dụng để định nghĩa, thay đổi và xóa các cấu trúc cơ sở dữ liệu như bảng, chỉ mục và schema. Nó chỉ xử lý mô tả schema của cơ sở dữ liệu và được sử dụng để tạo và sửa đổi cấu trúc các đối tượng trong database. </div> <div class='content-card'> <h3 class='card-title'> <span>📋</span> Các lệnh DDL chính </h3> <div class='card-content'> <table class='data-table'> <thead> <tr> <th>Command</th> <th>Description</th> <th>Syntax</th> </tr> </thead> <tbody> <tr> <td><span class='command-badge'>CREATE</span></td> <td>Tạo database hoặc các đối tượng của nó (table, index, function, views, stored procedure và triggers)</td> <td><code>CREATE TABLE table_name (column1 data_type, column2 data_type, ...);</code></td> </tr> <tr> <td><span class='command-badge'>DROP</span></td> <td>Xóa đối tượng khỏi database</td> <td><code>DROP TABLE table_name;</code></td> </tr> <tr> <td><span class='command-badge'>ALTER</span></td> <td>Thay đổi cấu trúc của database</td> <td><code>ALTER TABLE table_name ADD COLUMN column_name data_type;</code></td> </tr> </tbody> </table> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>✨</span> CREATE - Tạo đối tượng mới </h3> <div class='card-content'> <p><strong>Mô tả:</strong> Lệnh CREATE được sử dụng để tạo database hoặc các đối tượng trong database.</p> <p style='margin-top: 16px;'><strong>Ví dụ SQL Server:</strong></p> <div class='sql-code'> <span class='sql-comment'>-- 1. Tạo bảng Student</span><br> <span class='sql-keyword'>CREATE TABLE</span> Student (<br> &nbsp;&nbsp;&nbsp;&nbsp;StudentId <span class='sql-attribute'>INT PRIMARY KEY IDENTITY</span>(1,1),<br> &nbsp;&nbsp;&nbsp;&nbsp;FirstName <span class='sql-attribute'>NVARCHAR</span>(50) <span class='sql-attribute'>NOT NULL</span>,<br> &nbsp;&nbsp;&nbsp;&nbsp;LastName <span class='sql-attribute'>NVARCHAR</span>(50) <span class='sql-attribute'>NOT NULL</span>,<br> &nbsp;&nbsp;&nbsp;&nbsp;BirthDate <span class='sql-attribute'>DATE NOT NULL</span>,<br> &nbsp;&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-comment'>-- [Composite Attribute] Tách Address thành các trường thành phần</span><br> &nbsp;&nbsp;&nbsp;&nbsp;StreetNumber <span class='sql-attribute'>NVARCHAR</span>(20),<br> &nbsp;&nbsp;&nbsp;&nbsp;City <span class='sql-attribute'>NVARCHAR</span>(50),<br> &nbsp;&nbsp;&nbsp;&nbsp;State <span class='sql-attribute'>NVARCHAR</span>(50),<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-comment'>-- [Derived Attribute] Tự động tính Age từ BirthDate</span><br> &nbsp;&nbsp;&nbsp;&nbsp;Age <span class='sql-attribute'>AS</span> (DATEDIFF(YEAR, BirthDate, GETDATE()))<br> );<br> <br> <span class='sql-comment'>-- 2. [Multivalued Attribute] Tạo bảng riêng cho Hobby</span><br> <span class='sql-keyword'>CREATE TABLE</span> StudentHobby (<br> &nbsp;&nbsp;&nbsp;&nbsp;StudentId <span class='sql-attribute'>INT</span>,<br> &nbsp;&nbsp;&nbsp;&nbsp;HobbyName <span class='sql-attribute'>NVARCHAR</span>(50),<br> &nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-keyword'>PRIMARY KEY</span> (StudentId, HobbyName),<br> &nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-keyword'>FOREIGN KEY</span> (StudentId) <span class='sql-keyword'>REFERENCES</span> Student(StudentId) <span class='sql-keyword'>ON DELETE CASCADE</span><br> ); </div> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>🗑️</span> DROP - Xóa đối tượng </h3> <div class='card-content'> <p><strong>Mô tả:</strong> Lệnh DROP được sử dụng để xóa hoàn toàn một đối tượng khỏi database.</p> <div class='warning-box'> <strong>⚠️ Cảnh báo:</strong> DROP sẽ xóa vĩnh viễn đối tượng và toàn bộ dữ liệu. Không thể khôi phục! </div> <p style='margin-top: 16px;'><strong>Ví dụ SQL Server:</strong></p> <div class='sql-code'> <span class='sql-comment'>-- Xóa bảng</span><br> <span class='sql-keyword'>DROP TABLE</span> Student;<br> <br> <span class='sql-comment'>-- Xóa Index</span><br> <span class='sql-keyword'>DROP INDEX</span> IX_Student_Email <span class='sql-keyword'>ON</span> Student;<br> <br> <span class='sql-comment'>-- Xóa View</span><br> <span class='sql-keyword'>DROP VIEW</span> vwActiveStudents;<br> <br> <span class='sql-comment'>-- Xóa Database (cẩn thận!)</span><br> <span class='sql-keyword'>DROP DATABASE</span> SchoolDB; </div> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>🔧</span> ALTER - Thay đổi cấu trúc </h3> <div class='card-content'> <p><strong>Mô tả:</strong> Lệnh ALTER được sử dụng để thay đổi cấu trúc của một đối tượng đã tồn tại trong database.</p> <p style='margin-top: 16px;'><strong>Các thao tác phổ biến:</strong></p> <div class='sql-code'> <span class='sql-comment'>-- 1. Thêm cột mới (Ví dụ: Thêm số điện thoại)</span><br> <span class='sql-keyword'>ALTER TABLE</span> Student<br> <span class='sql-keyword'>ADD</span> PhoneNumber <span class='sql-aggregate'>VARCHAR</span>(20);<br> <br> <span class='sql-comment'>-- 2. Xóa cột (Ví dụ: Xóa cột State)</span><br> <span class='sql-keyword'>ALTER TABLE</span> Student<br> <span class='sql-keyword'>DROP COLUMN</span> State;<br> <br> <span class='sql-comment'>-- 3. Sửa đổi kiểu dữ liệu (Ví dụ: Tăng độ dài cho LastName)</span><br> <span class='sql-keyword'>ALTER TABLE</span> Student<br> <span class='sql-keyword'>ALTER COLUMN</span> LastName <span class='sql-aggregate'>NVARCHAR</span>(100) <span class='sql-keyword'>NOT NULL</span>;<br> <br> <span class='sql-comment'>-- 4. Thêm Constraint (Check lỗi logic ngày sinh)</span><br> <span class='sql-keyword'>ALTER TABLE</span> Student<br> <span class='sql-keyword'>ADD CONSTRAINT</span> CkStudent_BirthDate<br> <span class='sql-keyword'>CHECK</span> (BirthDate <= <span class='sql-aggregate'>GETDATE</span>());<br> <br> <span class='sql-comment'>-- 5. Xóa Constraint</span><br> <span class='sql-keyword'>ALTER TABLE</span> Student<br> <span class='sql-keyword'>DROP CONSTRAINT</span> CkStudent_BirthDate; </div> </div> </div> <div class='success-box'> <strong>✅ Best Practices cho DDL:</strong> <ul style='margin-top: 12px; margin-bottom: 0;'> <li>Luôn backup database trước khi thực hiện DROP hoặc ALTER</li> <li>Sử dụng transactions khi có thể để có thể rollback</li> <li>Test DDL commands trên môi trường development trước</li> <li>Document tất cả thay đổi schema</li> <li>Sử dụng IF EXISTS/IF NOT EXISTS để tránh lỗi</li> </ul> </div>"          
+          },
+          {
+            "name": "2. Ngôn ngữ DML",
+            "icon": "bi-search",
+            "type": "sqlDql",
+            "content": "<div class='section-header'> <h2 class='section-title'>✏️ DML - Data Manipulation Language</h2> <p class='section-description'>Thao tác với dữ liệu: Thêm, Sửa, Xóa và Truy xuất bản ghi</p> </div> <div class='info-box'> <strong>💡 DML là gì?</strong><br> DML (Data Manipulation Language) là tập hợp các lệnh dùng để quản lý dữ liệu bên trong các đối tượng database. Khác với DDL (thay đổi khung xương), DML tương tác trực tiếp với các dòng (rows) dữ liệu. </div> <div class='content-card'> <h3 class='card-title'><span>📋</span> Các lệnh DML chính</h3> <div class='card-content'> <table class='data-table'> <thead> <tr> <th>Lệnh</th> <th>Mô tả</th> <th>Cú pháp mẫu</th> </tr> </thead> <tbody> <tr> <td><span class='command-badge'>INSERT</span></td> <td>Thêm bản ghi mới</td> <td><code>INSERT INTO Table VALUES (...);</code></td> </tr> <tr> <td><span class='command-badge'>UPDATE</span></td> <td>Cập nhật dữ liệu</td> <td><code>UPDATE Table SET Col = Val WHERE...;</code></td> </tr> <tr> <td><span class='command-badge'>DELETE</span></td> <td>Xóa bản ghi</td> <td><code>DELETE FROM Table WHERE...;</code></td> </tr> </tbody> </table> </div> </div> <div class='content-card'> <h3 class='card-title'><span>➕</span> INSERT - Thêm dữ liệu</h3> <div class='card-content'> <p>Thêm sinh viên mới vào hệ thống. Lưu ý cột <code>StudentId</code> thường là Identity nên không cần chèn thủ công.</p> <div class='sql-code'> <span style='color: #64748b;'>-- 1. Chèn một dòng (khuyên dùng liệt kê cột)</span><br> <span style='font-weight: bold; color: #2563eb;'>INSERT INTO</span> Student (FirstName, LastName, BirthDate, City)<br> <span style='font-weight: bold; color: #2563eb;'>VALUES</span> (N'Nguyễn', N'An', <span style='color: #0891b2;'>'2002-05-20'</span>, <span style='color: #0891b2;'>'Hanoi'</span>);<br><br> <span style='color: #64748b;'>-- 2. Chèn nhiều dòng cùng lúc để tối ưu hiệu năng</span><br> <span style='font-weight: bold; color: #2563eb;'>INSERT INTO</span> Student (FirstName, LastName, BirthDate, City)<br> <span style='font-weight: bold; color: #2563eb;'>VALUES</span><br> &nbsp;&nbsp;&nbsp;&nbsp;(N'Trần', N'Bình', <span style='color: #0891b2;'>'2001-03-15'</span>, <span style='color: #0891b2;'>'Danang'</span>),<br> &nbsp;&nbsp;&nbsp;&nbsp;(N'Lê', N'Chi', <span style='color: #0891b2;'>'2003-11-02'</span>, <span style='color: #0891b2;'>'HCM'</span>);<br><br> <span style='color: #64748b;'>-- 3. Copy dữ liệu từ bảng khác</span><br> <span style='font-weight: bold; color: #2563eb;'>INSERT INTO</span> ArchivedStudent (FirstName, LastName)<br> <span style='font-weight: bold; color: #2563eb;'>SELECT</span> FirstName, LastName <span style='font-weight: bold; color: #2563eb;'>FROM</span> Student <span style='font-weight: bold; color: #2563eb;'>WHERE</span> IsActive = 0; </div> </div> </div> <div class='content-card'> <h3 class='card-title'><span>🔄</span> UPDATE - Cập nhật dữ liệu</h3> <div class='card-content'> <div class='warning-box' style='background: #fff1f2; border-left: 4px solid #f43f5e; padding: 15px; margin-bottom: 15px; border-radius: 4px;'> <strong>⚠️ QUAN TRỌNG:</strong> Luôn kiểm tra điều kiện <code>WHERE</code>. Nếu thiếu, toàn bộ dữ liệu sẽ bị thay đổi! </div> <div class='sql-code'> <span style='color: #64748b;'>-- Cập nhật cho một sinh viên cụ thể</span><br> <span style='font-weight: bold; color: #2563eb;'>UPDATE</span> Student<br> <span style='font-weight: bold; color: #2563eb;'>SET</span> City = <span style='color: #0891b2;'>'Saigon'</span>, State = <span style='color: #0891b2;'>'District 1'</span><br> <span style='font-weight: bold; color: #2563eb;'>WHERE</span> StudentId = 10;<br><br> <span style='color: #64748b;'>-- Cập nhật dựa trên điều kiện thời gian</span><br> <span style='font-weight: bold; color: #2563eb;'>UPDATE</span> Student<br> <span style='font-weight: bold; color: #2563eb;'>SET</span> IsActive = 0<br> <span style='font-weight: bold; color: #2563eb;'>WHERE</span> LastLoginDate < <span style='color: #0891b2;'>'2024-01-01'</span>; </div> </div> </div> <div class='content-card'> <h3 class='card-title'><span>❌</span> DELETE - Xóa dữ liệu</h3> <div class='card-content'> <div class='sql-code'> <span style='color: #64748b;'>-- Xóa bản ghi cụ thể</span><br> <span style='font-weight: bold; color: #2563eb;'>DELETE FROM</span> Student <span style='font-weight: bold; color: #2563eb;'>WHERE</span> StudentId = 5;<br><br> <span style='color: #64748b;'>-- TRUNCATE: Xóa sạch bảng (nhanh hơn DELETE)</span><br> <span style='font-weight: bold; color: #2563eb;'>TRUNCATE TABLE</span> TempLog; </div> </div> </div> <div class='content-card'> <h3 class='card-title'><span>🔐</span> Transaction - An toàn dữ liệu</h3> <div class='card-content'> <p>Đảm bảo tính toàn vẹn khi thực hiện nhiều lệnh đồng thời.</p>  <div class='sql-code'> <span style='font-weight: bold; color: #2563eb;'>BEGIN TRANSACTION</span>;<br> <span style='font-weight: bold; color: #2563eb;'>BEGIN TRY</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span style='color: #64748b;'>-- Thực hiện chuỗi lệnh</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span style='font-weight: bold; color: #2563eb;'>UPDATE</span> Accounts <span style='font-weight: bold; color: #2563eb;'>SET</span> Balance = Balance - 100 <span style='font-weight: bold; color: #2563eb;'>WHERE</span> AccId = 1;<br> &nbsp;&nbsp;&nbsp;&nbsp;<span style='font-weight: bold; color: #2563eb;'>UPDATE</span> Accounts <span style='font-weight: bold; color: #2563eb;'>SET</span> Balance = Balance + 100 <span style='font-weight: bold; color: #2563eb;'>WHERE</span> AccId = 2;<br><br> &nbsp;&nbsp;&nbsp;&nbsp;<span style='font-weight: bold; color: #2563eb;'>COMMIT</span>; <span style='color: #64748b;'>-- Thành công</span><br> <span style='font-weight: bold; color: #2563eb;'>END TRY</span><br> <span style='font-weight: bold; color: #2563eb;'>BEGIN CATCH</span><br> &nbsp;&nbsp;&nbsp;&nbsp;<span style='font-weight: bold; color: #2563eb;'>ROLLBACK</span>; <span style='color: #64748b;'>-- Thất bại, hoàn tác</span><br> <span style='font-weight: bold; color: #2563eb;'>END CATCH</span>; </div> </div> </div>"          },
+          {
+            "name": "3. Truy vấn SELECT & JOIN",
+            "icon": "bi-input-cursor-text",
+            "type": "sqlDml",
+            "content": "<div class='section-header'> <h2 class='section-title'>🔍 DQL - Data Query Language</h2> <p class='section-description'>Truy vấn và lấy dữ liệu từ database</p> </div> <div class='info-box'> <strong>💡 DQL là gì?</strong><br> DQL được sử dụng để truy vấn dữ liệu từ database. Lệnh chính là SELECT, cho phép lấy các bản ghi dựa trên điều kiện. Kết quả được trả về dưới dạng result set (bảng tạm thời) có thể xem hoặc sử dụng trong ứng dụng. </div> <div class='warning-box'> <strong>⚠️ Lưu ý quan trọng:</strong><br> DQL chỉ có <strong>MỘT lệnh duy nhất là SELECT</strong>. Các từ khóa như FROM, WHERE, GROUP BY, HAVING, ORDER BY, DISTINCT và LIMIT là <strong>các mệnh đề (clauses)</strong> của SELECT, KHÔNG phải là lệnh riêng biệt. </div> <div class='content-card'> <h3 class='card-title'> <span>📊</span> Cấu trúc lệnh SELECT </h3> <div class='card-content'> <table class='data-table'> <thead> <tr> <th>Mệnh đề</th> <th>Mô tả</th> <th>Syntax</th> </tr> </thead> <tbody> <tr> <td><span class='command-badge'>SELECT</span></td> <td>Lấy dữ liệu từ database</td> <td><code>SELECT column1, column2 FROM table_name WHERE condition;</code></td> </tr> <tr> <td><span class='command-badge'>FROM</span></td> <td>Chỉ định bảng nguồn dữ liệu</td> <td><code>SELECT column1 FROM table_name;</code></td> </tr> <tr> <td><span class='command-badge'>WHERE</span></td> <td>Lọc dữ liệu trước khi group hoặc aggregate</td> <td><code>SELECT column1 FROM table_name WHERE condition;</code></td> </tr> <tr> <td><span class='command-badge'>GROUP BY</span></td> <td>Nhóm các hàng có cùng giá trị</td> <td><code>SELECT column1, AVG(column2) FROM table_name GROUP BY column1;</code></td> </tr> <tr> <td><span class='command-badge'>HAVING</span></td> <td>Lọc kết quả sau GROUP BY</td> <td><code>SELECT column1, AVG(column2) FROM table_name GROUP BY column1 HAVING condition;</code></td> </tr> <tr> <td><span class='command-badge'>DISTINCT</span></td> <td>Loại bỏ các hàng trùng lặp</td> <td><code>SELECT DISTINCT column1 FROM table_name;</code></td> </tr> <tr> <td><span class='command-badge'>ORDER BY</span></td> <td>Sắp xếp kết quả</td> <td><code>SELECT column1 FROM table_name ORDER BY column1 [ASC|DESC];</code></td> </tr> <tr> <td><span class='command-badge'>TOP/LIMIT</span></td> <td>Giới hạn số hàng trả về (SQL Server dùng TOP)</td> <td><code>SELECT TOP 10 * FROM table_name;</code></td> </tr> </tbody> </table> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>🎯</span> SELECT cơ bản </h3> <div class='card-content'> <div class='sql-code'> <span class='sql-comment'>-- Lấy tất cả cột</span><br> <span class='sql-keyword'>SELECT</span> * <span class='sql-keyword'>FROM</span> Student;<br><br> <span class='sql-comment'>-- Lấy các cột cụ thể</span><br> <span class='sql-keyword'>SELECT</span> FirstName, LastName, Email <br> <span class='sql-keyword'>FROM</span> Student;<br><br> <span class='sql-comment'>-- Lấy dữ liệu với điều kiện</span><br> <span class='sql-keyword'>SELECT</span> FirstName, LastName <br> <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>WHERE</span> IsActive = 1;<br><br> <span class='sql-comment'>-- Lấy dữ liệu DISTINCT (không trùng lặp)</span><br> <span class='sql-keyword'>SELECT DISTINCT</span> DepartmentId <br> <span class='sql-keyword'>FROM</span> Student; </div> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>🔎</span> WHERE - Lọc dữ liệu </h3> <div class='card-content'> <p><strong>WHERE được thực hiện TRƯỚC GROUP BY và AGGREGATE FUNCTION</strong></p> <div class='sql-code'> <span class='sql-comment'>-- Xuất thông tin học sinh có tuổi từ 18 trở lên</span><br> <span class='sql-keyword'>SELECT</span> * <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>WHERE</span> Age >= 18;<br><br> <span class='sql-comment'>-- Xuất thông tin học sinh đang hoạt động và có tuổi từ 18 trở lên</span><br> <span class='sql-keyword'>SELECT</span> * <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>WHERE</span> Age >= 18 <span class='sql-keyword'>AND</span> IsActive = 1;<br><br> <span class='sql-comment'>-- Kiểm tra học sinh có Email kết thúc bằng @gmail.com</span><br> <span class='sql-keyword'>SELECT</span> * <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>WHERE</span> Email <span class='sql-keyword'>LIKE</span> <span class='sql-values'>'%@gmail.com'</span>;<br><br> <span class='sql-comment'>-- Truy xuất sinh viên thuộc các phòng ban 1, 2 hoặc 3</span><br> <span class='sql-keyword'>SELECT</span> * <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>WHERE</span> DepartmentId <span class='sql-keyword'>IN</span> (1, 2, 3);<br><br> <span class='sql-comment'>-- Truy xuất sinh viên sinh trong khoảng từ 2000 đến 2005</span><br> <span class='sql-keyword'>SELECT</span> * <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>WHERE</span> BirthDate <span class='sql-keyword'>BETWEEN</span> <span class='sql-values'>'2000-01-01'</span> <span class='sql-keyword'>AND</span> <span class='sql-values'>'2005-12-31'</span>;<br><br> <span class='sql-comment'>-- Truy xuất sinh viên có số điện thoại</span><br> <span class='sql-keyword'>SELECT</span> * <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>WHERE</span> PhoneNumber <span class='sql-keyword'>IS NOT NULL</span>; </div> </div> </div>  <div class='content-card'> <h3 class='card-title'> <span>📊</span> GROUP BY & HAVING </h3> <div class='card-content'> <div class='info-box'> <strong>Sự khác biệt:</strong><br> • <code>WHERE</code>: Lọc dữ liệu TRƯỚC khi group<br> • <code>HAVING</code>: Lọc dữ liệu SAU khi group </div> <div class='sql-code'> <span class='sql-comment'>-- Truy xuất số lượng sinh viên trong mỗi phòng ban</span><br> <span class='sql-keyword'>SELECT</span> DepartmentId, <span class='sql-aggregate'>COUNT</span>(*) <span class='sql-keyword'>AS</span> StudentCount<br> <span class='sql-keyword'>FROM</span> Student<br> <span class='sql-keyword'>GROUP BY</span> DepartmentId;<br><br> <span class='sql-comment'>-- Thống kê tuổi trung bình, tuổi lớn nhất và nhỏ nhất</span><br> <span class='sql-keyword'>SELECT</span> DepartmentId, <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-aggregate'>COUNT</span>(*) <span class='sql-keyword'>AS</span> Total,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-aggregate'>AVG</span>(Age) <span class='sql-keyword'>AS</span> AvgAge,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-aggregate'>MIN</span>(Age) <span class='sql-keyword'>AS</span> MinAge,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-aggregate'>MAX</span>(Age) <span class='sql-keyword'>AS</span> MaxAge<br> <span class='sql-keyword'>FROM</span> Student<br> <span class='sql-keyword'>GROUP BY</span> DepartmentId;<br><br> <span class='sql-comment'>-- Lọc phòng ban có hơn 10 sinh viên (HAVING)</span><br> <span class='sql-keyword'>SELECT</span> DepartmentId, <span class='sql-aggregate'>COUNT</span>(*) <span class='sql-keyword'>AS</span> StudentCount<br> <span class='sql-keyword'>FROM</span> Student<br> <span class='sql-keyword'>GROUP BY</span> DepartmentId<br> <span class='sql-keyword'>HAVING</span> <span class='sql-aggregate'>COUNT</span>(*) > 10; </div> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>📈</span> ORDER BY - Sắp xếp </h3> <div class='card-content'> <div class='sql-code'> <span class='sql-comment'>-- Sắp xếp tăng dần (mặc định)</span><br> <span class='sql-keyword'>SELECT</span> FirstName, LastName <br> <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>ORDER BY</span> LastName;<br><br> <span class='sql-comment'>-- Sắp xếp giảm dần</span><br> <span class='sql-keyword'>SELECT</span> FirstName, LastName <br> <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>ORDER BY</span> Age <span class='sql-keyword'>DESC</span>;<br><br> <span class='sql-comment'>-- Lấy Top 10 (SQL Server)</span><br> <span class='sql-keyword'>SELECT TOP</span> 10 FirstName, LastName, Age <br> <span class='sql-keyword'>FROM</span> Student <br> <span class='sql-keyword'>ORDER BY</span> Age <span class='sql-keyword'>DESC</span>; </div> </div> </div> <div class='content-card'> <h3 class='card-title'> <span>📝</span> Ví dụ hoàn chỉnh </h3> <div class='card-content'> <p style='margin-top: 20px;'><strong>Ví dụ phức tạp hơn với SQL Server:</strong></p> <div class='sql-code'> <span class='sql-keyword'>SELECT</span> <br> &nbsp;&nbsp;&nbsp;&nbsp;DepartmentId,<br> &nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-aggregate'>COUNT</span>(<span class='sql-keyword'>DISTINCT</span> StudentId) <span class='sql-keyword'>AS</span> TotalStudents,<br> &nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-aggregate'>AVG</span>(Age) <span class='sql-keyword'>AS</span> AvgAge,<br> &nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-aggregate'>MAX</span>(BirthDate) <span class='sql-keyword'>AS</span> LatestBirthDate<br> <span class='sql-keyword'>FROM</span> Student<br> <span class='sql-keyword'>WHERE</span> IsActive = 1 <br> &nbsp;&nbsp;&nbsp;&nbsp;<span class='sql-keyword'>AND</span> BirthDate >= <span class='sql-values'>'2000-01-01'</span><br> <span class='sql-keyword'>GROUP BY</span> DepartmentId<br> <span class='sql-keyword'>HAVING</span> <span class='sql-aggregate'>COUNT</span>(<span class='sql-keyword'>DISTINCT</span> StudentId) >= 5<br> <span class='sql-keyword'>ORDER BY</span> TotalStudents <span class='sql-keyword'>DESC</span>, DepartmentId <span class='sql-keyword'>ASC</span>; </div> <span style='color: #1e293b; font-family: sans-serif;'> <hr style='border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;'> <strong>Giải thích chi tiết:</strong> <div>1. <strong>Lọc dữ liệu (WHERE):</strong> Chỉ lấy sinh viên đang hoạt động (IsActive = 1) và sinh từ năm 2000.</div> <div>2. <strong>Nhóm (GROUP BY):</strong> Gom nhóm sinh viên theo phòng ban (DepartmentId).</div> <div>3. <strong>Thống kê:</strong> Đếm số lượng sinh viên duy nhất, tính tuổi trung bình và ngày sinh mới nhất.</div> <div>4. <strong>Lọc nhóm (HAVING):</strong> Chỉ giữ lại những phòng ban có từ 5 sinh viên trở lên.</div> <div>5. <strong>Sắp xếp (ORDER BY):</strong> Đưa phòng ban đông nhất lên đầu. </span> </div> </div> <div class='success-box'> <strong>✅ Thứ tự thực thi SELECT:</strong> <ol style='margin: 12px 0 0 24px; padding: 0;'> <li><strong>FROM</strong> - Xác định bảng nguồn</li> <li><strong>WHERE</strong> - Lọc dữ liệu</li> <li><strong>GROUP BY</strong> - Nhóm dữ liệu</li> <li><strong>HAVING</strong> - Lọc nhóm</li> <li><strong>SELECT</strong> - Chọn cột</li> <li><strong>DISTINCT</strong> - Loại bỏ trùng lặp</li> <li><strong>ORDER BY</strong> - Sắp xếp</li> <li><strong>TOP/LIMIT</strong> - Giới hạn kết quả</li> </ol> </div>"          }
+        ]
       }
     ]
   },
@@ -93,29 +154,37 @@
     "id": "lab",
     "code": "LAB211",
     "name": "Java nâng cao",
-    "desc": "Thực hành làm các bài tập quản lý sinh viên, thư viện... bằng Java.",
-    "file": "./document/LAB211_Materials.zip",
+    "desc": "Thực hành OOP và Java Collections.",
+    "file": "./document/LAB211_Materials.rar",
     "note": "Code phải tuân thủ Coding Convention và Clean Code.",
     "noteColor": "info",
     "noteIcon": "bi-info-circle-fill",
     "subLessons": [
-      { 
-        "name": "Bài 1: Quản lý sinh viên", 
-        "icon": "bi-folder", 
-        "type": "management",
-        "content": "<h4>Yêu cầu bài toán</h4><p>Viết chương trình quản lý sinh viên gồm các chức năng: Add, Update, Delete, Search.</p><p>Sử dụng ArrayList để lưu trữ.</p>"
+      {
+        "name": "Thực hành Project",
+        "icon": "bi-laptop",
+        "type": "proj-group",
+        "subLessons": [
+          {
+            "name": "Quản lý Sinh viên/Thư viện",
+            "icon": "bi-folder",
+            "type": "management",
+            "content": "<h4>Yêu cầu bài toán</h4><p>Add, Update, Delete, Search. Sử dụng ArrayList.</p>"
+          }
+        ]
       },
-      { 
-        "name": "Bài 2: Quản lý thư viện", 
-        "icon": "bi-folder", 
-        "type": "management",
-        "content": "<h4>Yêu cầu bài toán</h4><p>Quản lý sách và người mượn. Yêu cầu validate dữ liệu đầu vào chặt chẽ.</p>"
-      },
-      { 
-        "name": "Java Collections", 
-        "icon": "bi-collection", 
-        "type": "collection",
-        "content": "<h4>Lý thuyết Collection</h4><p>Phân biệt sự khác nhau giữa ArrayList và LinkedList, HashMap và HashSet.</p>"
+      {
+        "name": "Kiến thức bổ trợ",
+        "icon": "bi-mortarboard",
+        "type": "theory-group",
+        "subLessons": [
+          {
+            "name": "Java Collections",
+            "icon": "bi-collection",
+            "type": "collection",
+            "content": "<h4>Lý thuyết Collection</h4><p>ArrayList vs LinkedList, HashMap vs HashSet.</p>"
+          }
+        ]
       }
     ]
   },
@@ -123,23 +192,37 @@
     "id": "swe",
     "code": "SWE202c",
     "name": "Nhập môn KTPM",
-    "desc": "Quy trình phát triển phần mềm, thu thập yêu cầu khách hàng.",
-    "file": "./document/SWE201c_Materials.zip",
-    "note": "Môn này lý thuyết nhiều, cần đọc kỹ giáo trình.",
+    "desc": "Quy trình phát triển phần mềm.",
+    "file": "./document/SWE201c_Materials.rar",
+    "note": "Cần đọc kỹ giáo trình về các mô hình.",
     "noteColor": "info",
     "noteIcon": "bi-info-circle-fill",
     "subLessons": [
-      { 
-        "name": "SDLC Models", 
-        "icon": "bi-recycle", 
-        "type": "sdlc",
-        "content": "<h4>Các mô hình phát triển phần mềm</h4><ul><li>Waterfall (Thác nước)</li><li>Agile/Scrum (Linh hoạt)</li><li>V-Model</li></ul>"
+      {
+        "name": "Quy trình SDLC",
+        "icon": "bi-arrow-repeat",
+        "type": "process-group",
+        "subLessons": [
+          {
+            "name": "Các mô hình SDLC",
+            "icon": "bi-recycle",
+            "type": "sdlc",
+            "content": "<h4>Waterfall, Agile, V-Model</h4>"
+          }
+        ]
       },
-      { 
-        "name": "Requirement Engineering", 
-        "icon": "bi-list-check", 
-        "type": "req",
-        "content": "<h4>Kỹ nghệ yêu cầu</h4><p>Phân biệt Functional Requirements (Chức năng) và Non-functional Requirements (Phi chức năng).</p>"
+      {
+        "name": "Kỹ thuật yêu cầu",
+        "icon": "bi-clipboard-check",
+        "type": "req-group",
+        "subLessons": [
+          {
+            "name": "Requirement Engineering",
+            "icon": "bi-list-check",
+            "type": "req",
+            "content": "<h4>Functional & Non-functional Requirements</h4>"
+          }
+        ]
       }
     ]
   }

@@ -45,6 +45,7 @@ async function loadSubjectsFromJSON() {
         contentContainer.innerHTML = '';
 
         data.forEach((subject, index) => {
+            // Render menu bên trái
             const isActive = index === 0 ? 'active' : '';
             const menuItem = document.createElement('a');
             menuItem.className = `timeline-item list-group-item-action ${isActive}`;
@@ -52,100 +53,112 @@ async function loadSubjectsFromJSON() {
             menuItem.setAttribute('data-bs-toggle', 'pill');
             menuItem.setAttribute('data-bs-target', `#content-${subject.id}`);
             menuItem.setAttribute('role', 'tab');
-            menuItem.setAttribute('type', 'button');
-
-            menuItem.onclick = function() { 
-                downloadBtn.href = subject.file; 
-            };
-            
+            menuItem.onclick = () => { downloadBtn.href = subject.file; };
             menuItem.innerHTML = `
                 <div class="timeline-marker"></div>
                 <div class="timeline-content-mini">
                     <h5 class="fw-bolder mb-0">${subject.code}</h5>
                     <small class="text-muted">${subject.name}</small>
-                </div>
-            `;
+                </div>`;
             menuContainer.appendChild(menuItem);
 
-
-            const isShowActive = index === 0 ? 'show active' : '';
-
+            // Xử lý danh sách bài học (Quét 2 lớp)
             let subButtonsHTML = '';
-            if (subject.subLessons && subject.subLessons.length > 0) {
+            if (subject.subLessons) {
                 subject.subLessons.forEach(sub => {
-                    subButtonsHTML += `
-                        <button class="btn btn-sub-lesson bg-white text-start btn-view-lesson" 
-                                data-content-id="${subject.id}-${sub.type}">
-                            <i class="bi ${sub.icon} me-2"></i>${sub.name}
-                        </button>
-                    `;
+                    if (sub.subLessons && sub.subLessons.length > 0) {
+                        // Nếu là một nhóm (ví dụ: Thiết kế ERD)
+                        subButtonsHTML += `<div class="fw-bold mt-2 mb-1 text-primary small"><i class="bi ${sub.icon} me-2"></i>${sub.name}</div>`;
+                        sub.subLessons.forEach(child => {
+                            subButtonsHTML += `
+                                <button class="btn btn-sub-lesson bg-white text-start btn-view-lesson ms-3 mb-1 border-light shadow-sm" 
+                                        data-content-id="${subject.id}-${child.type}">
+                                    <i class="bi ${child.icon || 'bi-dot'} me-2"></i>${child.name}
+                                </button>`;
+                        });
+                    } else {
+                        // Nếu là bài học đơn lẻ
+                        subButtonsHTML += `
+                            <button class="btn btn-sub-lesson bg-white text-start btn-view-lesson mb-1 shadow-sm" 
+                                    data-content-id="${subject.id}-${sub.type}">
+                                <i class="bi ${sub.icon} me-2"></i>${sub.name}
+                            </button>`;
+                    }
                 });
             }
 
-            const contentItem = `
+            const isShowActive = index === 0 ? 'show active' : '';
+            contentContainer.innerHTML += `
                 <div class="tab-pane fade ${isShowActive}" id="content-${subject.id}" role="tabpanel">
                     <div class="d-flex align-items-center mb-3">
-                        <span class="badge bg-gradient-primary-to-secondary me-3 p-2">${subject.code}</span>
+                        <span class="badge bg-primary me-3 p-2">${subject.code}</span>
                         <h2 class="fw-bolder mb-0 text-primary">${subject.name}</h2>
                     </div>
                     <p class="lead text-muted">${subject.desc}</p>
                     <hr>
-                    
                     <div class="mb-3">
                         <button class="btn btn-outline-orange w-100 d-flex justify-content-between align-items-center" 
-                                type="button" data-bs-toggle="collapse" 
-                                data-bs-target="#menu-${subject.id}" aria-expanded="false">
+                                type="button" data-bs-toggle="collapse" data-bs-target="#menu-${subject.id}">
                             <span><i class="bi bi-collection-play me-2"></i>Chọn nội dung học</span>
                             <i class="bi bi-chevron-down"></i>
                         </button>
-                        
                         <div class="collapse mt-2" id="menu-${subject.id}">
-                            <div class="card card-body bg-light border-0">
-                                <div class="d-grid gap-2">
-                                    ${subButtonsHTML}
-                                </div>
-                            </div>
+                            <div class="card card-body bg-light border-0"><div class="d-grid">${subButtonsHTML}</div></div>
                         </div>
                     </div>
-
-                    <div class="alert alert-${subject.noteColor} border-start bg-${subject.noteColor} bg-opacity-10">
+                    <div class="alert alert-${subject.noteColor} border-start bg-opacity-10">
                         <strong><i class="bi ${subject.noteIcon} me-2"></i>Ghi chú:</strong>
                         <p class="mb-0 small">${subject.note}</p>
                     </div>
-                </div>
-            `;
-            contentContainer.innerHTML += contentItem;
+                </div>`;
         });
-
-        if(data.length > 0) {
-            downloadBtn.href = data[0].file;
-        }
-
+        if(data.length > 0) downloadBtn.href = data[0].file;
     } catch (error) {
-        console.error('Lỗi tải data:', error);
-        document.getElementById('v-pills-tab').innerHTML = '<p class="text-danger">Lỗi tải dữ liệu.</p>';
+        console.error('Lỗi:', error);
     }
 }
 
 document.addEventListener('DOMContentLoaded', loadSubjectsFromJSON);
+// 1. Hàm tìm kiếm xuyên thấu các tầng (Recursive Find)
+function findLessonDeep(lessons, targetType) {
+    for (const lesson of lessons) {
+        // Nếu tìm thấy đúng type ở tầng này, trả về luôn
+        if (lesson.type === targetType) return lesson;
+        
+        // Nếu có subLessons con, chui vào trong đó tìm tiếp
+        if (lesson.subLessons && lesson.subLessons.length > 0) {
+            const found = findLessonDeep(lesson.subLessons, targetType);
+            if (found) return found;
+        }
+    }
+    return null;
+}
+
+// 2. Lắng nghe sự kiện Click (Dùng Event Delegation)
 document.addEventListener('click', function(e) {
-    if (e.target.closest('.btn-view-lesson')) {
-        const btn = e.target.closest('.btn-view-lesson');
+    const btn = e.target.closest('.btn-view-lesson');
+    if (btn) {
         const contentId = btn.getAttribute('data-content-id');
         const [subjectId, lessonType] = contentId.split('-');
         
-        // Tìm trong dữ liệu đã load
+        // Tìm môn học chính (subject)
         const subject = subjectsData.find(s => s.id === subjectId);
         
         if (subject && subject.subLessons) {
-            const lesson = subject.subLessons.find(l => l.type === lessonType);
+            // DÙNG HÀM TÌM KIẾM SÂU thay vì hàm find thông thường
+            const lesson = findLessonDeep(subject.subLessons, lessonType);
             
             if (lesson) {
+                // Đổ dữ liệu vào Offcanvas
                 document.getElementById('offcanvasTitle').textContent = lesson.name;
                 document.getElementById('offcanvasContent').innerHTML = lesson.content;
+                
+                // Hiển thị Offcanvas
                 const offcanvasElement = document.getElementById('lessonOffcanvas');
-                const offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasElement);
                 offcanvas.show();
+            } else {
+                console.error("Không tìm thấy nội dung cho type:", lessonType);
             }
         }
     }
