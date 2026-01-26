@@ -38,9 +38,9 @@ async function loadSubjectsFromJSON() {
     const menuContainer = document.getElementById('v-pills-tab');
     const contentContainer = document.getElementById('v-pills-tabContent');
     
-    // ✅ Kiểm tra element có tồn tại không
+    
     if (!menuContainer || !contentContainer) {
-        return; // Không phải trang learn.html, bỏ qua
+        return; 
     }
 
     try {
@@ -53,7 +53,6 @@ async function loadSubjectsFromJSON() {
         contentContainer.innerHTML = '';
 
         data.forEach((subject, index) => {
-            // ... code cũ giữ nguyên
             const isActive = index === 0 ? 'active' : '';
             const menuItem = document.createElement('a');
             menuItem.className = `timeline-item list-group-item-action ${isActive}`;
@@ -518,20 +517,20 @@ if (contactForm) {
                 form.classList.remove("was-validated");
                 
                 if (!successMsg) {
-                    alert("✅ Cảm ơn bạn đã phản hồi!");
+                    alert("Cảm ơn bạn đã phản hồi!");
                 }
             } else {
                 throw new Error("Save failed");
             }
 
         } catch (err) {
-            console.error("❌ Lỗi:", err);
+            console.error("Lỗi:", err);
             
             const errorMsg = document.getElementById("submitErrorMessage");
             if (errorMsg) {
                 errorMsg.classList.remove("d-none");
             } else {
-                alert("❌ Lỗi gửi thông tin. Vui lòng thử lại!");
+                alert("Lỗi gửi thông tin. Vui lòng thử lại!");
             }
         } finally {
             submitBtn.disabled = false;
