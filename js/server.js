@@ -3,9 +3,18 @@ const mysql = require('mysql2/promise');
 const cors = require('cors');
 require('dotenv').config();
 const app = express();
-app.use(cors());
+
+// ✅ CORS - Cho phép mọi domain (hoặc chỉ định domain cụ thể)
+app.use(cors({
+    origin: '*', // Trong production nên thay bằng domain cụ thể
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
+
 app.use(express.json());
 
+// ✅ PORT động cho Render
+const PORT = process.env.PORT || 3000;
 
 // --- CẤU HÌNH KẾT NỐI AIVEN ---
 const dbConfig = {
@@ -14,10 +23,31 @@ const dbConfig = {
     user: process.env.DB_USER,      
     password: process.env.DB_PASSWORD, 
     database: process.env.DB_NAME,  
-    ssl: { rejectUnauthorized: false }
+    ssl: { rejectUnauthorized: false },
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 };
 
 const pool = mysql.createPool(dbConfig);
+
+// ✅ ROOT ENDPOINT - Kiểm tra server đang chạy
+app.get('/', (req, res) => {
+    res.json({ 
+        message: '✅ CapMotSach API is running!',
+        endpoints: {
+            initDB: '/init-db',
+            quiz: '/api/quiz/:category',
+            feedback: '/feedback'
+        }
+    });
+});
+
+
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK' });
+});
+
 app.get('/init-db', async (req, res) => {
     try {
         const connection = await pool.getConnection();
@@ -69,7 +99,7 @@ app.get('/init-db', async (req, res) => {
             ['JPD', 'Khẳng định "Vâng/Có"?', 'Iie', 'Hai', 'Eeto', 'Ano', 'B', 'Hai (はい) nghĩa là Vâng/Có.'],
             ['JPD', 'Phủ định "Không"?', 'Hai', 'Sou', 'Iie', 'Ne', 'C', 'Iie (いいえ) nghĩa là Không.'],
             ['JPD', 'Con mèo tiếng Nhật?', 'Inu', 'Tori', 'Sakana', 'Neko', 'D', 'Neko (猫) là con mèo. Inu là con chó.'],
-            ['JPD', 'Động từ "Ăn"?', 'Nomimasu', 'Tabemasu', 'Mimasu', 'Ikimasu', 'B', 'Tabemasu (食べます) là ăn.'],
+            ['JPD', 'Động từ "Ăn"?', 'Nomimasu', 'Tabemasu', 'Mimasu', 'Ikimasu', 'B', 'Tabemasu (食べます) là Ăn.'],
             ['JPD', 'Hôm nay là?', 'Kyou', 'Ashita', 'Kinou', 'Asatte', 'A', 'Kyou (今日) là hôm nay.'],
             ['JPD', 'Thứ 2 tiếng Nhật?', 'Getsuyoubi', 'Kayoubi', 'Suiyoubi', 'Mokuyoubi', 'A', 'Getsuyoubi (月曜日) là thứ Hai.'],
             ['JPD', 'Trợ từ chỉ chủ ngữ?', 'Wo', 'Ni', 'Wa', 'De', 'C', 'Trợ từ Wa (は) dùng để xác định chủ ngữ.'],
@@ -85,7 +115,7 @@ app.get('/init-db', async (req, res) => {
             ['MAS', 'P(A) + P(not A) = ?', '0', '0.5', '1', '2', 'C', 'Biến cố và biến cố đối luôn có tổng xác suất là 1.'],
             ['MAS', 'Mode của {2, 4, 4, 6}?', '2', '4', '6', '10', 'B', 'Mode (Mốt) là giá trị xuất hiện nhiều nhất.'],
             ['MAS', 'Mean của {2, 4} là?', '2', '3', '4', '6', 'B', 'Mean = (2+4)/2 = 3.'],
-            ['MAS', 'Xác suất P(E) nằm trong?', '[-1, 1]', '[0, 1]', '[0, 100]', '(-vc, +vc)', 'B', 'Xác suất luôn nằm trong đoạn [0, 1].'],
+            ['MAS', 'Xác suất P(E) nằm trong?', '[-1, 1]', '[0, 1]', '[0, 100]', '(-∞, +∞)', 'B', 'Xác suất luôn nằm trong đoạn [0, 1].'],
             ['MAS', 'Công thức chỉnh hợp?', 'nCr', 'nPr', 'n!', 'n^2', 'B', 'Chỉnh hợp là nPr (Permutation).'],
             ['MAS', 'Hai biến cố độc lập P(AB)?', 'P(A)+P(B)', 'P(A)-P(B)', 'P(A).P(B)', 'P(A)/P(B)', 'C', 'Độc lập thì P(AB) = P(A) * P(B).'],
             ['MAS', 'Xác suất có điều kiện P(A|B)?', 'P(AB)/P(B)', 'P(AB)/P(A)', 'P(A)/P(B)', 'P(B)/P(A)', 'A', 'P(A|B) = P(A giao B) / P(B).'],
@@ -153,7 +183,7 @@ app.get('/init-db', async (req, res) => {
             ['SWEc', 'Unit Test ai làm?', 'Tester', 'Developer', 'User', 'PM', 'B', 'Dev viết Unit Test.'],
             ['SWEc', 'Test toàn hệ thống?', 'Unit Test', 'Integration Test', 'System Test', 'Acceptance Test', 'C', 'System Testing.'],
             ['SWEc', 'User Story mẫu?', 'As a... I want...', 'If... then...', 'When... then...', 'Given... when...', 'A', 'As a [role], I want [feature] so that [benefit].'],
-            ['SWEc', 'Kanban tập trung?', 'Sprint', 'Trực quan hóa', 'Họp đứng', 'Tài liệu', 'B', 'Visualize work (Bảng Kanban).'],
+            ['SWEc', 'Kanban tập trung?', 'Sprint', 'Trực quan hóa', 'Hợp đồng', 'Tài liệu', 'B', 'Visualize work (Bảng Kanban).'],
             ['SWEc', 'Black-box testing?', 'Hộp trắng', 'Hộp đen', 'Hiệu năng', 'Bảo mật', 'B', 'Kiểm thử không nhìn code.'],
             ['SWEc', 'SRS là tài liệu?', 'Code', 'Yêu cầu', 'Test', 'Thiết kế', 'B', 'Software Requirement Specification.'],
             ['SWEc', 'Sprint kéo dài?', '1-4 tuần', '3 tháng', '6 tháng', '1 năm', 'A', 'Thường là 2-4 tuần.'],
@@ -186,27 +216,61 @@ app.get('/api/quiz/:category', async (req, res) => {
         res.json(rows);
     } catch (err) {
         console.error(err);
-        res.status(500).send('Lỗi kết nối Aiven');
+        res.status(500).json({ error: 'Lỗi kết nối Aiven' });
     }
 });   
 
-
-// --- API lƯU FEEDBACK ---
+// --- API LƯU FEEDBACK ---
 app.post('/feedback', async (req, res) => {
     try {
-        const { name, email, phone, message} = req.body;
+        const { name, email, phone, message } = req.body;
+
+        if (!name || !email || !message) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Name, email và message là bắt buộc!" 
+            });
+        }
     
         const sql = "INSERT INTO Feedback (name, email, phone, message) VALUES (?, ?, ?, ?)";
-    
-        await pool.query(sql, [name, email, phone, message]);
+        await pool.query(sql, [name, email, phone || null, message]);
 
-        console.log("Đã nhận feeedback từ:", name);
-        res.json({ success: true, message: "Cảm ơn bạn đã phản hồi!"})
+        console.log("✅ Đã nhận feedback từ:", name);
+        res.json({ 
+            success: true, 
+            message: "Cảm ơn bạn đã phản hồi!" 
+        });
     } catch (error) {
         console.error("Lỗi lưu feedback:", error);
-        res.status(500).json({ success: false, message: "Lỗi lưu phản hồi."})
+        res.status(500).json({ 
+            success: false, 
+            message: "Lỗi lưu phản hồi." 
+        });
     }
 });
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server chạy tại http://localhost:${PORT}`));
+app.use((req, res) => {
+    res.status(404).json({ 
+        error: 'Endpoint not found',
+        availableEndpoints: {
+            root: '/',
+            health: '/health',
+            initDB: '/init-db',
+            quiz: '/api/quiz/:category',
+            feedback: '/feedback'
+        }
+    });
+});
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ 
+        error: 'Internal Server Error',
+        message: err.message 
+    });
+});
+
+app.listen(PORT, () => {
+    console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
+    console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+});

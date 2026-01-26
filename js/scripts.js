@@ -263,8 +263,8 @@ async function loadChallengesFromJSON() {
 document.addEventListener('DOMContentLoaded', loadChallengesFromJSON);
 
 
-// ĐƯỜNG DẪN API: Trỏ về máy bạn (localhost) để test
-const API_URL = "http://localhost:3000/api/quiz"; 
+
+
 
 let questions = [];     
 let currentIdx = 0;     
@@ -419,6 +419,8 @@ function closeQuiz() {
 }
 
 //contact form
+const API_URL = "http://localhost:3000/api/quiz"; 
+const FEEDBACK_URL = "http://localhost:3000/feedback";
 document.getElementById("contactForm").addEventListener("submit", async function (e) {
     e.preventDefault();
     const form = this;
@@ -451,7 +453,7 @@ document.getElementById("contactForm").addEventListener("submit", async function
         phoneInput.setCustomValidity(
             patterns.phone.test(phoneInput.value.trim())
                 ? ""
-                : "Phone must be belong to Vietnam mobile numbers()"
+                : "Phone must be belong to Vietnam mobile numbers"
         );
     } else {
         phoneInput.setCustomValidity("");
@@ -478,13 +480,14 @@ document.getElementById("contactForm").addEventListener("submit", async function
 
     try {
         submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Đang gửi...';
 
-        const res = await fetch("/feedback", {
+        // ===== SỬA URL TẠI ĐÂY =====
+        const res = await fetch(FEEDBACK_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
-            });
-
+        });
 
         if (!res.ok) throw new Error("Server error");
 
@@ -500,8 +503,10 @@ document.getElementById("contactForm").addEventListener("submit", async function
         }
 
     } catch (err) {
+        console.error(err);
         document.getElementById("submitErrorMessage").classList.remove("d-none");
     } finally {
         submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Submit';
     }
 });
