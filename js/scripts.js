@@ -262,10 +262,6 @@ async function loadChallengesFromJSON() {
 // Gọi hàm load khi trang web tải xong
 document.addEventListener('DOMContentLoaded', loadChallengesFromJSON);
 
-
-
-
-
 let questions = [];     
 let currentIdx = 0;     
 let score = 0;          
@@ -419,8 +415,8 @@ function closeQuiz() {
 }
 
 //contact form
-const API_URL = "http://localhost:3000/api/quiz"; 
-const FEEDBACK_URL = "http://localhost:3000/feedback";
+const API_URL = "https://roadmapse.onrender.com/api/quiz";
+const FEEDBACK_URL = "https://roadmapse.onrender.com/feedback";
 document.getElementById("contactForm").addEventListener("submit", async function (e) {
     e.preventDefault();
     const form = this;
