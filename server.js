@@ -4,16 +4,18 @@ const cors = require('cors');
 require('dotenv').config();
 const app = express();
 
-// ✅ CORS - Cho phép mọi domain (hoặc chỉ định domain cụ thể)
-app.use(cors({
-    origin: '*', // Trong production nên thay bằng domain cụ thể
-    methods: ['GET', 'POST'],
-    credentials: true
-}));
+app.use(cors());
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
 
 app.use(express.json());
-
-// ✅ PORT động cho Render
 const PORT = process.env.PORT || 3000;
 
 // --- CẤU HÌNH KẾT NỐI AIVEN ---
@@ -31,10 +33,9 @@ const dbConfig = {
 
 const pool = mysql.createPool(dbConfig);
 
-// ✅ ROOT ENDPOINT - Kiểm tra server đang chạy
 app.get('/', (req, res) => {
     res.json({ 
-        message: '✅ CapMotSach API is running!',
+        message: 'CapMotSach API is running!',
         endpoints: {
             initDB: '/init-db',
             quiz: '/api/quiz/:category',
@@ -198,10 +199,10 @@ app.get('/init-db', async (req, res) => {
         await connection.query(sqlInsert, [values]);
 
         connection.release();
-        res.send(`<h1 style="color:green">✅ Đã nạp thành công lên Aiven!</h1>`);
+        res.send(`<h1> Đã nạp thành công lên Aiven!</h1>`);
     } catch (err) {
         console.error(err);
-        res.status(500).send(`<h1 style="color:red">❌ Lỗi: ${err.message}</h1>`);
+        res.status(500).send(`<h1>Lỗi: ${err.message}</h1>`);
     }
 });
 
@@ -235,7 +236,7 @@ app.post('/feedback', async (req, res) => {
         const sql = "INSERT INTO Feedback (name, email, phone, message) VALUES (?, ?, ?, ?)";
         await pool.query(sql, [name, email, phone || null, message]);
 
-        console.log("✅ Đã nhận feedback từ:", name);
+        console.log("Đã nhận feedback từ:", name);
         res.json({ 
             success: true, 
             message: "Cảm ơn bạn đã phản hồi!" 

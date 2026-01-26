@@ -417,92 +417,95 @@ function closeQuiz() {
 //contact form
 const API_URL = "https://roadmapse.onrender.com/api/quiz";
 const FEEDBACK_URL = "https://roadmapse.onrender.com/feedback";
-document.getElementById("contactForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const form = this;
-    const patterns = {
-        name: /^[\p{L}\s]{3,50}$/u,
-        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        phone:/^(0|\+84)(32|33|34|35|36|37|38|39|86|96|97|98|70|76|77|78|79|89|90|93|81|82|83|84|85|88|91|94|56|58|59)\d{7}$/,
-        message: /^[\s\S]{10,500}$/
-    };
+const contactForm = document.getElementById("contactForm");
 
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const phoneInput = document.getElementById("phone");
-    const messageInput = document.getElementById("message");
-    const submitBtn = form.querySelector("button[type='submit']");
+if (contactForm) {  // ⬅️ Chỉ chạy nếu form tồn tại
+    contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const form = this;
+        const patterns = {
+            name: /^[\p{L}\s]{3,50}$/u,
+            email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            phone:/^(0|\+84)(32|33|34|35|36|37|38|39|86|96|97|98|70|76|77|78|79|89|90|93|81|82|83|84|85|88|91|94|56|58|59)\d{7}$/,
+            message: /^[\s\S]{10,500}$/
+        };
 
-    nameInput.setCustomValidity(
-        patterns.name.test(nameInput.value.trim())
-            ? ""
-            : "Name must be 3–50 letters"
-    );
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const phoneInput = document.getElementById("phone");
+        const messageInput = document.getElementById("message");
+        const submitBtn = form.querySelector("button[type='submit']");
 
-    emailInput.setCustomValidity(
-        patterns.email.test(emailInput.value.trim())
-            ? ""
-            : "Invalid email address"
-    );
-
-    if (phoneInput.value.trim()) {
-        phoneInput.setCustomValidity(
-            patterns.phone.test(phoneInput.value.trim())
+        nameInput.setCustomValidity(
+            patterns.name.test(nameInput.value.trim())
                 ? ""
-                : "Phone must be belong to Vietnam mobile numbers"
+                : "Name must be 3–50 letters"
         );
-    } else {
-        phoneInput.setCustomValidity("");
-    }
 
-    messageInput.setCustomValidity(
-        patterns.message.test(messageInput.value.trim())
-            ? ""
-            : "Message must be 10–500 characters"
-    );
+        emailInput.setCustomValidity(
+            patterns.email.test(emailInput.value.trim())
+                ? ""
+                : "Invalid email address"
+        );
 
-    if (!form.checkValidity()) {
-        e.stopPropagation();
-        form.classList.add("was-validated");
-        return;
-    }
-
-    const data = {
-        name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
-        phone: phoneInput.value.trim(),
-        message: messageInput.value.trim()
-    };
-
-    try {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Đang gửi...';
-
-        // ===== SỬA URL TẠI ĐÂY =====
-        const res = await fetch(FEEDBACK_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
-
-        if (!res.ok) throw new Error("Server error");
-
-        const result = await res.json();
-
-        if (result.success) {
-            document.getElementById("submitSuccessMessage").classList.remove("d-none");
-            document.getElementById("submitErrorMessage").classList.add("d-none");
-            form.reset();
-            form.classList.remove("was-validated");
+        if (phoneInput.value.trim()) {
+            phoneInput.setCustomValidity(
+                patterns.phone.test(phoneInput.value.trim())
+                    ? ""
+                    : "Phone must be belong to Vietnam mobile numbers"
+            );
         } else {
-            throw new Error("Save failed");
+            phoneInput.setCustomValidity("");
         }
 
-    } catch (err) {
-        console.error(err);
-        document.getElementById("submitErrorMessage").classList.remove("d-none");
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Submit';
-    }
-});
+        messageInput.setCustomValidity(
+            patterns.message.test(messageInput.value.trim())
+                ? ""
+                : "Message must be 10–500 characters"
+        );
+
+        if (!form.checkValidity()) {
+            e.stopPropagation();
+            form.classList.add("was-validated");
+            return;
+        }
+
+        const data = {
+            name: nameInput.value.trim(),
+            email: emailInput.value.trim(),
+            phone: phoneInput.value.trim(),
+            message: messageInput.value.trim()
+        };
+
+        try {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Đang gửi...';
+
+            const res = await fetch(FEEDBACK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            if (!res.ok) throw new Error("Server error");
+
+            const result = await res.json();
+
+            if (result.success) {
+                document.getElementById("submitSuccessMessage").classList.remove("d-none");
+                document.getElementById("submitErrorMessage").classList.add("d-none");
+                form.reset();
+                form.classList.remove("was-validated");
+            } else {
+                throw new Error("Save failed");
+            }
+
+        } catch (err) {
+            console.error(err);
+            document.getElementById("submitErrorMessage").classList.remove("d-none");
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Submit';
+        }
+    });
+}
