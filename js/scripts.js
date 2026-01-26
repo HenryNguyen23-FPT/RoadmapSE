@@ -91,7 +91,7 @@ async function loadSubjectsFromJSON() {
             contentContainer.innerHTML += `
                 <div class="tab-pane fade ${isShowActive}" id="content-${subject.id}" role="tabpanel">
                     <div class="d-flex align-items-center mb-3">
-                        <span class="badge bg-primary me-3 p-2">${subject.code}</span>
+                        <span class="badge bg-gradient-primary-to-secondary me-3 p-2">${subject.code}</span>
                         <h2 class="fw-bolder mb-0 text-primary">${subject.name}</h2>
                     </div>
                     <p class="lead text-muted">${subject.desc}</p>
@@ -479,11 +479,12 @@ document.getElementById("contactForm").addEventListener("submit", async function
     try {
         submitBtn.disabled = true;
 
-        const res = await fetch("http://localhost:3000/feedback", {
+        const res = await fetch("/feedback", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
-        });
+            });
+
 
         if (!res.ok) throw new Error("Server error");
 

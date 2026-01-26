@@ -3644,7 +3644,7 @@ html {
     background: #f8fafc;
 }
 
-.badge {
+.command-badge {
     display: inline-block;
     padding: 4px 12px;
     background: #eff6ff;
