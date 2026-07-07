@@ -1,11 +1,15 @@
 name: Render Webhook Alert
 on:
-  issue_comment:
-    types: [created]
-  pull_request_review:
-    types: [submitted]
+  push:
+    branches: [ "**" ] # Lắng nghe sự kiện push code ở mọi branch (cho github-feed)
   pull_request:
-    types: [opened, reopened, synchronize, ready_for_review]
+    types: [opened, reopened, synchronize, ready_for_review] # Thêm 'closed' (cho github-feed & pr-status)
+  issue_comment:
+    types: [created] # Giữ nguyên cho CodeRabbit
+  pull_request_review:
+    types: [submitted] # Giữ nguyên cho CodeRabbit
+  check_run:
+    types: [completed] # Lắng nghe khi các bước test/CI chạy xong (cho pr-status pass/fail)
 
 jobs:
   notify-render-backend:
@@ -13,74 +17,106 @@ jobs:
     steps:
       - name: Send Data to Render Spring Boot
         env:
-          # FIX: route đúng là /api/webhook/coderabbit, không phải /api/webhook/triage
           RENDER_API_URL: "https://discord-bot-service-9m6f.onrender.com/api/webhook/coderabbit"
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
           EVENT_NAME: ${{ github.event_name }}
           REPO_FULL_NAME: ${{ github.repository }}
+          
+          # Dữ liệu từ PUSH
+          PUSH_REF: ${{ github.ref_name }}
+          PUSH_ACTOR: ${{ github.actor }}
+          PUSH_COMPARE: ${{ github.event.compare }}
 
-          PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
-          PR_TITLE: ${{ github.event.pull_request.title || github.event.issue.title }}
-          PR_URL: ${{ github.event.pull_request.html_url || github.event.issue.html_url }}
+          # Dữ liệu từ PUSH hoặc CHECK_RUN không có sẵn PR nên lấy fallback an toàn
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number || github.event.check_run.pull_requests[0].number || '' }}
+          PR_TITLE: ${{ github.event.pull_request.title || github.event.issue.title || github.event.check_run.pull_requests[0].title || '' }}
+          PR_URL: ${{ github.event.pull_request.html_url || github.event.issue.html_url || '' }}
 
           COMMENT_AUTHOR: ${{ github.event.comment.user.login || github.event.review.user.login || '' }}
           COMMENT_BODY: ${{ github.event.comment.body || github.event.review.body || '' }}
 
           PR_AUTHOR: ${{ github.event.pull_request.user.login || '' }}
           PR_BODY: ${{ github.event.pull_request.body || '' }}
+          PR_ACTION: ${{ github.event.action }}
+          PR_MERGED: ${{ github.event.pull_request.merged }}
+
+          # Dữ liệu từ CI/Check Run (cho pr-status)
+          CHECK_CONCLUSION: ${{ github.event.check_run.conclusion }} # success, failure, cancelled, v.v.
+          CHECK_NAME: ${{ github.event.check_run.name }}
+          CHECK_URL: ${{ github.event.check_run.html_url }}
         run: |
           GITHUB_USERNAME=""
           SUMMARY=""
           ALERT_TYPE="UNKNOWN"
           SEVERITY="INFO"
 
-          # 1. Phân loại sự kiện và gán dữ liệu
-          if [[ "$EVENT_NAME" == "pull_request" ]]; then
-            ALERT_TYPE="PR_UPDATE"
+          # 1. Xử lý sự kiện PUSH CODE (Kênh: github-feed)
+          if [[ "$EVENT_NAME" == "push" ]]; then
+            ALERT_TYPE="PUSH"
+            GITHUB_USERNAME="$PUSH_ACTOR"
+            SUMMARY="Pushed to branch [$PUSH_REF]. Compare changes: $PUSH_COMPARE"
+
+          # 2. Xử lý sự kiện PULL REQUEST (Kênh: github-feed & pr-status)
+          elif [[ "$EVENT_NAME" == "pull_request" ]]; then
             GITHUB_USERNAME="$PR_AUTHOR"
             SUMMARY="$PR_BODY"
+            
+            if [[ "$PR_ACTION" == "closed" ]]; then
+              ALERT_TYPE="PR_CLOSED"
+              if [[ "$PR_MERGED" == "true" ]]; then
+                SUMMARY="[SUCCESS / MERGED] PR #$PR_NUMBER has been successfully merged."
+              else
+                SUMMARY="[CLOSED] PR #$PR_NUMBER was closed without merging."
+              fi
+            else
+              ALERT_TYPE="PR_UPDATE" # opened, reopened, synchronize
+            fi
+
+          # 3. Xử lý sự kiện TRẠNG THÁI CI / TEST (Kênh: pr-status)
+          elif [[ "$EVENT_NAME" == "check_run" ]]; then
+            GITHUB_USERNAME="GitHub Actions"
+            ALERT_TYPE="CI_STATUS"
+            SUMMARY="Workflow [ $CHECK_NAME ] status: ${CHECK_CONCLUSION^^}. Details: $CHECK_URL"
+            
+            if [[ "$CHECK_CONCLUSION" == "failure" ]]; then
+              SEVERITY="HIGH"
+            fi
+
+          # 4. Xử lý CODERABBIT REVIEW (Kênh: bot-alert)
           elif [[ "$COMMENT_AUTHOR" == *"coderabbit"* ]]; then
             ALERT_TYPE="CODERABBIT_REVIEW"
             GITHUB_USERNAME="$COMMENT_AUTHOR"
             SUMMARY="$COMMENT_BODY"
 
-            # Phân tích mức độ nghiêm trọng nếu CodeRabbit có cảnh báo
             if [[ "$SUMMARY" == *"fail"* ]] || [[ "$SUMMARY" == *"error"* ]]; then
               SEVERITY="HIGH"
             fi
           else
-            echo "Not a PR update and not a CodeRabbit review. Skipping."
-            exit 0
-          fi
-
-          if [[ -z "$PR_NUMBER" || "$PR_NUMBER" == "null" ]]; then
-            echo "No PR number resolved. Skipping."
+            echo "Event not mapped to any alert channel. Skipping."
             exit 0
           fi
 
           echo "Processing event: $ALERT_TYPE triggered by $GITHUB_USERNAME"
 
-          # 2. Lấy danh sách file đã thay đổi trong PR qua GitHub REST API.
-          #    Cần thiết vì OwnershipResolver ở backend map module -> owner
-          #    dựa trên changedFiles; nếu để rỗng thì sẽ không bao giờ
-          #    resolve được owner nào, dù backend đã sẵn sàng.
-          CHANGED_FILES_JSON=$(curl -s \
-            -H "Authorization: Bearer $GH_TOKEN" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/${REPO_FULL_NAME}/pulls/${PR_NUMBER}/files?per_page=100" \
-            | jq '[.[].filename]')
+          # 2. Lấy danh sách file thay đổi (Chỉ chạy nếu có số PR hợp lệ)
+          if [[ -n "$PR_NUMBER" && "$PR_NUMBER" != "null" && "$PR_NUMBER" != "0" ]]; then
+            CHANGED_FILES_JSON=$(curl -s \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${REPO_FULL_NAME}/pulls/${PR_NUMBER}/files?per_page=100" \
+              | jq '[.[].filename]')
+          else
+            CHANGED_FILES_JSON="[]"
+            PR_NUMBER=0
+          fi
 
-          # Fallback an toàn nếu API lỗi hoặc trả về không phải mảng (vd rate limit, PR không tồn tại)
           if [[ -z "$CHANGED_FILES_JSON" ]] || ! echo "$CHANGED_FILES_JSON" | jq -e 'type == "array"' > /dev/null 2>&1; then
-            echo "Could not resolve changed files, defaulting to empty list."
             CHANGED_FILES_JSON="[]"
           fi
 
-          echo "Changed files: $CHANGED_FILES_JSON"
-
           SAFE_SUMMARY=$(echo "$SUMMARY" | head -c 1500)
 
+          # Build JSON Payload gửi về Backend
           jq -n \
             --arg repoFullName "$REPO_FULL_NAME" \
             --argjson prNumber "${PR_NUMBER:-0}" \
