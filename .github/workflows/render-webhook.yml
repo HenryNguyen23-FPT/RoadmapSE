@@ -1,5 +1,4 @@
 name: Render Webhook Alert
-
 on:
   issue_comment:
     types: [created]
@@ -11,25 +10,25 @@ on:
 jobs:
   notify-render-backend:
     runs-on: ubuntu-latest
-
     steps:
       - name: Send Data to Render Spring Boot
         env:
-          RENDER_API_URL: "https://discord-bot-service-9m6f.onrender.com/api/webhook/triage" 
-          
+          # FIX: route đúng là /api/webhook/coderabbit, không phải /api/webhook/triage
+          RENDER_API_URL: "https://discord-bot-service-9m6f.onrender.com/api/webhook/coderabbit"
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
           EVENT_NAME: ${{ github.event_name }}
           REPO_FULL_NAME: ${{ github.repository }}
-          
+
           PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
           PR_TITLE: ${{ github.event.pull_request.title || github.event.issue.title }}
           PR_URL: ${{ github.event.pull_request.html_url || github.event.issue.html_url }}
-          
+
           COMMENT_AUTHOR: ${{ github.event.comment.user.login || github.event.review.user.login || '' }}
           COMMENT_BODY: ${{ github.event.comment.body || github.event.review.body || '' }}
-          
+
           PR_AUTHOR: ${{ github.event.pull_request.user.login || '' }}
           PR_BODY: ${{ github.event.pull_request.body || '' }}
-
         run: |
           GITHUB_USERNAME=""
           SUMMARY=""
@@ -45,7 +44,7 @@ jobs:
             ALERT_TYPE="CODERABBIT_REVIEW"
             GITHUB_USERNAME="$COMMENT_AUTHOR"
             SUMMARY="$COMMENT_BODY"
-            
+
             # Phân tích mức độ nghiêm trọng nếu CodeRabbit có cảnh báo
             if [[ "$SUMMARY" == *"fail"* ]] || [[ "$SUMMARY" == *"error"* ]]; then
               SEVERITY="HIGH"
@@ -55,7 +54,30 @@ jobs:
             exit 0
           fi
 
+          if [[ -z "$PR_NUMBER" || "$PR_NUMBER" == "null" ]]; then
+            echo "No PR number resolved. Skipping."
+            exit 0
+          fi
+
           echo "Processing event: $ALERT_TYPE triggered by $GITHUB_USERNAME"
+
+          # 2. Lấy danh sách file đã thay đổi trong PR qua GitHub REST API.
+          #    Cần thiết vì OwnershipResolver ở backend map module -> owner
+          #    dựa trên changedFiles; nếu để rỗng thì sẽ không bao giờ
+          #    resolve được owner nào, dù backend đã sẵn sàng.
+          CHANGED_FILES_JSON=$(curl -s \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${REPO_FULL_NAME}/pulls/${PR_NUMBER}/files?per_page=100" \
+            | jq '[.[].filename]')
+
+          # Fallback an toàn nếu API lỗi hoặc trả về không phải mảng (vd rate limit, PR không tồn tại)
+          if [[ -z "$CHANGED_FILES_JSON" ]] || ! echo "$CHANGED_FILES_JSON" | jq -e 'type == "array"' > /dev/null 2>&1; then
+            echo "Could not resolve changed files, defaulting to empty list."
+            CHANGED_FILES_JSON="[]"
+          fi
+
+          echo "Changed files: $CHANGED_FILES_JSON"
 
           SAFE_SUMMARY=$(echo "$SUMMARY" | head -c 1500)
 
@@ -68,6 +90,7 @@ jobs:
             --arg alertType "$ALERT_TYPE" \
             --arg severity "$SEVERITY" \
             --arg summary "$SAFE_SUMMARY" \
+            --argjson changedFiles "$CHANGED_FILES_JSON" \
             '{
               repoFullName: $repoFullName,
               prNumber: $prNumber,
@@ -77,7 +100,7 @@ jobs:
               alertType: $alertType,
               severity: $severity,
               summary: $summary,
-              changedFiles: []
+              changedFiles: $changedFiles
             }' > payload.json
 
           echo "Sending payload to $RENDER_API_URL..."
