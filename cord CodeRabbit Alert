@@ -1,0 +1,235 @@
+[1mdiff --git a/.github/workflows/discord-coderabbit-alert.yml b/.github/workflows/discord-coderabbit-alert.yml[m
+[1mdeleted file mode 100644[m
+[1mindex deafb1b..0000000[m
+[1m--- a/.github/workflows/discord-coderabbit-alert.yml[m
+[1m+++ /dev/null[m
+[36m@@ -1,42 +0,0 @@[m
+[31m-name: Discord CodeRabbit Alert[m
+[31m-[m
+[31m-on:[m
+[31m-  issue_comment:[m
+[31m-    types: [created][m
+[31m-  pull_request_review:[m
+[31m-    types: [submitted][m
+[31m-[m
+[31m-jobs:[m
+[31m-  notify-coderabbit:[m
+[31m-    runs-on: ubuntu-latest[m
+[31m-[m
+[31m-    steps:[m
+[31m-      - name: Send CodeRabbit comment/review to Discord[m
+[31m-        env:[m
+[31m-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}[m
+[31m-          COMMENT_AUTHOR: ${{ github.event.comment.user.login || github.event.review.user.login }}[m
+[31m-          COMMENT_BODY: ${{ github.event.comment.body || github.event.review.body }}[m
+[31m-          PR_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}[m
+[31m-        run: |[m
+[31m-          echo "Author: $COMMENT_AUTHOR"[m
+[31m-[m
+[31m-          if [[ "$COMMENT_AUTHOR" != *"coderabbit"* ]]; then[m
+[31m-            echo "Not CodeRabbit. Skip."[m
+[31m-            exit 0[m
+[31m-          fi[m
+[31m-[m
+[31m-          SAFE_BODY=$(echo "$COMMENT_BODY" | head -c 1500)[m
+[31m-[m
+[31m-          jq -n \[m
+[31m-            --arg author "$COMMENT_AUTHOR" \[m
+[31m-            --arg body "$SAFE_BODY" \[m
+[31m-            --arg url "$PR_URL" \[m
+[31m-            '{[m
+[31m-              username: "CodeRabbit Relay Bot",[m
+[31m-              content: ("🐰 **CodeRabbit Review Detected**\n\n**Author:** " + $author + "\n**PR:** " + $url + "\n\n**Review Summary:**\n" + $body)[m
+[31m-            }' > payload.json[m
+[31m-[m
+[31m-          curl -H "Content-Type: application/json" \[m
+[31m-               -X POST \[m
+[31m-               --data @payload.json \[m
+[31m-               "$DISCORD_WEBHOOK_URL"[m
+[1mdiff --git a/.github/workflows/discord-pr-alert.yml b/.github/workflows/discord-pr-alert.yml[m
+[1mdeleted file mode 100644[m
+[1mindex dfe2fcd..0000000[m
+[1m--- a/.github/workflows/discord-pr-alert.yml[m
+[1m+++ /dev/null[m
+[36m@@ -1,37 +0,0 @@[m
+[31m-name: Discord PR Alert[m
+[31m-[m
+[31m-on:[m
+[31m-  pull_request:[m
+[31m-    types: [opened, reopened, synchronize, ready_for_review][m
+[31m-[m
+[31m-jobs:[m
+[31m-  notify-pr:[m
+[31m-    runs-on: ubuntu-latest[m
+[31m-[m
+[31m-    steps:[m
+[31m-      - name: Send PR info to Discord[m
+[31m-        env:[m
+[31m-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}[m
+[31m-          PR_TITLE: ${{ github.event.pull_request.title }}[m
+[31m-          PR_AUTHOR: ${{ github.event.pull_request.user.login }}[m
+[31m-          PR_URL: ${{ github.event.pull_request.html_url }}[m
+[31m-          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}[m
+[31m-          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}[m
+[31m-          PR_BODY: ${{ github.event.pull_request.body }}[m
+[31m-        run: |[m
+[31m-          jq -n \[m
+[31m-            --arg title "$PR_TITLE" \[m
+[31m-            --arg author "$PR_AUTHOR" \[m
+[31m-            --arg url "$PR_URL" \[m
+[31m-            --arg head "$HEAD_BRANCH" \[m
+[31m-            --arg base "$BASE_BRANCH" \[m
+[31m-            --arg body "$PR_BODY" \[m
+[31m-            '{[m
+[31m-              username: "PR Watcher Bot",[m
+[31m-              content: ("[PR Updated]\n\n**Title:** " + $title + "\n**Author:** " + $author + "\n**Branch:** `" + $head + "` -> `" + $base + "`\n**Link:** " + $url + "\n\n**Description:**\n" + if $body == "" then "No description" else $body end)[m
+[31m-            }' > payload.json[m
+[31m-[m
+[31m-          curl -H "Content-Type: application/json" \[m
+[31m-               -X POST \[m
+[31m-               --data @payload.json \[m
+[31m-               "$DISCORD_WEBHOOK_URL"[m
+[1mdiff --git a/.github/workflows/render-webhook.yml b/.github/workflows/render-webhook.yml[m
+[1mindex 41b0776..afb7cb3 100644[m
+[1m--- a/.github/workflows/render-webhook.yml[m
+[1m+++ b/.github/workflows/render-webhook.yml[m
+[36m@@ -1,87 +1,71 @@[m
+[31m-name: Render Webhook Alert[m
+[31m-[m
+[32m+[m[32mname: Forward Event to Webhook[m
+ on:[m
+[32m+[m[32m  push:[m
+[32m+[m[32m    branches: [ "**" ][m
+[32m+[m[32m  pull_request:[m
+[32m+[m[32m    types: [opened, reopened, synchronize, ready_for_review, closed][m
+[32m+[m[32m  check_run:[m
+[32m+[m[32m    types: [completed][m
+   issue_comment:[m
+     types: [created][m
+   pull_request_review:[m
+     types: [submitted][m
+[31m-  pull_request:[m
+[31m-    types: [opened, reopened, synchronize, ready_for_review][m
+ [m
+ jobs:[m
+[31m-  notify-render-backend:[m
+[32m+[m[32m  forward-payload:[m
+     runs-on: ubuntu-latest[m
+[31m-[m
+     steps:[m
+[31m-      - name: Send Data to Render Spring Boot[m
+[32m+[m[32m      - name: Send Raw Event to Backend[m
+         env:[m
+[31m-          RENDER_API_URL: "https://discord-bot-service-9m6f.onrender.com/api/webhook/triage" [m
+[31m-          [m
+[32m+[m[32m          # Thêm secret này trong Repo Settings -> Secrets -> Actions (nếu backend yêu cầu bảo mật)[m
+[32m+[m[32m          # Nếu backend cấu hình github.webhook.secret rỗng, bạn có thể bỏ trống[m
+[32m+[m[32m          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}[m[41m [m
+           EVENT_NAME: ${{ github.event_name }}[m
+[31m-          REPO_FULL_NAME: ${{ github.repository }}[m
+[31m-          [m
+[31m-          PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}[m
+[31m-          PR_TITLE: ${{ github.event.pull_request.title || github.event.issue.title }}[m
+[31m-          PR_URL: ${{ github.event.pull_request.html_url || github.event.issue.html_url }}[m
+[31m-          [m
+[31m-          COMMENT_AUTHOR: ${{ github.event.comment.user.login || github.event.review.user.login || '' }}[m
+[31m-          COMMENT_BODY: ${{ github.event.comment.body || github.event.review.body || '' }}[m
+[31m-          [m
+[31m-          PR_AUTHOR: ${{ github.event.pull_request.user.login || '' }}[m
+[31m-          PR_BODY: ${{ github.event.pull_request.body || '' }}[m
+[31m-[m
+[32m+[m[32m          DELIVERY_ID: ${{ github.run_id }}-${{ github.run_attempt }}[m
+         run: |[m
+[31m-          GITHUB_USERNAME=""[m
+[31m-          SUMMARY=""[m
+[31m-          ALERT_TYPE="UNKNOWN"[m
+[31m-          SEVERITY="INFO"[m
+[31m-[m
+[31m-          # 1. Phân loại sự kiện và gán dữ liệu[m
+[31m-          if [[ "$EVENT_NAME" == "pull_request" ]]; then[m
+[31m-            ALERT_TYPE="PR_UPDATE"[m
+[31m-            GITHUB_USERNAME="$PR_AUTHOR"[m
+[31m-            SUMMARY="$PR_BODY"[m
+[31m-          elif [[ "$COMMENT_AUTHOR" == *"coderabbit"* ]]; then[m
+[31m-            ALERT_TYPE="CODERABBIT_REVIEW"[m
+[31m-            GITHUB_USERNAME="$COMMENT_AUTHOR"[m
+[31m-            SUMMARY="$COMMENT_BODY"[m
+[32m+[m[32m          # 1. Phân luồng URL dựa theo sự kiện[m
+[32m+[m[32m          URL=""[m
+[32m+[m[32m          if [[ "$EVENT_NAME" == "push" ]]; then[m
+[32m+[m[32m            URL="https://discord-bot-service-9m6f.onrender.com/api/webhook/github/feed"[m
+             [m
+[31m-            # Phân tích mức độ nghiêm trọng nếu CodeRabbit có cảnh báo[m
+[31m-            if [[ "$SUMMARY" == *"fail"* ]] || [[ "$SUMMARY" == *"error"* ]]; then[m
+[31m-              SEVERITY="HIGH"[m
+[31m-            fi[m
+[31m-          else[m
+[31m-            echo "Not a PR update and not a CodeRabbit review. Skipping."[m
+[32m+[m[32m          elif [[ "$EVENT_NAME" == "pull_request" || "$EVENT_NAME" == "check_run" ]]; then[m
+[32m+[m[32m            URL="https://discord-bot-service-9m6f.onrender.com/api/webhook/github/pr-status"[m
+[32m+[m[41m            [m
+[32m+[m[32m          elif [[ "$EVENT_NAME" == "issue_comment" || "$EVENT_NAME" == "pull_request_review" ]]; then[m
+[32m+[m[32m            # Vẫn giữ lại endpoint coderabbit cũ cho tính năng Alert / Assign owner[m
+[32m+[m[32m            URL="https://discord-bot-service-9m6f.onrender.com/api/webhook/coderabbit"[m
+[32m+[m[32m            # Lưu ý: Coderabbit endpoint ở backend của bạn nhận JSON map khác với native Github.[m
+[32m+[m[32m            # Nếu bạn gọi endpoint /api/webhook/github/bot-alert, Backend sẽ xử lý theo chuẩn Github.[m
+[32m+[m[32m            # Ở đây tôi ví dụ gửi về bot-alert chuẩn của bạn:[m
+[32m+[m[32m            # URL="https://discord-bot-service-9m6f.onrender.com/api/webhook/github/bot-alert"[m
+[32m+[m[32m          fi[m
+[32m+[m
+[32m+[m[32m          if [[ -z "$URL" ]]; then[m
+[32m+[m[32m            echo "Skipping event $EVENT_NAME - no matching endpoint."[m
+             exit 0[m
+           fi[m
+ [m
+[31m-          echo "Processing event: $ALERT_TYPE triggered by $GITHUB_USERNAME"[m
+[32m+[m[32m          # 2. Payload thô (chuẩn xác 100% giống Native Webhook)[m
+[32m+[m[32m          PAYLOAD_FILE="$GITHUB_EVENT_PATH"[m
+ [m
+[31m-          SAFE_SUMMARY=$(echo "$SUMMARY" | head -c 1500)[m
+[32m+[m[32m          # 3. Tạo chữ ký SHA-256 (Để vượt qua bước verify bảo mật ở GithubWebhookController)[m
+[32m+[m[32m          HEADER_SIG=""[m
+[32m+[m[32m          if [[ -n "$WEBHOOK_SECRET" ]]; then[m
+[32m+[m[32m            SIGNATURE="sha256=$(openssl dgst -sha256 -hmac "$WEBHOOK_SECRET" "$PAYLOAD_FILE" | sed 's/^.* //')"[m
+[32m+[m[32m            HEADER_SIG="-H \"X-Hub-Signature-256: $SIGNATURE\""[m
+[32m+[m[32m          fi[m
+ [m
+[31m-          jq -n \[m
+[31m-            --arg repoFullName "$REPO_FULL_NAME" \[m
+[31m-            --argjson prNumber "${PR_NUMBER:-0}" \[m
+[31m-            --arg prTitle "$PR_TITLE" \[m
+[31m-            --arg prUrl "$PR_URL" \[m
+[31m-            --arg githubUsername "$GITHUB_USERNAME" \[m
+[31m-            --arg alertType "$ALERT_TYPE" \[m
+[31m-            --arg severity "$SEVERITY" \[m
+[31m-            --arg summary "$SAFE_SUMMARY" \[m
+[31m-            '{[m
+[31m-              repoFullName: $repoFullName,[m
+[31m-              prNumber: $prNumber,[m
+[31m-              prTitle: $prTitle,[m
+[31m-              prUrl: $prUrl,[m
+[31m-              githubUsername: $githubUsername,[m
+[31m-              alertType: $alertType,[m
+[31m-              severity: $severity,[m
+[31m-              summary: $summary,[m
+[31m-              changedFiles: [][m
+[31m-            }' > payload.json[m
+[32m+[m[32m          echo "Sending $EVENT_NAME payload to $URL..."[m
+ [m
+[31m-          echo "Sending payload to $RENDER_API_URL..."[m
+[31m-          curl -H "Content-Type: application/json" \[m
+[31m-               -X POST \[m
+[31m-               --data @payload.json \[m
+[31m-               "$RENDER_API_URL"[m
+[32m+[m[32m          # 4. Gửi Request[m
+[32m+[m[32m          eval curl -s -o response.txt -w \"%{http_code}\" \[m
+[32m+[m[32m            -X POST \[m
+[32m+[m[32m            -H '"Content-Type: application/json"' \[m
+[32m+[m[32m            -H '"X-GitHub-Event: '"$EVENT_NAME"'"' \[m
+[32m+[m[32m            -H '"X-GitHub-Delivery: '"$DELIVERY_ID"'"' \[m
+[32m+[m[32m            $HEADER_SIG \[m
+[32m+[m[32m            -d @"$PAYLOAD_FILE" \[m
+[32m+[m[32m            "$URL"[m
+[32m+[m[41m            [m
+[32m+[m[32m          echo -e "\nResponse from server:"[m
+[32m+[m[32m          cat response.txt[m
