@@ -5,4 +5,4 @@ const router = express.Router();
 
 router.get('/', challengeController.getAll);
 
-module.exports = ;
+module.exports = router;
