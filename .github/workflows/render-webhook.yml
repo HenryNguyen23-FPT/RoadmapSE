@@ -3,15 +3,13 @@ on:
   push:
     branches: [ "**" ] # Lắng nghe sự kiện push code ở mọi branch (cho github-feed)
   pull_request:
-    types: [opened, reopened, synchronize, ready_for_review, closed] # PR_CLOSED/merged
+    types: [opened, reopened, synchronize, ready_for_review] # Thêm 'closed' (cho github-feed & pr-status)
   issue_comment:
-    types: [created] # Comment tổng của CodeRabbit trên PR (summary)
+    types: [created] # Giữ nguyên cho CodeRabbit
   pull_request_review:
-    types: [submitted] # Review tổng của CodeRabbit
-  pull_request_review_comment:
-    types: [created] # Comment CodeRabbit để lại trên 1 dòng code cụ thể
+    types: [submitted] # Giữ nguyên cho CodeRabbit
   check_run:
-    types: [completed] # Lắng nghe khi các bước test/CI chạy xong
+    types: [completed] # Lắng nghe khi các bước test/CI chạy xong (cho pr-status pass/fail)
 
 jobs:
   notify-render-backend:
@@ -23,13 +21,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EVENT_NAME: ${{ github.event_name }}
           REPO_FULL_NAME: ${{ github.repository }}
-
+          
           # Dữ liệu từ PUSH
           PUSH_REF: ${{ github.ref_name }}
           PUSH_ACTOR: ${{ github.actor }}
           PUSH_COMPARE: ${{ github.event.compare }}
 
-          # Fallback an toàn cho PR info
+          # Dữ liệu từ PUSH hoặc CHECK_RUN không có sẵn PR nên lấy fallback an toàn
           PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number || github.event.check_run.pull_requests[0].number || '' }}
           PR_TITLE: ${{ github.event.pull_request.title || github.event.issue.title || github.event.check_run.pull_requests[0].title || '' }}
           PR_URL: ${{ github.event.pull_request.html_url || github.event.issue.html_url || '' }}
@@ -37,18 +35,13 @@ jobs:
           COMMENT_AUTHOR: ${{ github.event.comment.user.login || github.event.review.user.login || '' }}
           COMMENT_BODY: ${{ github.event.comment.body || github.event.review.body || '' }}
 
-          # Thông tin comment từng dòng code (pull_request_review_comment)
-          RC_FILE_PATH: ${{ github.event.comment.path }}
-          RC_LINE: ${{ github.event.comment.line || github.event.comment.original_line }}
-          RC_COMMENT_URL: ${{ github.event.comment.html_url }}
-
           PR_AUTHOR: ${{ github.event.pull_request.user.login || '' }}
           PR_BODY: ${{ github.event.pull_request.body || '' }}
           PR_ACTION: ${{ github.event.action }}
           PR_MERGED: ${{ github.event.pull_request.merged }}
 
-          # Dữ liệu từ CI/Check Run
-          CHECK_CONCLUSION: ${{ github.event.check_run.conclusion }}
+          # Dữ liệu từ CI/Check Run (cho pr-status)
+          CHECK_CONCLUSION: ${{ github.event.check_run.conclusion }} # success, failure, cancelled, v.v.
           CHECK_NAME: ${{ github.event.check_run.name }}
           CHECK_URL: ${{ github.event.check_run.html_url }}
         run: |
@@ -57,17 +50,17 @@ jobs:
           ALERT_TYPE="UNKNOWN"
           SEVERITY="INFO"
 
-          # 1. Xử lý sự kiện PUSH CODE
+          # 1. Xử lý sự kiện PUSH CODE (Kênh: github-feed)
           if [[ "$EVENT_NAME" == "push" ]]; then
             ALERT_TYPE="PUSH"
             GITHUB_USERNAME="$PUSH_ACTOR"
             SUMMARY="Pushed to branch [$PUSH_REF]. Compare changes: $PUSH_COMPARE"
 
-          # 2. Xử lý sự kiện PULL REQUEST
+          # 2. Xử lý sự kiện PULL REQUEST (Kênh: github-feed & pr-status)
           elif [[ "$EVENT_NAME" == "pull_request" ]]; then
             GITHUB_USERNAME="$PR_AUTHOR"
             SUMMARY="$PR_BODY"
-
+            
             if [[ "$PR_ACTION" == "closed" ]]; then
               ALERT_TYPE="PR_CLOSED"
               if [[ "$PR_MERGED" == "true" ]]; then
@@ -76,38 +69,26 @@ jobs:
                 SUMMARY="[CLOSED] PR #$PR_NUMBER was closed without merging."
               fi
             else
-              ALERT_TYPE="PR_UPDATE"
+              ALERT_TYPE="PR_UPDATE" # opened, reopened, synchronize
             fi
 
-          # 3. Xử lý sự kiện TRẠNG THÁI CI / TEST
+          # 3. Xử lý sự kiện TRẠNG THÁI CI / TEST (Kênh: pr-status)
           elif [[ "$EVENT_NAME" == "check_run" ]]; then
+
+            if [[ "$CHECK_NAME" == *"Vercel"* ]]; then
+              echo "Ignore Vercel check_run event. Skipping."
+              exit 0
+            fi
+          
             GITHUB_USERNAME="GitHub Actions"
             ALERT_TYPE="CI_STATUS"
             SUMMARY="Workflow [ $CHECK_NAME ] status: ${CHECK_CONCLUSION^^}. Details: $CHECK_URL"
-
+            
             if [[ "$CHECK_CONCLUSION" == "failure" ]]; then
               SEVERITY="HIGH"
             fi
 
-          # 4. Xử lý COMMENT CỦA CODERABBIT TRÊN TỪNG DÒNG CODE
-          elif [[ "$EVENT_NAME" == "pull_request_review_comment" ]]; then
-            if [[ "$COMMENT_AUTHOR" != *"coderabbit"* ]]; then
-              echo "Inline comment is not from CodeRabbit, skipping."
-              exit 0
-            fi
-            ALERT_TYPE="CODERABBIT_LINE_COMMENT"
-            GITHUB_USERNAME="$COMMENT_AUTHOR"
-            SUMMARY="$COMMENT_BODY"
-
-            if [[ "$SUMMARY" == *"Critical"* ]]; then
-              SEVERITY="HIGH"
-            elif [[ "$SUMMARY" == *"Major"* ]]; then
-              SEVERITY="MEDIUM"
-            elif [[ "$SUMMARY" == *"Minor"* ]]; then
-              SEVERITY="LOW"
-            fi
-
-          # 5. Xử lý COMMENT/REVIEW TỔNG CỦA CODERABBIT TRÊN CẢ PR
+          # 4. Xử lý CODERABBIT REVIEW (Kênh: bot-alert)
           elif [[ "$COMMENT_AUTHOR" == *"coderabbit"* ]]; then
             ALERT_TYPE="CODERABBIT_REVIEW"
             GITHUB_USERNAME="$COMMENT_AUTHOR"
@@ -123,8 +104,8 @@ jobs:
 
           echo "Processing event: $ALERT_TYPE triggered by $GITHUB_USERNAME"
 
-          # Lấy danh sách file thay đổi
-          if [[ -n "$PR_NUMBER" && "$PR_NUMBER" != "null" && "$PR_NUMBER" != "0" && "$ALERT_TYPE" != "CODERABBIT_LINE_COMMENT" ]]; then
+          # 2. Lấy danh sách file thay đổi (Chỉ chạy nếu có số PR hợp lệ)
+          if [[ -n "$PR_NUMBER" && "$PR_NUMBER" != "null" && "$PR_NUMBER" != "0" ]]; then
             CHANGED_FILES_JSON=$(curl -s \
               -H "Authorization: Bearer $GH_TOKEN" \
               -H "Accept: application/vnd.github+json" \
@@ -132,14 +113,14 @@ jobs:
               | jq '[.[].filename]')
           else
             CHANGED_FILES_JSON="[]"
-            PR_NUMBER="${PR_NUMBER:-0}"
+            PR_NUMBER=0
           fi
 
           if [[ -z "$CHANGED_FILES_JSON" ]] || ! echo "$CHANGED_FILES_JSON" | jq -e 'type == "array"' > /dev/null 2>&1; then
             CHANGED_FILES_JSON="[]"
           fi
 
-          # Gửi nguyên vẹn chuỗi SUMMARY qua jq --arg để đảm bảo an toàn dữ liệu cho Backend bóc tách
+          # Build JSON Payload gửi nguyên văn SUMMARY về Backend
           jq -n \
             --arg repoFullName "$REPO_FULL_NAME" \
             --argjson prNumber "${PR_NUMBER:-0}" \
@@ -150,9 +131,6 @@ jobs:
             --arg severity "$SEVERITY" \
             --arg summary "$SUMMARY" \
             --argjson changedFiles "$CHANGED_FILES_JSON" \
-            --arg filePath "${RC_FILE_PATH:-}" \
-            --argjson lineNumber "${RC_LINE:-null}" \
-            --arg commentUrl "${RC_COMMENT_URL:-}" \
             '{
               repoFullName: $repoFullName,
               prNumber: $prNumber,
@@ -162,10 +140,7 @@ jobs:
               alertType: $alertType,
               severity: $severity,
               summary: $summary,
-              changedFiles: $changedFiles,
-              filePath: (if $filePath == "" then null else $filePath end),
-              lineNumber: $lineNumber,
-              commentUrl: (if $commentUrl == "" then null else $commentUrl end)
+              changedFiles: $changedFiles
             }' > payload.json
 
           echo "Sending payload to $RENDER_API_URL..."
