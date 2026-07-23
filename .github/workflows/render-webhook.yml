@@ -75,11 +75,6 @@ jobs:
           # 3. Xử lý sự kiện TRẠNG THÁI CI / TEST (Kênh: pr-status)
           elif [[ "$EVENT_NAME" == "check_run" ]]; then
 
-            if [[ "$CHECK_NAME" == *"Vercel"* ]]; then
-              echo "Ignore Vercel check_run event. Skipping."
-              exit 0
-            fi
-          
             GITHUB_USERNAME="GitHub Actions"
             ALERT_TYPE="CI_STATUS"
             SUMMARY="Workflow [ $CHECK_NAME ] status: ${CHECK_CONCLUSION^^}. Details: $CHECK_URL"
