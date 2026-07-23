@@ -16,4 +16,4 @@ pages.forEach(({ path, view, page }) => {
   });
 });
 
-module.exports = ;
+module.exports = router;
