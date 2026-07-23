@@ -1,0 +1,56 @@
+name: Notify CodeRabbit Line Comment
+
+on:
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  notify-line-comment:
+    # Chỉ chạy nếu người comment là bot CodeRabbit
+    if: contains(github.event.comment.user.login, 'coderabbitai')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Line Comment Payload to Backend
+        env:
+          RENDER_API_URL: ${{ secrets.RENDER_API_URL }} # Đảm bảo bạn đã config Secret này
+        run: |
+          COMMENT_BODY='${{ github.event.comment.body }}'
+          FILE_PATH='${{ github.event.comment.path }}'
+          LINE_NUMBER='${{ github.event.comment.line }}'
+          COMMENT_URL='${{ github.event.comment.html_url }}'
+          PR_NUMBER='${{ github.event.pull_request.number }}'
+          PR_TITLE='${{ github.event.pull_request.title }}'
+          PR_URL='${{ github.event.pull_request.html_url }}'
+          GITHUB_USERNAME='${{ github.event.comment.user.login }}'
+
+          jq -n \
+            --arg repoFullName "${{ github.repository }}" \
+            --argjson prNumber "$PR_NUMBER" \
+            --arg prTitle "$PR_TITLE" \
+            --arg prUrl "$PR_URL" \
+            --arg githubUsername "$GITHUB_USERNAME" \
+            --arg alertType "CODERABBIT_LINE_COMMENT" \
+            --arg severity "HIGH" \
+            --arg summary "$COMMENT_BODY" \
+            --arg filePath "$FILE_PATH" \
+            --argjson lineNumber "${LINE_NUMBER:-null}" \
+            --arg commentUrl "$COMMENT_URL" \
+            '{
+              repoFullName: $repoFullName,
+              prNumber: $prNumber,
+              prTitle: $prTitle,
+              prUrl: $prUrl,
+              githubUsername: $githubUsername,
+              alertType: $alertType,
+              severity: $severity,
+              summary: $summary,
+              filePath: $filePath,
+              lineNumber: $lineNumber,
+              commentUrl: $commentUrl
+            }' > payload.json
+
+          echo "Sending line comment to $RENDER_API_URL..."
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               --data @payload.json \
+               "$RENDER_API_URL"
