@@ -1,9 +1,7 @@
 name: Notify CodeRabbit Line Comment
-
 on:
   pull_request_review_comment:
     types: [created]
-
 jobs:
   notify-line-comment:
     # Bắt tất cả username có chứa từ coderabbit (bao gồm coderabbitai[bot])
@@ -24,6 +22,19 @@ jobs:
           GITHUB_USERNAME: ${{ github.event.comment.user.login }}
           REPO_FULL_NAME: ${{ github.repository }}
         run: |
+          # FIX: severity trước đó bị hardcode cứng "HIGH" cho MỌI comment, nên
+          # nitpick nhỏ và lỗi Critical đều hiện đỏ như nhau, mất khả năng phân biệt.
+          # Khôi phục lại cách dò severity theo đúng chữ CodeRabbit tự in trong nội
+          # dung comment ("... | Critical | ...", "... | Major | ...", "... | Minor | ...").
+          SEVERITY="INFO"
+          if [[ "$COMMENT_BODY" == *"Critical"* ]]; then
+            SEVERITY="HIGH"
+          elif [[ "$COMMENT_BODY" == *"Major"* ]]; then
+            SEVERITY="MEDIUM"
+          elif [[ "$COMMENT_BODY" == *"Minor"* ]]; then
+            SEVERITY="LOW"
+          fi
+
           jq -n \
             --arg repoFullName "$REPO_FULL_NAME" \
             --argjson prNumber "${PR_NUMBER:-0}" \
@@ -31,7 +42,7 @@ jobs:
             --arg prUrl "$PR_URL" \
             --arg githubUsername "$GITHUB_USERNAME" \
             --arg alertType "CODERABBIT_LINE_COMMENT" \
-            --arg severity "HIGH" \
+            --arg severity "$SEVERITY" \
             --arg summary "$COMMENT_BODY" \
             --arg filePath "$FILE_PATH" \
             --argjson lineNumber "${LINE_NUMBER:-null}" \
@@ -49,7 +60,6 @@ jobs:
               lineNumber: $lineNumber,
               commentUrl: $commentUrl
             }' > payload.json
-
           echo "Sending line comment to $RENDER_API_URL..."
           curl -H "Content-Type: application/json" \
                -X POST \
