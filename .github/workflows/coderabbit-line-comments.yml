@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Send Line Comment Payload to Backend
         env:
-          RENDER_API_URL: ${{ secrets.RENDER_API_URL }} # Đảm bảo bạn đã config Secret này
+          RENDER_API_URL: "https://discord-bot-service-9m6f.onrender.com/api/webhook/coderabbit"
         run: |
           COMMENT_BODY='${{ github.event.comment.body }}'
           FILE_PATH='${{ github.event.comment.path }}'
